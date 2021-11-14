@@ -1,17 +1,35 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import CreateHabitForm from "./components/CreateHabitForm";
+import HabitsList from "./components/HabitsList";
+import HomePage from "./components/HomePage";
+import ProgressList from "./components/ProgressList";
+import SettingsPage from "./components/SettingsPage"
+import Header from "./components/Header";
+import "./index.scss"
+import {BrowserRouter, Routes, Route} from "react-router-dom";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+const App = () => {
+    return (
+        <BrowserRouter>
+            <div className="content">
+                <Header/>
+                <Routes>
+                    <Route path="/"
+                           element={<HomePage/>}/>
+                    <Route
+                        path="/create-habit"
+                        element={<CreateHabitForm/>}/>
+                    <Route path="/habits-list"
+                           element={<HabitsList/>}/>
+                    <Route path="/progress"
+                           element={<ProgressList/>}/>
+                    <Route path="/settings"
+                           element={<SettingsPage/>}/>
+                </Routes>
+            </div>
+        </BrowserRouter>
+    )
+};
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+ReactDOM.render(<App/>, document.getElementById('root'));
