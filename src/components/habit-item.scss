@@ -1,0 +1,48 @@
+.habit-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 35px;
+  color: #000;
+  align-self: flex-start;
+
+  &__data {
+    width: 200px;
+    max-width: 200px;
+    display: flex;
+    flex-direction: column;
+    font-family: "Montserrat-Regular", Arial, sans-serif;
+    font-size: 18px;
+    line-height: 18px;
+  }
+
+  &__name {
+    margin-bottom: 10px;
+  }
+
+  &__description {
+    font-size: 14px;
+  }
+
+
+}
+
+.days-list {
+  display: flex;
+  flex-wrap: wrap;
+  width: 320px;
+
+  &__item {
+    width: 35px;
+    height: 35px;
+    border: 1px solid #89ccc5;
+    text-align: center;
+    vertical-align: middle;
+    margin-bottom: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: inline-block;
+    padding-top: 8px;
+    margin-right: 10px;
+  }
+}
