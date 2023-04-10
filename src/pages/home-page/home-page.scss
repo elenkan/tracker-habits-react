@@ -1,0 +1,20 @@
+.main-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../../images/bg-image.jpg");
+  width: 100vw;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  span {
+    display: inline-block;
+    padding: 40px;
+    background-color: rgba(137,204,197, 0.9);
+    border-radius: 10px;
+    font-size: 50px;
+    line-height: 50px;
+  }
+}

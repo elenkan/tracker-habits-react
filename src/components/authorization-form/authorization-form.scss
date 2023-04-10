@@ -1,0 +1,41 @@
+.auth {
+  margin-left: auto;
+  color: #272727;
+}
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 400px;
+  font-family: "Montserrat-Regular", Arial, sans-serif;
+  font-size: 20px;
+  line-height: 28px;
+
+  &__divider {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    font-size: 14px;
+    line-height: 14px;
+
+    &::before,
+    &::after {
+      content: "";
+      display: block;
+      width: 150px;
+      height: 1px;
+      background-color: #89ccc5;
+      padding: 0;
+    }
+
+    &::before {
+      margin-right: 5px;
+    }
+
+    &::after {
+      margin-left: 5px;
+    }
+  }
+}
