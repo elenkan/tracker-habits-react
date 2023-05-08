@@ -6,12 +6,16 @@ const App = () => {
         palette: {
             primary: {
                 main: '#89ccc5',
+
             },
             // secondary: {
             //     // This is green.A700 as hex.
             //     main: '#11cb5f',
             // },
         },
+        typography: {
+            fontFamily: 'Montserrat-Regular, Arial, sans-serif;'
+        }
     });
     return (
         <ThemeProvider theme={theme}>

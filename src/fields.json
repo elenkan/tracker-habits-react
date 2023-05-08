@@ -1,0 +1,28 @@
+{
+  "userName": {
+    "placeholder": "Имя",
+    "rules": {
+      "required": {
+        "value": true,
+        "message": "Обязательное поле"
+      },
+      "minLength": {
+        "value": 2,
+        "message": "Минимальная длина 2 символа"
+      }
+    }
+  },
+  "email": {
+    "placeholder": "Email",
+    "rules": {
+      "required": {
+        "value":true,
+        "message": "Обязательное поле"
+      },
+      "pattern": {
+        "value": "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$",
+        "message": "Неверный формат"
+      }
+    }
+  }
+}

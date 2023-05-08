@@ -7,7 +7,7 @@ import {
     addChangeableHabit,
     changeProgressData,
     updateProgressData,
-    setAuthStatus
+    setAuthStatus, setUserData
 } from '../actions/actions';
 
 import {Habit, ProgressItem} from '../types';
@@ -17,7 +17,9 @@ type StateType = {
     progressData: ProgressItem[],
     colorMood: string,
     changeableHabit: Habit | null,
-    isAuth: boolean
+    isAuth: boolean,
+    // TODO: присвоить тип
+    userData: any
 }
 
 const initialState: StateType = {
@@ -25,10 +27,11 @@ const initialState: StateType = {
     progressData: [],
     colorMood: '',
     changeableHabit: null,
-    isAuth: false
+    isAuth: false,
+    userData: {}
 };
 
-export const reducer = createReducer(initialState, builder => {
+const reducer = createReducer(initialState, builder => {
     builder.addCase(addHabit, (state, action) => {
             state.habitList = [...state.habitList, action.payload];
         });
@@ -60,4 +63,10 @@ export const reducer = createReducer(initialState, builder => {
     builder.addCase(setAuthStatus, (state, action) => {
         state.isAuth = action.payload
     });
+
+    builder.addCase(setUserData, (state, action) => {
+        state.userData = action.payload
+    });
 });
+
+export {reducer}

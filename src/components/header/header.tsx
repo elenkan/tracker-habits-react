@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {AppBar} from '@mui/material';
 import {Toolbar} from '@mui/material';
 import {IconButton} from '@mui/material';
@@ -12,11 +12,20 @@ import AuthorizationForm from '../authorization-form';
 import {useAppSelector} from '../../hooks/stateHooks';
 import {useAppDispatch} from '../../hooks/stateHooks';
 import {logout} from '../../actions/api-actions';
+import {setAuthStatus} from '../../actions/actions';
+import {useNavigate} from 'react-router-dom';
+import {AppRouteList} from '../../router/enums';
 
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const isAuth = useAppSelector(state => state.isAuth)
+    const isAuth = useAppSelector(state => state.isAuth);
+    const userData = useAppSelector(state => state.userData);
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        console.log(userData)
+    }, [userData])
 
     const menuItems = [
         {path: '/progress', label: 'Прогресс'},
@@ -34,7 +43,10 @@ const Header = () => {
 
     const logOut = (label: string) => {
         if (label === 'Выйти') {
-            dispatch(logout())
+            dispatch(logout()).then(res => {
+                dispatch(setAuthStatus(false))
+                navigate(AppRouteList.Home)
+            })
         }
     }
     const listItems = menuItems.map(item => (

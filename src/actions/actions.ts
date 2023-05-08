@@ -8,3 +8,4 @@ export const addChangeableHabit = createAction('addChangeableHabit', changeableH
 export const updateProgressData = createAction('updateProgressData', list => ({payload: list}));
 export const changeProgressData = createAction('changeProgressData', progressData => ({payload: progressData}));
 export const setAuthStatus = createAction('setAuthStatus', value => ({payload: value}));
+export const setUserData = createAction('setUserData', value => ({payload: value}));
