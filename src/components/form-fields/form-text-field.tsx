@@ -24,7 +24,7 @@ const FormTextField = ({ name,control }: PropsType) => {
     control,
     rules: { ...fieldRules as Exclude<RegisterOptions, 'valueAsNumber' | 'valueAsDate' | 'setValueAs' >},
   });
-  console.log(error)
+
   return (
     <Fragment>
       <TextField

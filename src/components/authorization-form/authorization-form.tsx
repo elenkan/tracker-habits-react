@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
@@ -30,7 +30,7 @@ const AuthorizationForm = () => {
     email: ''
   }
   const methods = useForm<FormProps>({defaultValues: defaultValues})
-  const {handleSubmit, control} = methods;
+  const {handleSubmit, control, reset} = methods;
 
   const handleClickOpen = (type: string) => () => {
     setOpen(true);
@@ -40,6 +40,11 @@ const AuthorizationForm = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  useEffect(() => {
+    reset({userName: '', email: ''})
+  }, [open])
+  
 
   const onSubmit = async (data: FormProps) => {
     const { userName: name, email, password} = data
