@@ -3,9 +3,10 @@ import TextField from '@mui/material/TextField';
 import {IconButton, InputAdornment} from '@mui/material';
 import {Visibility, VisibilityOff} from '@mui/icons-material';
 import {useState} from 'react';
+import {AuthFormData} from './../../types/index'
 
 type PropsType = {
-  control: Control
+  control: Control<AuthFormData>
 }
 const FormPasswordField = ({control}: PropsType) => {
   const {

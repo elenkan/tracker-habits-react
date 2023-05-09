@@ -49,6 +49,12 @@ export type Field = {
   }
 }
 
+export type AuthFormData = {
+  userName?: string,
+  email?: string,
+  password?: string
+}
+
 
 
 

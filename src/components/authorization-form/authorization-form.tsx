@@ -13,12 +13,7 @@ import {AppRouteList} from '../../router/enums';
 import FormTextField from '../form-fields/form-text-field';
 import FormPasswordField from '../form-fields/form-password-field';
 import FormButton from '../form-fields/form-button';
-
-type FormProps = {
-  userName?: string,
-  email?: string,
-  password?: string
-}
+import {AuthFormData} from './../../types/index';
 
 const AuthorizationForm = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -29,7 +24,7 @@ const AuthorizationForm = () => {
     userName: '',
     email: ''
   }
-  const methods = useForm<FormProps>({defaultValues: defaultValues})
+  const methods = useForm<AuthFormData>({defaultValues: defaultValues})
   const {handleSubmit, control, reset} = methods;
 
   const handleClickOpen = (type: string) => () => {
@@ -44,10 +39,10 @@ const AuthorizationForm = () => {
   useEffect(() => {
     reset({userName: '', email: ''})
   }, [open])
-  
 
-  const onSubmit = async (data: FormProps) => {
-    const { userName: name, email, password} = data
+
+  const onSubmit = async (data: AuthFormData) => {
+    const {userName: name, email, password} = data
     if (type === 'signup') {
       // TODO: разобраться с типами
       // @ts-ignore
@@ -84,40 +79,38 @@ const AuthorizationForm = () => {
         }}
       >
         <DialogContent>
-          <FormProvider {...methods}>
-            <Box
-              component="form"
-              autoComplete="off"
-              className="auth-form"
-              sx={{m: 'auto'}}>
+          <Box
+            component="form"
+            autoComplete="off"
+            className="auth-form"
+            sx={{m: 'auto'}}>
 
-              <Button variant="outlined"
-                      className="auth_form__item"
-                      sx={{
-                        color: '#272727',
-                        width: '180px',
-                        margin: '0 auto',
-                      }}>
-                Войти как гость
-              </Button>
+            <Button variant="outlined"
+                    className="auth_form__item"
+                    sx={{
+                      color: '#272727',
+                      width: '180px',
+                      margin: '0 auto',
+                    }}>
+              Войти как гость
+            </Button>
 
-              <span className="auth-form__divider">Или</span>
+            <span className="auth-form__divider">Или</span>
 
-              { type === 'signup' &&
-                <FormTextField name="userName" control={control}/>
-              }
+            {type === 'signup' &&
+            <FormTextField fieldName="userName" control={control}/>
+            }
 
-              <FormTextField name="email" control={control}/>
+            <FormTextField fieldName="email" control={control}/>
 
-              <FormPasswordField control={control}/>
+            <FormPasswordField control={control}/>
 
-              <FormButton
-                buttonWidth="300px"
-                buttonTitle={type === 'signup' ? 'Зарегистрироваться' : 'Войти'}
-                action={handleSubmit(onSubmit)}
-              />
-            </Box>
-          </FormProvider>
+            <FormButton
+              buttonWidth="300px"
+              buttonTitle={type === 'signup' ? 'Зарегистрироваться' : 'Войти'}
+              action={handleSubmit(onSubmit)}
+            />
+          </Box>
         </DialogContent>
       </Dialog>
     </div>

@@ -1,16 +1,16 @@
 import { useController, Control, RegisterOptions } from "react-hook-form";
 import TextField from '@mui/material/TextField';
-import {Field} from '../../types';
+import {Field, AuthFormData} from '../../types';
 import fieldsData from './../../fields.json';
 import {Fragment} from 'react';
 
 type PropsType = {
-  name: string,
-  control: Control
+  fieldName: 'userName' | 'email',
+  control: Control<AuthFormData>
 }
-const FormTextField = ({ name,control }: PropsType) => {
+const FormTextField = ({ fieldName,control }: PropsType) => {
   const data: Field = fieldsData;
-  let fieldRules = data[name].rules;
+  let fieldRules = data[fieldName].rules;
 
   if (fieldRules.pattern) {
     fieldRules.pattern.value = new RegExp(fieldRules.pattern.value, 'g')
@@ -20,7 +20,7 @@ const FormTextField = ({ name,control }: PropsType) => {
     field: { onChange, value},
     fieldState: { error }
   } = useController({
-    name,
+    name: fieldName,
     control,
     rules: { ...fieldRules as Exclude<RegisterOptions, 'valueAsNumber' | 'valueAsDate' | 'setValueAs' >},
   });
@@ -28,7 +28,7 @@ const FormTextField = ({ name,control }: PropsType) => {
   return (
     <Fragment>
       <TextField
-        placeholder={data[name].placeholder}
+        placeholder={data[fieldName].placeholder}
         size="small"
         helperText={error && error.message}
         FormHelperTextProps={{
@@ -40,7 +40,7 @@ const FormTextField = ({ name,control }: PropsType) => {
         error={ !!error }
         onChange={onChange}
         value={value}
-        name={name}
+        name={fieldName}
         sx={{
           width: '250px',
           position: 'relative',
