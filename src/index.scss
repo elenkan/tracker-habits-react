@@ -50,3 +50,10 @@ body {
 ul {
   list-style: none;
 }
+
+.toast {
+  --toastify-font-family: "Montserrat-Regular", Arial, sans-serif;
+  --toastify-text-color-light: #272727;
+  font-size: 16px;
+  line-height: 20px;
+}

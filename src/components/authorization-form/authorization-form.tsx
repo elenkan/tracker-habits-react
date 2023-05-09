@@ -47,7 +47,7 @@ const AuthorizationForm = () => {
       // TODO: разобраться с типами
       // @ts-ignore
       const user = await dispatch(createLogin({name, email, password}))
-      if (user) {
+      if (user.payload?.users) {
         dispatch(setUserData(user))
         dispatch(setAuthStatus(true))
         navigate(AppRouteList.CreateHabitPage)

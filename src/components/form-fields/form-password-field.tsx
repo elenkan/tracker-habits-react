@@ -21,8 +21,8 @@ const FormPasswordField = ({control}: PropsType) => {
         message: "Обязательное поле"
       },
       minLength: {
-        value: 4,
-        message: "Минимальная длина 4 символа"
+        value: 6,
+        message: "Минимальная длина 6 символов"
       }
     }
   });

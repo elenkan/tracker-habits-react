@@ -2,6 +2,7 @@ import { auth } from '../index';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AuthData} from '../types/index'
 import {signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth'
+import Notification from './../utils/notification/notification'
 
 //TODO: заменить тип user
 export const login = createAsyncThunk<any, AuthData>('login',
@@ -10,7 +11,7 @@ export const login = createAsyncThunk<any, AuthData>('login',
             const {user} =  await signInWithEmailAndPassword(auth,email, password)
             return user ? user : {}
         } catch (e) {
-            console.log(e)
+          Notification.showErrorNotification(e)
         }
     });
 
@@ -27,6 +28,7 @@ export const createLogin = createAsyncThunk<any, AuthData>('createLogin',
             console.log('user', user)
             return user ? user : {}
         } catch (e) {
-            console.log(e)
+          // @ts-ignore
+          Notification.showErrorNotification(e)
         }
     });
