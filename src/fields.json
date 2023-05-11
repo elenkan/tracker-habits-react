@@ -24,5 +24,21 @@
         "message": "Неверный формат"
       }
     }
+  },
+  "habitName": {
+    "placeholder": "Название привычки",
+    "rules": {
+      "required": {
+        "value": true,
+        "message": "Обязательное поле"
+      },
+      "minLength": {
+        "value": 3,
+        "message": "Минимальная длина 3 символа"
+      }
+    }
+  },
+  "habitDescription": {
+    "placeholder": "Описание"
   }
 }

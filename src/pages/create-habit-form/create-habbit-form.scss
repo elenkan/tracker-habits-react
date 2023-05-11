@@ -15,34 +15,42 @@
 
   &__title {
     display: inline-block;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     font-family: "Montserrat-Regular", Arial, sans-serif;
     font-size: 18px;
     line-height: 18px;
     color: #272727;
   }
 
+  &__subtitle {
+    display: inline-block;
+    font-family: "Montserrat-Regular", Arial, sans-serif;
+    font-size: 16px;
+    width: 100%;
+    margin-bottom: 15px;
+    color: #272727;
+  }
+
   &__period {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+  }
+
+  &__target-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-top: -15px;
+    margin-bottom: 10px;
 
     span {
-      display: inline-block;
+      color: rgba(0,0,0,.6);
       font-family: "Montserrat-Regular", Arial, sans-serif;
       font-size: 16px;
-      width: 100%;
-      margin-bottom: 15px;
-      color: #272727;
+      line-height: 16px;
     }
-  }
-
-  &__buttons-group {
-    margin-bottom: 15px;
-  }
-
-  &__button {
-    font-family: "Montserrat-Regular", Arial, sans-serif;
-    font-size: 16px;
   }
 }

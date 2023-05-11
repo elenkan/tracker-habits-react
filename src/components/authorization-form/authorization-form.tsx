@@ -1,19 +1,16 @@
 import {useState, useEffect} from 'react';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogContent from '@mui/material/DialogContent';
-import {Box} from '@mui/material';
+import {Box, Button, Dialog, DialogContent} from '@mui/material';
 import './authorization-form.scss';
 import {login, createLogin} from '../../actions/api-actions';
 import {useAppDispatch} from '../../hooks/stateHooks';
 import {setAuthStatus, setUserData} from '../../actions/actions';
 import {useNavigate} from 'react-router-dom';
-import {useForm, FormProvider} from 'react-hook-form';
+import {useForm} from 'react-hook-form';
 import {AppRouteList} from '../../router/enums';
 import FormTextField from '../form-fields/form-text-field';
 import FormPasswordField from '../form-fields/form-password-field';
 import FormButton from '../form-fields/form-button';
-import {AuthFormData} from './../../types/index';
+import {FormData} from '../../types';
 
 const AuthorizationForm = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -24,7 +21,7 @@ const AuthorizationForm = () => {
     userName: '',
     email: ''
   }
-  const methods = useForm<AuthFormData>({defaultValues: defaultValues})
+  const methods = useForm<FormData>({defaultValues: defaultValues})
   const {handleSubmit, control, reset} = methods;
 
   const handleClickOpen = (type: string) => () => {
@@ -41,7 +38,7 @@ const AuthorizationForm = () => {
   }, [open])
 
 
-  const onSubmit = async (data: AuthFormData) => {
+  const onSubmit = async (data: FormData) => {
     const {userName: name, email, password} = data
     if (type === 'signup') {
       // TODO: разобраться с типами
@@ -67,9 +64,9 @@ const AuthorizationForm = () => {
 
   return (
     <div className="auth">
-      <Button sx={{color: '#fff', fontFamily: '"Raleway-Bold",Arial,sans-serif'}}
+      <Button sx={{color: '#fff', fontFamily: '"Raleway-Medium",Arial,sans-serif'}}
               onClick={handleClickOpen('signup')}>Регистрация</Button>
-      <Button sx={{color: '#fff', fontFamily: '"Raleway-Bold",Arial,sans-serif'}}
+      <Button sx={{color: '#fff', fontFamily: '"Raleway-Medium",Arial,sans-serif'}}
               onClick={handleClickOpen('signin')}>Войти</Button>
       <Dialog
         open={open}

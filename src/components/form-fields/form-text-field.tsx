@@ -1,18 +1,18 @@
 import { useController, Control, RegisterOptions } from "react-hook-form";
 import TextField from '@mui/material/TextField';
-import {Field, AuthFormData} from '../../types';
+import {Field, FormData} from '../../types';
 import fieldsData from './../../fields.json';
 import {Fragment} from 'react';
 
 type PropsType = {
-  fieldName: 'userName' | 'email',
-  control: Control<AuthFormData>
+  fieldName: 'userName' | 'email' | 'habitName' | 'habitDescription',
+  control: Control<FormData>
 }
 const FormTextField = ({ fieldName,control }: PropsType) => {
   const data: Field = fieldsData;
   let fieldRules = data[fieldName].rules;
 
-  if (fieldRules.pattern) {
+  if (fieldRules?.pattern) {
     fieldRules.pattern.value = new RegExp(fieldRules.pattern.value, 'g')
   }
 

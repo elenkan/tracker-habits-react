@@ -30,7 +30,7 @@ export type AuthData = {
 export type Field = {
   [key: string]: {
     placeholder: string,
-    rules: {
+    rules?: {
       required?: {
         value: boolean,
         message: string
@@ -49,11 +49,15 @@ export type Field = {
   }
 }
 
-export type AuthFormData = {
+export type FormData = {
   userName?: string,
   email?: string,
-  password?: string
+  password?: string,
+  habitName?: string,
+  habitDescription?: string
+  weekPeriod?:  number
 }
+
 
 
 

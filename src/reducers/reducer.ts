@@ -7,7 +7,9 @@ import {
     addChangeableHabit,
     changeProgressData,
     updateProgressData,
-    setAuthStatus, setUserData
+    setAuthStatus,
+    setUserData,
+    setModeApp
 } from '../actions/actions';
 
 import {Habit, ProgressItem} from '../types';
@@ -15,19 +17,25 @@ import {Habit, ProgressItem} from '../types';
 type StateType = {
     habitList: Habit[],
     progressData: ProgressItem[],
+    challengeProgressData: ProgressItem[],
+    calendarHabitsList: Habit[],
     colorMood: string,
     changeableHabit: Habit | null,
     isAuth: boolean,
+    mode: string,
     // TODO: присвоить тип
     userData: any
 }
 
 const initialState: StateType = {
     habitList: [],
+    calendarHabitsList: [],
     progressData: [],
+    challengeProgressData: [],
     colorMood: '',
     changeableHabit: null,
     isAuth: false,
+    mode: 'challenge',
     userData: {}
 };
 
@@ -66,6 +74,10 @@ const reducer = createReducer(initialState, builder => {
 
     builder.addCase(setUserData, (state, action) => {
         state.userData = action.payload
+    });
+
+    builder.addCase(setModeApp, (state, action) => {
+        state.mode = action.payload
     });
 });
 
