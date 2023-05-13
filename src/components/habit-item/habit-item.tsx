@@ -4,7 +4,7 @@ import CreateIcon from '@mui/icons-material/Create';
 import DeleteIcon from '@mui/icons-material/Delete';
 import {useAppSelector, useAppDispatch} from '../../hooks/stateHooks';
 import {useState} from "react";
-import {changeProgressData, addChangeableHabit, changeHabitList, updateProgressData } from '../../actions/actions';
+import {changeProgressData, addChangeableHabit, addHabit } from '../../actions/actions';
 import {useNavigate} from "react-router-dom";
 import "./habit-item.scss";
 import lists from "../../lists.json"
@@ -19,7 +19,7 @@ const HabitItem = ({item}: PropsType) => {
     let navigate = useNavigate();
 
     let color = useAppSelector(state => state.colorMood);
-    let habitList = useAppSelector(state => state.habitList);
+    let habitList = useAppSelector(state => state.challengeHabitsList);
     let progressData = useAppSelector(state => state.progressData);
 
     const daysList = () => {
@@ -81,7 +81,7 @@ const HabitItem = ({item}: PropsType) => {
                     // @ts-ignore
                     el[key] = progressItem[key]
                 }
-                dispatch(updateProgressData(data))
+                dispatch(changeProgressData(data))
             }
         }
     }
@@ -100,7 +100,7 @@ const HabitItem = ({item}: PropsType) => {
     };
     const deleteHabit = (habitId: number | null) => {
         const filterList = habitList.filter(item => item.id !== habitId);
-        dispatch(changeHabitList(filterList))
+        dispatch(addHabit(filterList))
     }
 
     let dayListItem = list.map(day => {

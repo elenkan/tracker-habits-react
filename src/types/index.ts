@@ -2,7 +2,8 @@ export type Habit = {
   id: number | null,
   name: string,
   description: string,
-  period: number
+  period: number,
+  weekPeriod: number
 }
 
 export type ProgressItem = {

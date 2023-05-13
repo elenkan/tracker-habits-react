@@ -1,8 +1,14 @@
 import Box from '@mui/material/Box';
 import './create-habbit-form.scss';
-import {useRef} from 'react';
+import {useEffect, useRef} from 'react';
 import {useAppDispatch, useAppSelector} from '../../hooks/stateHooks';
-import {addChangeableHabit, addHabit, changeHabitList} from '../../actions/actions';
+import {
+  addCalendarHabit,
+  addChangeableHabit,
+  addHabit,
+  changeCalendarHabitList,
+  changeHabitList
+} from '../../actions/actions';
 import {useNavigate} from 'react-router-dom';
 import FormToggleButton from '../../components/form-fields/form-toggle-button';
 import FormTextField from '../../components/form-fields/form-text-field';
@@ -25,7 +31,8 @@ const CreateHabitForm = () => {
 
   const changeableHabit = useAppSelector(state => state.changeableHabit);
   const modeType = useAppSelector(state => state.mode);
-  const habitsList = useAppSelector(state => state.habitList);
+  const challengeHabitsList = useAppSelector(state => state.challengeHabitsList);
+  const calendarHabitsList = useAppSelector(state => state.calendarHabitsList);
 
   const dispatch = useAppDispatch();
   let navigate = useNavigate();
@@ -35,38 +42,52 @@ const CreateHabitForm = () => {
     countDays.current = value
   };
 
+  useEffect(() => {
+    reset({habitName: '', habitDescription: '', weekPeriod: 1})
+    if (modeType === 'challenge') {
+      countDays.current = 21
+    }
+  }, [modeType])
+
   const defaultValues = {
     habitName: !!changeableHabit ? changeableHabit.name : '',
     habitDescription: !!changeableHabit ? changeableHabit.description : '',
-    weekPeriod: 1
+    weekPeriod: !!changeableHabit && changeableHabit.weekPeriod ? changeableHabit.weekPeriod : 1
   }
 
   const methods = useForm<FormData>({defaultValues: defaultValues})
   const {handleSubmit, control, reset} = methods;
 
   const saveHabit = (data: FormData) => {
-    const {habitName: name, habitDescription: description} = data;
+    const {habitName: name, habitDescription: description, weekPeriod} = data;
+
     const habit = {
       name,
       description,
+      // TODO: заменить id
       id: changeableHabit ? changeableHabit.id : Math.random() * 2 * Math.random(),
-      period: countDays.current
+      period: countDays.current,
+      weekPeriod
     };
 
     if (changeableHabit) {
-      const list = habitsList.map(item => Object.assign({}, item));
-      let listElement = list.find(item => item.id === changeableHabit.id) ?? {name: '', description: ''};
-      // @ts-ignore
-      listElement.name = habit.name
-      // @ts-ignore
-      listElement.description = habit.description
-
-      dispatch(changeHabitList(list))
-      dispatch(addChangeableHabit(null));
-      navigate('/habits-list');
+      const changeElement = modeType === 'challenge'
+        ? challengeHabitsList.find(item => item.id === changeableHabit.id)
+        : calendarHabitsList.find(item => item.id === changeableHabit.id);
+        if (changeElement) {
+          for (let key in changeElement) {
+            changeElement.name = habit.name as string;
+            changeElement.description = habit.description as string;
+            changeElement.period = habit.period;
+            changeElement.weekPeriod = habit.weekPeriod as number;
+          }
+          dispatch(addChangeableHabit(null));
+          modeType === 'challenge' ? dispatch(changeHabitList(challengeHabitsList)) : dispatch(changeCalendarHabitList(calendarHabitsList))
+          navigate('/habits-list');
+        }
     } else {
-      dispatch(addHabit(habit))
-      reset({ habitName: '', habitDescription: ''})
+      modeType === 'challenge' ? dispatch(addHabit(habit)) : dispatch(addCalendarHabit(habit))
+      reset({habitName: '', habitDescription: '', weekPeriod: 1})
     }
   };
 
@@ -97,17 +118,17 @@ const CreateHabitForm = () => {
               }}
             />
             :
-              <div
-                className="habit-form__target-wrapper">
-                <FormNumberField
-                  fieldName="weekPeriod"
-                  control={control}
-                  minValue={1}
-                  maxValue={7}
-                  fieldWidth="100px"
-                />
-                <span>раз в неделю</span>
-              </div>
+            <div
+              className="habit-form__target-wrapper">
+              <FormNumberField
+                fieldName="weekPeriod"
+                control={control}
+                minValue={1}
+                maxValue={7}
+                fieldWidth="100px"
+              />
+              <span>раз в неделю</span>
+            </div>
 
         }
         <FormButton
