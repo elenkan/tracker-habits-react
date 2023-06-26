@@ -5,9 +5,8 @@ import {Link, useNavigate} from 'react-router-dom';
 import AuthorizationForm from '../authorization-form';
 import {useAppSelector, useAppDispatch} from '../../hooks/stateHooks';
 import {logout} from '../../actions/api-actions';
-import {setAuthStatus, setModeApp} from '../../actions/actions';
+import {setAuthStatus} from '../../actions/actions';
 import {AppRouteList} from '../../router/enums';
-import FormToggleButton from '../form-fields/form-toggle-button';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -57,23 +56,8 @@ const Header = () => {
     </ListItem>
   ));
 
-  const modeData = [
-    {
-      label: 'Челлендж',
-      toggleValue: 'challenge'
-    },
-    {
-      label: 'Календарь',
-      toggleValue: 'calendar'
-    }
-  ];
-
-  const setModeType = (value: string) => {
-    dispatch(setModeApp(value))
-  };
-
   return (
-    <AppBar position="absolute"
+    <AppBar position="fixed"
             sx={{
               backgroundColor: '#89ccc5',
               zIndex: '10'
@@ -117,15 +101,6 @@ const Header = () => {
             </Typography>
         </>}
         {!isAuth && <AuthorizationForm/>}
-        {isAuth && <FormToggleButton
-            groupData={modeData}
-            actionStringValue={setModeType}
-            color="secondary"
-            defaultValue="challenge"
-            styleData={{
-              'marginLeft': 'auto'
-            }}
-        />}
       </Toolbar>
     </AppBar>);
 }
