@@ -7,13 +7,15 @@
   align-self: flex-start;
 
   &__data {
-    width: 200px;
-    max-width: 200px;
+    width: 350px;
+    max-width: 350px;
     display: flex;
     flex-direction: column;
     font-family: "Montserrat-Regular", Arial, sans-serif;
     font-size: 18px;
     line-height: 18px;
+    align-items: flex-start;
+    text-align: left;
   }
 
   &__name {
@@ -23,8 +25,6 @@
   &__description {
     font-size: 14px;
   }
-
-
 }
 
 .days-list {

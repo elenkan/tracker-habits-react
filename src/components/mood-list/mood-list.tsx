@@ -27,7 +27,7 @@ const MoodList = () => {
     });
     return (
         <div className="mood">
-            <h3 className="mood__title">Настроение:</h3>
+            <h3 className="mood__title">Как справился (-ась):</h3>
             <ul className="mood-list">
                 {moodListItems}
             </ul>

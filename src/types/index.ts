@@ -3,7 +3,14 @@ export type Habit = {
   name: string,
   description: string,
   period: number,
-  weekPeriod: number
+  weekPeriod: number,
+  dates: DateItem[][]
+}
+
+export type DateItem = {
+  isSelected: boolean,
+  label: string,
+  value: string
 }
 
 export type ProgressItem = {
@@ -58,6 +65,7 @@ export type FormData = {
   habitDescription?: string
   weekPeriod?:  number
 }
+
 
 
 

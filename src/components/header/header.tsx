@@ -73,7 +73,7 @@ const Header = () => {
   };
 
   return (
-    <AppBar position="absolute"
+    <AppBar position="fixed"
             sx={{
               backgroundColor: '#89ccc5',
               zIndex: '10'
