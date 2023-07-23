@@ -1,97 +1,107 @@
 import {
-    Chart as ChartJS,
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Legend
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  ChartArea,
+  ChartData
 } from 'chart.js'
 import {Line} from 'react-chartjs-2'
+import {useEffect, useRef, useState} from 'react';
 
 ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Legend
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip
 )
 
 type PropsType = {
-    colorsValue: number[]
+  colorsValue: number[]
 }
 
 const MoodStatistics = ({colorsValue}: PropsType) => {
-
-    const lineChartData = () => {
-        // const ctx = canvas.getContext("2d");
-        // const colorStart = ["#FFFF00", "#08d9d6"];
-        // const colorMid = ["#66ff66", "#cc6699"]
-        // const colorEnd = ["#ee82ee", "#ffcc66", "#d7d3d3"]
-        //
-        // const gradient = ctx.createLinearGradient(0,0,0,150);
-        //
-        // gradient.addColorStop(0, colorStart);
-        // gradient.addColorStop(0.5, colorMid);
-        // gradient.addColorStop(1, colorEnd);
-
-        return {
-            labels: colorsValue,
-            datasets: [
-                {
-                    data: colorsValue,
-                    borderColor: "#08d9d6",
-                    fill: true,
-                    lineTension: 0.5
-                }
-            ]
-        };
+  const chartRef = useRef<ChartJS>(null);
+  const [chartData, setChartData] = useState<ChartData<'line'>>({
+    datasets: [],
+  });
+  const labels = ['Сложно','Средне', 'Легко']
+  const options = {
+    plugins: {
+      legend: {
+        display: false
+      }
+    },
+    scales: {
+      x: {
+        grid: {
+          display: false
+        }
+      },
+      y: {
+        min: 0,
+        max: 100,
+        ticks: {
+          stepSize: 10
+        }
+      }
     }
-    return (
-        <Line
-            // @ts-ignore
-            type="line"
-            width={160}
-            height={60}
-            data={lineChartData()}
-        />
-    );
+  };
+
+  function createGradient(ctx: CanvasRenderingContext2D, area: ChartArea) {
+    const colorStart = '#cc6699';
+    const colorMid = '#08d9d6';
+    const colorEnd = '#66ff66';
+
+    const gradient = ctx.createLinearGradient(0, area.bottom, 0, area.top);
+
+    gradient.addColorStop(0.2, colorStart);
+    gradient.addColorStop(0.4, colorMid);
+    gradient.addColorStop(1, colorEnd);
+
+    return gradient;
+  }
+
+  const lineChartData = {
+    labels: labels,
+    datasets: [
+      {
+        data: colorsValue,
+        lineTension: 0.5
+      }
+    ]
+  }
+
+  useEffect(() => {
+    const chart = chartRef.current;
+
+    if (!chart) {
+      return;
+    }
+
+    const chartData = {
+      ...lineChartData,
+      datasets: lineChartData.datasets.map(dataset => ({
+        ...dataset,
+        borderColor: createGradient(chart.ctx, chart.chartArea),
+      })),
+    };
+
+    setChartData(chartData);
+  }, []);
+
+  return (
+    <Line
+      ref={chartRef}
+      data={chartData}
+      options={options}
+    />
+  );
 };
 
 export default MoodStatistics;
-
-
-// import {Chart} from "chart.js";
-//
-// const bar_ctx = document.getElementById('bar-chart').getContext('2d');
-//
-// const purple_orange_gradient = bar_ctx.createLinearGradient(0, 0, 0, 600);
-// purple_orange_gradient.addColorStop(0, 'orange');
-// purple_orange_gradient.addColorStop(1, 'purple');
-//
-// const bar_chart = new Chart(bar_ctx, {
-//     type: 'bar',
-//     data: {
-//         labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-//         datasets: [{
-//             label: '# of Votes',
-//             data: [12, 19, 3, 8, 14, 5],
-//             backgroundColor: purple_orange_gradient,
-//             hoverBackgroundColor: purple_orange_gradient,
-//             hoverBorderWidth: 2,
-//             hoverBorderColor: 'purple'
-//         }]
-//     },
-//     options: {
-//         scales: {
-//             yAxes: [{
-//                 ticks: {
-//                     beginAtZero:true
-//                 }
-//             }]
-//         }
-//     }
-// });

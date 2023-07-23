@@ -47,7 +47,7 @@ const HabitItem = ({item}: PropsType) => {
     setList(newList);
     return colors;
   };
-
+ // TODO: добавить сортировку по цвету
   const getColorValueArray = (array: ColorItem[]) => {
     const checkedColorAmount = array.reduce((acc, curr) => acc + curr.value, 0);
     return array.map(item => {

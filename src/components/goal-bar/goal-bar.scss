@@ -1,9 +1,11 @@
 .goal-bar {
   display: flex;
-  flex-direction: column;
   align-items: center;
+  margin-bottom: 20px;
+  padding: 0 15px;
 
   &__title {
+    margin-top: 0;
     margin-bottom: 10px;
     font-family: "Montserrat-Regular", Arial, sans-serif;
     font-size: 18px;
@@ -11,20 +13,25 @@
   }
 
   &__circle {
+    width: 50%;
     background-color: #d7ebe9;
     padding: 15px;
     border-radius: 10px;
+    margin-right: 15px;
   }
 
   &__days {
-    margin-top: 20px;
-    padding: 10px;
+    padding: 15px;
     border-radius: 10px;
     background-color: #d7ebe9;
-    width: 100%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
 
     span {
       font-weight: bold;
+      font-size: 26px;
+      line-height: 26px;
     }
   }
 }
