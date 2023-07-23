@@ -13,6 +13,7 @@ import FormTextField from '../../components/form-fields/form-text-field';
 import {useForm} from 'react-hook-form';
 import FormButton from '../../components/form-fields/form-button';
 import {FormData} from '../../types';
+import {cloneDeep} from 'lodash';
 
 const CreateHabitForm = () => {
   const buttonData = [
@@ -38,13 +39,16 @@ const CreateHabitForm = () => {
   };
 
   useEffect(() => {
-    reset({habitName: '', habitDescription: ''})
-    countDays.current = 21
+    if (!changeableHabit) {
+      reset({habitName: '', habitDescription: ''})
+      countDays.current = 21
+    }
   }, [])
 
   const defaultValues = {
-    habitName: !!changeableHabit ? changeableHabit.name : '',
-    habitDescription: !!changeableHabit ? changeableHabit.description : ''
+    habitName: changeableHabit?.name || '',
+    habitDescription: changeableHabit?.description || '',
+    period: changeableHabit?.period || 21
   }
 
   const methods = useForm<FormData>({defaultValues: defaultValues})
@@ -62,20 +66,21 @@ const CreateHabitForm = () => {
     };
 
     if (changeableHabit) {
-      const changeElement = challengeHabitsList.find(item => item.id === changeableHabit.id)
+      const habitsList = cloneDeep(challengeHabitsList)
+      const changeElement = habitsList.find(item => item.id === changeableHabit.id)
         if (changeElement) {
           for (let key in changeElement) {
             changeElement.name = habit.name as string;
             changeElement.description = habit.description as string;
-            changeElement.period = habit.period;
           }
           dispatch(addChangeableHabit(null));
-          dispatch(changeHabitList(challengeHabitsList))
+          dispatch(changeHabitList(habitsList))
           navigate('/habits-list');
         }
     } else {
       dispatch(addHabit(habit))
-      reset({habitName: '', habitDescription: '', weekPeriod: 1})
+      reset({habitName: '', habitDescription: ''})
+      // TODO: выставлять дефолтное значение 21
     }
   };
 
@@ -98,7 +103,7 @@ const CreateHabitForm = () => {
         <FormToggleButton
           groupData={buttonData}
           action={setCountDays}
-          defaultValue={21}
+          defaultValue={defaultValues.period}
           styleData={{
             'marginBottom': '20px'
           }}

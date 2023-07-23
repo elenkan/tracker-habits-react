@@ -54,8 +54,8 @@ export type FormData = {
   email?: string,
   password?: string,
   habitName?: string,
-  habitDescription?: string
-  weekPeriod?:  number
+  habitDescription?: string,
+  period?: number
 }
 
 

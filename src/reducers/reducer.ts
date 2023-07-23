@@ -50,7 +50,7 @@ const reducer = createReducer(initialState, builder => {
   });
 
   builder.addCase(changeProgressData, (state, action) => {
-    state.progressData = [...state.progressData, action.payload]
+    state.progressData = action.payload
   });
 
   builder.addCase(setAuthStatus, (state, action) => {
