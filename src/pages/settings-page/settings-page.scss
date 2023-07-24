@@ -1,15 +1,18 @@
 .setting {
-  display: inline-block;
-  border-radius: 10px;
-  width: 400px;
-  min-height: 300px;
-  box-sizing: border-box;
-  font-family: "Montserrat-Regular", Arial, sans-serif;
-  font-size: 20px;
-  line-height: 28px;
-  color: #272727;
-  background-color: #fff;
-  box-shadow: 0 1px 12px -4px #bababa;
+  padding-top: 70px;
+  &__form {
+    display: inline-block;
+    border-radius: 10px;
+    width: 400px;
+    min-height: 300px;
+    box-sizing: border-box;
+    font-family: "Montserrat-Regular", Arial, sans-serif;
+    font-size: 20px;
+    line-height: 28px;
+    color: #272727;
+    background-color: #fff;
+    box-shadow: 0 1px 12px -4px #bababa;
+  }
 
   &__item {
     display: flex;
