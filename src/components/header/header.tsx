@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
-import {AppBar, Toolbar, IconButton, Typography, List, ListItem, Drawer} from '@mui/material';
+import {AppBar, Toolbar, IconButton, Typography, List, ListItem, Drawer, Button} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link as RouterLink, useNavigate} from 'react-router-dom';
 import AuthorizationForm from '../authorization-form';
 import {useAppSelector, useAppDispatch} from '../../hooks/stateHooks';
 import {logout} from '../../actions/api-actions';
@@ -42,24 +42,26 @@ const Header = () => {
     }
   }
   const listItems = menuItems.map(item => (
-    <ListItem key={item.label} onClick={toggleDrawer}>
-      <Link to={item.path}
-            onClick={() => logOut(item.label)}
-            style={{
-              display: 'block',
-              textDecoration: 'none',
-              fontFamily: '"Montserrat-Regular", Arial, sans-serif',
-              fontSize: '.8125rem',
-              lineHeight: '1rem',
-              color: '#272727'
-            }}>{item.label}</Link>
+    <ListItem key={item.label} onClick={toggleDrawer} sx={{color: 'text.primary'}}>
+      <Button
+        component={RouterLink}
+        to={item.path}
+        onClick={() => logOut(item.label)}
+        sx={{
+          fontSize: '14px',
+          lineHeight: '16px',
+          color: 'text.primary',
+          textTransform: 'none',
+          paddingBottom: '0px'
+        }}>
+        {item.label}
+      </Button>
     </ListItem>
   ));
 
   return (
     <AppBar position="fixed"
             sx={{
-              backgroundColor: '#89ccc5',
               zIndex: '10'
             }}>
       <Toolbar variant="dense">
@@ -93,8 +95,7 @@ const Header = () => {
                 sx={{
                   fontFamily: '"Raleway-Medium", Arial, sans-serif',
                   fontSize: '20px',
-                  lineHeight: '28px',
-                  color: '#272727'
+                  lineHeight: '28px'
                 }}
                 component="div">
                 Трекер Привычек

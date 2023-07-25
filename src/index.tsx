@@ -4,8 +4,8 @@ import './index.scss'
 import App from './components/app/app';
 import {Provider} from 'react-redux';
 import {store} from './store';
-import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import {initializeApp} from 'firebase/app';
+import {getAuth} from 'firebase/auth';
 import {ToastContainer} from 'react-toastify';
 import reportWebVitals from './reportWebVitals';
 
@@ -29,10 +29,8 @@ export const auth = getAuth(app);
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <div className="content">
-        <App />
-        <ToastContainer className="toast"/>
-      </div>
+      <App/>
+      <ToastContainer className="toast"/>
     </Provider>
   </React.StrictMode>
 );

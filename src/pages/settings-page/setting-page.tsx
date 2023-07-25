@@ -1,16 +1,22 @@
 import Box from '@mui/material/Box';
-import {Button} from '@mui/material';
-import {Tabs} from '@mui/material';
-import {Tab} from '@mui/material';
-import {Switch} from '@mui/material';
+import {Button, Tabs, Tab, Switch, Typography} from '@mui/material';
 import {ChangeEvent, useState} from 'react';
 import './settings-page.scss'
+import {useAppDispatch, useAppSelector} from '../../hooks/stateHooks';
+import {setCurrentTheme} from '../../actions/actions';
+
 
 const SettingPage = () => {
   const [value, setValue] = useState(0);
+  const currentTheme = useAppSelector(state => state.currentTheme);
+  const dispatch = useAppDispatch();
 
   const handleChange = (event: ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
+  };
+
+  const handleChangeSwitch = () => {
+    dispatch(setCurrentTheme(currentTheme === 'light' ? 'dark' : 'light'))
   };
 
   const tabsContent = (value: number) => {
@@ -18,19 +24,24 @@ const SettingPage = () => {
     if (showTab === 0) {
       return (
         <div className="setting__item">
-          <span
-            className="setting-account">Удалить аккаунт</span>
+          <Typography
+            component="span"
+            color="text.primary">
+            Удалить аккаунт
+          </Typography>
           <Button
-            className="setting-account__button"
-            sx={{color: '#272727'}}
             variant="outlined">Удалить</Button>
         </div>
       );
     } else {
       return (
         <div className="setting__item">
-          <span className="setting-theme">Темная тема</span>
-          <Switch/>
+          <Typography
+            component="span"
+            color="text.primary">
+            Темная тема
+          </Typography>
+          <Switch onChange={handleChangeSwitch}/>
         </div>
       );
     }
@@ -42,11 +53,14 @@ const SettingPage = () => {
              '& .MuiTextField-root': {m: 1, width: '25ch'},
              boxShadow: '0 1px 12px -4px #bababa',
              borderRadius: '10px',
-             width: '400px'
+             width: '400px',
+             minHeight: '300px',
+             fontSize:'20px',
+             lineHeight: '28px',
+             bgcolor: 'background.default'
            }}
            noValidate
-           autoComplete="off"
-           className="setting__form">
+           autoComplete="off">
         <Tabs value={value}
               variant="fullWidth"
               onChange={handleChange}>

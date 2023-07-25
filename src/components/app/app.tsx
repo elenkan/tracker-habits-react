@@ -1,30 +1,46 @@
 import AppRouter from '../../router';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import {createTheme, ThemeProvider} from '@mui/material/styles';
+import {useMemo} from 'react';
+import {PaletteMode} from '@mui/material';
+import {useAppSelector} from '../../hooks/stateHooks';
+import CssBaseline from '@mui/material/CssBaseline';
 
 const App = () => {
-    const theme = createTheme({
-        palette: {
-            primary: {
-                main: '#89ccc5',
+  const currentTheme = useAppSelector(state => state.currentTheme);
+  const getDesignTokens = (mode: PaletteMode) => ({
+    palette: {
+      mode,
+      ...(mode === 'light'
+        && {
+          primary: {
+            main: '#89ccc5',
+          },
+          secondary: {
+            main: '#fff',
+          },
+          text: {
+            primary: '#272727'
+          },
+          background: {
+            default: '#fff'
+          }
+        })
+    },
+    typography: {
+      fontFamily: 'Montserrat-Regular, Arial, sans-serif;'
+    },
+  });
 
-            },
-            secondary: {
-                main: '#fff',
-            }
-            // secondary: {
-            //     // This is green.A700 as hex.
-            //     main: '#11cb5f',
-            // },
-        },
-        typography: {
-            fontFamily: 'Montserrat-Regular, Arial, sans-serif;'
-        }
-    });
-    return (
-        <ThemeProvider theme={theme}>
-            <AppRouter/>
-        </ThemeProvider>
-    )
+  const theme = useMemo(() => createTheme(getDesignTokens(currentTheme)), [currentTheme]);
+
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <div className="content">
+        <AppRouter/>
+      </div>
+    </ThemeProvider>
+  )
 };
 
 export default App;
