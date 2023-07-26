@@ -3,7 +3,6 @@
   flex-direction: row;
   align-items: center;
   margin-bottom: 35px;
-  color: #000;
   align-self: flex-start;
 
   &__data {
@@ -16,14 +15,6 @@
     line-height: 18px;
     align-items: flex-start;
     text-align: left;
-  }
-
-  &__name {
-    margin-bottom: 10px;
-  }
-
-  &__description {
-    font-size: 14px;
   }
 }
 

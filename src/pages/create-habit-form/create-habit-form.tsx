@@ -14,6 +14,7 @@ import {useForm} from 'react-hook-form';
 import FormButton from '../../components/form-fields/form-button';
 import {FormData} from '../../types';
 import {cloneDeep} from 'lodash';
+import {Typography} from '@mui/material';
 
 const CreateHabitForm = () => {
   const buttonData = [
@@ -68,15 +69,15 @@ const CreateHabitForm = () => {
     if (changeableHabit) {
       const habitsList = cloneDeep(challengeHabitsList)
       const changeElement = habitsList.find(item => item.id === changeableHabit.id)
-        if (changeElement) {
-          for (let key in changeElement) {
-            changeElement.name = habit.name as string;
-            changeElement.description = habit.description as string;
-          }
-          dispatch(addChangeableHabit(null));
-          dispatch(changeHabitList(habitsList))
-          navigate('/habits-list');
+      if (changeElement) {
+        for (let key in changeElement) {
+          changeElement.name = habit.name as string;
+          changeElement.description = habit.description as string;
         }
+        dispatch(addChangeableHabit(null));
+        dispatch(changeHabitList(habitsList))
+        navigate('/habits-list');
+      }
     } else {
       dispatch(addHabit(habit))
       reset({habitName: '', habitDescription: ''})
@@ -89,17 +90,33 @@ const CreateHabitForm = () => {
       component="form"
       sx={{
         '& .MuiTextField-root': {m: 1, width: '25ch'},
-        boxShadow: '0 1px 12px -4px #bababa',
-        borderRadius: '10px',
-        width: '400px'
+        bgcolor: 'background.default'
       }}
       autoComplete="off"
       className="habit-form">
-      <span className="habit-form__title">Создать новую привычку</span>
+      <Typography
+        component="span"
+        color="text.primary"
+        sx={{
+          fontSize: '18px',
+          lineHeight: '18px',
+          marginBottom: '20px'
+        }}>
+        Создать новую привычку
+      </Typography>
       <FormTextField fieldName="habitName" control={control}/>
       <FormTextField fieldName="habitDescription" control={control}/>
       <div className="habit-form__period">
-        <span className="habit-form__subtitle">Выбрать период:</span>
+        <Typography
+          component="span"
+          color="text.primary"
+          sx={{
+            fontSize: '16px',
+            lineHeight: '16px',
+            marginBottom: '15px'
+          }}>
+          Выбрать период:
+        </Typography>
         <FormToggleButton
           groupData={buttonData}
           action={setCountDays}

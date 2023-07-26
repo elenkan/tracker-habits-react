@@ -1,13 +1,13 @@
 import {Habit, ColorItem} from '../../types';
-import {IconButton} from "@mui/material";
+import {IconButton, Typography} from '@mui/material';
 import CreateIcon from '@mui/icons-material/Create';
 import DeleteIcon from '@mui/icons-material/Delete';
 import {useAppSelector, useAppDispatch} from '../../hooks/stateHooks';
-import {useState} from "react";
+import {useState} from 'react';
 import {changeProgressData, addChangeableHabit, addHabit, changeHabitList} from '../../actions/actions';
-import {useNavigate} from "react-router-dom";
-import "./habit-item.scss";
-import lists from "../../lists.json"
+import {useNavigate} from 'react-router-dom';
+import './habit-item.scss';
+import lists from '../../lists.json'
 import {cloneDeep} from 'lodash';
 
 type PropsType = {
@@ -24,7 +24,7 @@ const HabitItem = ({item}: PropsType) => {
   let progressData = useAppSelector(state => state.progressData);
 
   const daysList = () => {
-    const list = new Array(habit.period).fill({color: ""});
+    const list = new Array(habit.period).fill({color: ''});
     const daysArray = list.map(item => Object.assign({}, item));
     daysArray.forEach(item => {
       item.id = Math.random() * list.length;
@@ -36,10 +36,10 @@ const HabitItem = ({item}: PropsType) => {
   const [list, setList] = useState(resultList);
 
   const getMoodValue = () => {
-    const colors: ColorItem[] | []= lists.moodList.map(item => Object.assign({}, item));
+    const colors: ColorItem[] | [] = lists.moodList.map(item => Object.assign({}, item));
     const newList = list.slice();
     newList.forEach(item => {
-      if (item.color !== "") {
+      if (item.color !== '') {
         // @ts-ignore добавить функцию
         colors.find(el => el.color === item.color).value += 1;
       }
@@ -47,7 +47,7 @@ const HabitItem = ({item}: PropsType) => {
     setList(newList);
     return colors;
   };
- // TODO: добавить сортировку по цвету
+  // TODO: добавить сортировку по цвету
   const getColorValueArray = (array: ColorItem[]) => {
     const checkedColorAmount = array.reduce((acc, curr) => acc + curr.value, 0);
     return array.map(item => {
@@ -61,7 +61,7 @@ const HabitItem = ({item}: PropsType) => {
 
 
   const getProgressValue = () => {
-    const checkedDays = list.filter(item => item.color !== "");
+    const checkedDays = list.filter(item => item.color !== '');
     if (checkedDays.length > 0) {
       const progressValue = Math.round(checkedDays.length / habit.period * 100);
       const progressItem = {
@@ -94,7 +94,7 @@ const HabitItem = ({item}: PropsType) => {
   const setData = (item: ColorItem) => {
     const newArr = list.slice();
     const el = newArr.find(el => el.id === item.id);
-    el.color = el.color === "" ? color : "";
+    el.color = el.color === '' ? color : '';
     setList(newArr);
     getProgressValue();
     getMoodValue();
@@ -102,7 +102,7 @@ const HabitItem = ({item}: PropsType) => {
 
   const changeHabit = (habit: Habit) => {
     dispatch(addChangeableHabit(habit));
-    navigate("/create-habit");
+    navigate('/create-habit');
   };
   const deleteHabit = (habitId: number | null) => {
     const filterList = habitList.filter(item => item.id !== habitId);
@@ -112,12 +112,12 @@ const HabitItem = ({item}: PropsType) => {
   let dayListItem = list.map(day => {
     return (
       <span className="days-list__item"
-        onClick={() => setData(day)}
-        style={{
-          'backgroundColor': day.color ? day.color : 'transparent',
-          'border': day.color ? '1px solid transparent' : '1px solid #89ccc5'
-        }}
-        key={day.id}>
+            onClick={() => setData(day)}
+            style={{
+              'backgroundColor': day.color ? day.color : 'transparent',
+              'border': day.color ? '1px solid transparent' : '1px solid #89ccc5'
+            }}
+            key={day.id}>
         </span>
     );
   });
@@ -125,8 +125,23 @@ const HabitItem = ({item}: PropsType) => {
   return (
     <li className="habit-item">
       <div className="habit-item__data">
-        <span className="habit-item__name">{habit.name}</span>
-        <span className="habit-item__description">{habit.description}</span>
+        <Typography
+          component="span"
+          color="text.primary"
+          sx={{
+            marginBottom: '10px'
+          }}>
+          {habit.name}
+        </Typography>
+        <Typography
+          component="span"
+          color="text.primary"
+          sx={{
+            fontSize: '14px',
+            lineHeight: '14px'
+          }}>
+          {habit.description}
+        </Typography>
       </div>
 
       <div className="days-list">

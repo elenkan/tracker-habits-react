@@ -10,28 +10,8 @@
   font-family: "Montserrat-Regular", Arial, sans-serif;
   font-size: 20px;
   line-height: 28px;
-  background-color: #fff;
   box-shadow: 0 1px 12px -4px #bababa;
   margin-top: 70px;
-
-
-  &__title {
-    display: inline-block;
-    margin-bottom: 20px;
-    font-family: "Montserrat-Regular", Arial, sans-serif;
-    font-size: 18px;
-    line-height: 18px;
-    color: #272727;
-  }
-
-  &__subtitle {
-    display: inline-block;
-    font-family: "Montserrat-Regular", Arial, sans-serif;
-    font-size: 16px;
-    width: 100%;
-    margin-bottom: 15px;
-    color: #272727;
-  }
 
   &__period {
     display: flex;

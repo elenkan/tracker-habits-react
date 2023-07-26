@@ -52,7 +52,10 @@ const Header = () => {
           lineHeight: '16px',
           color: 'text.primary',
           textTransform: 'none',
-          paddingBottom: '0px'
+          paddingBottom: '0px',
+          ':hover': {
+            backgroundColor: 'transparent'
+          }
         }}>
         {item.label}
       </Button>

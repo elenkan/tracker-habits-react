@@ -1,15 +1,10 @@
 .mood {
   width: 100%;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
   position: fixed;
-  font-family: "Montserrat-Regular", Arial, sans-serif;
-  font-size: 16px;
-  line-height: 16px;
-  color: #272727;
   z-index: 9;
-  background-color: #ffffff;
 }
 .mood__title {
   margin-right: 10px;
@@ -19,7 +14,7 @@
 .mood-list {
   display: flex;
   padding-left: 0;
-  margin-bottom: 0;
+  margin: 0;
 
   &__item {
     display: flex;
@@ -30,6 +25,7 @@
     border-radius: 10px;
     margin-right: 10px;
     cursor: pointer;
+    max-height: 50px;
 
     &:last-child {
       margin-right: 0;

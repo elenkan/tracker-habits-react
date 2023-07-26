@@ -10,15 +10,14 @@ const FormButton = ({buttonWidth, buttonTitle, action}: PropsType) => {
   return (
     <Button
       sx={{
-        backgroundColor: '#e2958c',
+        backgroundColor: 'background.button',
         borderColor: '#e2958c',
-        color: '#fff',
+        color: 'text.button',
         width: buttonWidth,
         margin: '0 auto',
         ':hover': {
           backgroundColor: 'rgba(226,149,140, 0.9)',
           borderColor: '#e2958c'
-
         }
       }}
       variant="outlined"

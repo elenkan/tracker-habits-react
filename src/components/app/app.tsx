@@ -11,7 +11,7 @@ const App = () => {
     palette: {
       mode,
       ...(mode === 'light'
-        && {
+        ? {
           primary: {
             main: '#89ccc5',
           },
@@ -19,10 +19,17 @@ const App = () => {
             main: '#fff',
           },
           text: {
-            primary: '#272727'
+            primary: '#272727',
+            button: '#fff'
           },
           background: {
-            default: '#fff'
+            default: '#fff',
+            button: '#e2958c'
+          }
+        }
+        : {
+          primary: {
+            main: '#e2958c'
           }
         })
     },

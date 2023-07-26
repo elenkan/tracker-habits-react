@@ -46,7 +46,7 @@ const FormToggleButton = ({groupData, action, actionStringValue, defaultValue, c
             value={item.toggleValue}
             sx={{
               border: 'none',
-              color: '#272727'
+              color: 'text.primary'
             }}
           >
             {item.label}
