@@ -19,17 +19,25 @@ const App = () => {
             main: '#fff',
           },
           text: {
-            primary: '#272727',
-            button: '#fff'
+            primary: '#272727'
+          },
+          button: {
+            text: '#fff',
+            background: '#e2958c',
           },
           background: {
             default: '#fff',
-            button: '#e2958c'
+          },
+          card: {
+            background: '#d7ebe9'
           }
         }
         : {
           primary: {
             main: '#e2958c'
+          },
+          card: {
+            background: 'rgba(255, 255, 255, 0.1)'
           }
         })
     },

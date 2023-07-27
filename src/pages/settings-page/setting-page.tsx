@@ -41,7 +41,7 @@ const SettingPage = () => {
             color="text.primary">
             Темная тема
           </Typography>
-          <Switch onChange={handleChangeSwitch}/>
+          <Switch checked={currentTheme === 'dark'} onChange={handleChangeSwitch}/>
         </div>
       );
     }

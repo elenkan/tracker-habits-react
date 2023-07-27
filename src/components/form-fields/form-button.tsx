@@ -10,9 +10,9 @@ const FormButton = ({buttonWidth, buttonTitle, action}: PropsType) => {
   return (
     <Button
       sx={{
-        backgroundColor: 'background.button',
+        backgroundColor: 'button.background',
         borderColor: '#e2958c',
-        color: 'text.button',
+        color: 'button.text',
         width: buttonWidth,
         margin: '0 auto',
         ':hover': {

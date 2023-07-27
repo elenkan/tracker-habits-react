@@ -3,17 +3,14 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  font-family: "Montserrat-Regular", Arial, sans-serif;
   font-size: 16px;
   line-height: 16px;
-  color: #272727;
   margin-top: 90px;
 
   &__item {
     display: flex;
     flex-direction: column;
     width: 550px;
-    background-color: #fff;
     box-shadow: 0 1px 12px -4px #bababa;
     border-radius: 10px;
     flex-wrap: wrap;

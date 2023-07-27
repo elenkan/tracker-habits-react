@@ -45,16 +45,22 @@ const GoalBar = ({progressValue}: PropsType) => {
 
   return (
     <div className="goal-bar">
-      <div className="goal-bar__circle">
+      <Box
+        component="div"
+        sx={{bgcolor: 'card.background'}}
+        className="goal-bar__circle">
         <h4 className="goal-bar__title">Прогресс выполнения</h4>
         {CircularProgressWithLabel(progressValue.value)}
-      </div>
-      <div className="goal-bar__days">
+      </Box>
+      <Box
+        component="div"
+        sx={{bgcolor: 'card.background'}}
+        className="goal-bar__days">
         <h4 className="goal-bar__title">Завершено дней</h4>
         <div>
           <span>{progressValue.completedDays}</span>{` / ${progressValue.period}`}
         </div>
-      </div>
+      </Box>
     </div>)
 };
 
