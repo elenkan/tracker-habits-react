@@ -3,13 +3,17 @@ import {Button, Tabs, Tab, Switch, Typography} from '@mui/material';
 import {ChangeEvent, useState} from 'react';
 import './settings-page.scss'
 import {useAppDispatch, useAppSelector} from '../../hooks/stateHooks';
-import {setCurrentTheme} from '../../actions/actions';
+import {setAuthStatus, setCurrentTheme} from '../../actions/actions';
+import {deleteAccount} from '../../actions/api-actions';
+import {AppRouteList} from '../../router/enums';
+import {useNavigate} from 'react-router-dom';
 
 
 const SettingPage = () => {
   const [value, setValue] = useState(0);
   const currentTheme = useAppSelector(state => state.currentTheme);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const handleChange = (event: ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
@@ -18,6 +22,12 @@ const SettingPage = () => {
   const handleChangeSwitch = () => {
     dispatch(setCurrentTheme(currentTheme === 'light' ? 'dark' : 'light'))
   };
+
+  const deleteUserAccount = () => {
+    dispatch(deleteAccount)
+    dispatch(setAuthStatus(false))
+    navigate(AppRouteList.Home)
+  }
 
   const tabsContent = (value: number) => {
     const showTab = value;
@@ -30,7 +40,8 @@ const SettingPage = () => {
             Удалить аккаунт
           </Typography>
           <Button
-            variant="outlined">Удалить</Button>
+            variant="outlined"
+            onClick={deleteUserAccount}>Удалить</Button>
         </div>
       );
     } else {
