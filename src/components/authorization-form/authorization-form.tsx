@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react';
 import {Box, Button, Dialog, DialogContent} from '@mui/material';
 import './authorization-form.scss';
-import {login, createLogin} from '../../actions/api-actions';
+import {login, createLogin, signInAsGuest} from '../../actions/api-actions';
 import {useAppDispatch} from '../../hooks/stateHooks';
 import {setAuthStatus, setUserData} from '../../actions/actions';
 import {useNavigate} from 'react-router-dom';
@@ -37,6 +37,12 @@ const AuthorizationForm = () => {
     reset({userName: '', email: ''})
   }, [open])
 
+  const onClickGuestBtn = async () => {
+    await dispatch(signInAsGuest()).then(res => {
+      dispatch(setAuthStatus(true))
+      navigate(AppRouteList.CreateHabitPage)
+    })
+  };
 
   const onSubmit = async (data: FormData) => {
     const {userName: name, email, password} = data
@@ -88,7 +94,9 @@ const AuthorizationForm = () => {
                       color: '#272727',
                       width: '180px',
                       margin: '0 auto',
-                    }}>
+                    }}
+                    onClick={onClickGuestBtn}
+            >
               Войти как гость
             </Button>
 

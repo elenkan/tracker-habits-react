@@ -24,9 +24,10 @@ const SettingPage = () => {
   };
 
   const deleteUserAccount = () => {
-    dispatch(deleteAccount)
-    dispatch(setAuthStatus(false))
-    navigate(AppRouteList.Home)
+    dispatch(deleteAccount()).then(res => {
+      dispatch(setAuthStatus(false))
+      navigate(AppRouteList.Home)
+    })
   }
 
   const tabsContent = (value: number) => {

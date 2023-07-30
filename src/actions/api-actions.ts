@@ -1,7 +1,12 @@
 import {auth} from '../index';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AuthData} from '../types/index'
-import {signInWithEmailAndPassword, createUserWithEmailAndPassword, deleteUser} from 'firebase/auth'
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  deleteUser,
+  signInAnonymously
+} from 'firebase/auth'
 import Notification from './../utils/notification/notification'
 
 //TODO: заменить тип user
@@ -33,12 +38,25 @@ export const createLogin = createAsyncThunk<any, AuthData>('createLogin',
     }
   });
 
-export const deleteAccount = () => {
+export const deleteAccount = createAsyncThunk<any>('deleteAccount',
+  async () => {
     try {
       const user = auth.currentUser;
-      user && deleteUser(user);
+      user && await deleteUser(user);
     } catch (e) {
       // @ts-ignore
       Notification.showErrorNotification(e)
     }
-  }
+  });
+
+export const signInAsGuest = createAsyncThunk<any>('signInAsGuest',
+  async () => {
+    try {
+      await signInAnonymously(auth)
+    } catch (e) {
+      // @ts-ignore
+      Notification.showErrorNotification(e)
+    }
+  });
+
+
