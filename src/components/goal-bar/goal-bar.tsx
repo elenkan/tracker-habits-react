@@ -1,10 +1,10 @@
-import {ProgressItem} from '../../types';
+import {Habit} from '../../types';
 import CircularProgress from '@mui/material/CircularProgress';
 import {Typography, Box} from '@mui/material';
 import './goal-bar.scss'
 
 type PropsType = {
-  progressValue: ProgressItem
+  progressValue: Habit
 }
 
 const GoalBar = ({progressValue}: PropsType) => {

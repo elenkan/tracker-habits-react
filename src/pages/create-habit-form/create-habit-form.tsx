@@ -63,7 +63,10 @@ const CreateHabitForm = () => {
       description,
       // TODO: заменить id
       id: changeableHabit ? changeableHabit.id : Math.random() * 2 * Math.random(),
-      period: countDays.current
+      period: countDays.current,
+      colorsValue: [],
+      completedDays: 0,
+      value: 0
     };
 
     if (changeableHabit) {

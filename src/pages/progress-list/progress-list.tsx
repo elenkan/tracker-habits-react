@@ -5,8 +5,7 @@ import MoodStatistics from '../../components/mood-statistics';
 import './progress-list.scss';
 
 const ProgressList = () => {
-  const progressData = useAppSelector(state => state.progressData);
-
+  const progressData = useAppSelector(state => state.challengeHabitsList);
   const progressListItem = progressData.map(item => {
     return (
       <Box

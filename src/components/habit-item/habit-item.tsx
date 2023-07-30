@@ -4,7 +4,7 @@ import CreateIcon from '@mui/icons-material/Create';
 import DeleteIcon from '@mui/icons-material/Delete';
 import {useAppSelector, useAppDispatch} from '../../hooks/stateHooks';
 import {useState} from 'react';
-import {changeProgressData, addChangeableHabit, addHabit, changeHabitList} from '../../actions/actions';
+import {addChangeableHabit, changeHabitList} from '../../actions/actions';
 import {useNavigate} from 'react-router-dom';
 import './habit-item.scss';
 import lists from '../../lists.json'
@@ -21,7 +21,6 @@ const HabitItem = ({item}: PropsType) => {
 
   let color = useAppSelector(state => state.colorMood);
   let habitList = useAppSelector(state => state.challengeHabitsList);
-  let progressData = useAppSelector(state => state.progressData);
 
   const daysList = () => {
     const list = new Array(habit.period).fill({color: ''});
@@ -64,31 +63,20 @@ const HabitItem = ({item}: PropsType) => {
     const checkedDays = list.filter(item => item.color !== '');
     if (checkedDays.length > 0) {
       const progressValue = Math.round(checkedDays.length / habit.period * 100);
-      const progressItem = {
-        name: habit.name,
+      const progressData = {
         value: progressValue,
-        id: habit.id,
         colorsValue: getColorValueArray(getMoodValue()),
         completedDays: checkedDays.length,
-        period: habit.period
       };
-      //если нет такой привычки, добавляем новую
-      if (progressData.every(item => item.name !== progressItem.name)) {
-
-        let data = cloneDeep(progressData)
-        // @ts-ignore
-        // TODO: заменить отправку в store
-        data.push(progressItem)
-        dispatch(changeProgressData(data))
-      } else {
-        let data = cloneDeep(progressData)
-        let el = data.find(item => item.id === progressItem.id) ?? {}
-        for (let key in el) {
-          // @ts-ignore
-          el[key] = progressItem[key]
+        let data = cloneDeep(habitList)
+        let el = data.find(item => item.id === habit.id)
+        if (el) {
+          el.value = progressData.value;
+          el.colorsValue = progressData.colorsValue;
+          el.completedDays = progressData.completedDays;
         }
-        dispatch(changeProgressData(data))
-      }
+      console.log(el)
+        dispatch(changeHabitList(data))
     }
   }
   const setData = (item: ColorItem) => {

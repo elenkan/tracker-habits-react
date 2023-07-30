@@ -3,7 +3,6 @@ import {
   addHabit,
   addColorMood,
   addChangeableHabit,
-  changeProgressData,
   setAuthStatus,
   setUserData,
   changeHabitList,
@@ -11,12 +10,10 @@ import {
   setIsGuestAuth
 } from '../actions/actions';
 
-import {Habit, ProgressItem} from '../types';
+import {Habit} from '../types';
 
 type StateType = {
   challengeHabitsList: Habit[],
-  progressData: ProgressItem[],
-  challengeProgressData: ProgressItem[],
   colorMood: string,
   changeableHabit: Habit | null,
   isAuth: boolean,
@@ -28,8 +25,6 @@ type StateType = {
 
 const initialState: StateType = {
   challengeHabitsList: [],
-  progressData: [],
-  challengeProgressData: [],
   colorMood: '',
   changeableHabit: null,
   isAuth: true,
@@ -53,10 +48,6 @@ const reducer = createReducer(initialState, builder => {
 
   builder.addCase(addChangeableHabit, (state, action) => {
     state.changeableHabit = action.payload
-  });
-
-  builder.addCase(changeProgressData, (state, action) => {
-    state.progressData = action.payload
   });
 
   builder.addCase(setAuthStatus, (state, action) => {
