@@ -8,3 +8,4 @@ export const changeProgressData = createAction('changeProgressData', progressDat
 export const setAuthStatus = createAction('setAuthStatus', value => ({payload: value}));
 export const setUserData = createAction('setUserData', value => ({payload: value}));
 export const setCurrentTheme = createAction('setCurrentTheme', value => ({payload: value}))
+export const setIsGuestAuth = createAction('setIsGuestAuth', value => ({payload: value}))

@@ -5,13 +5,14 @@ import {Link as RouterLink, useNavigate} from 'react-router-dom';
 import AuthorizationForm from '../authorization-form';
 import {useAppSelector, useAppDispatch} from '../../hooks/stateHooks';
 import {logout} from '../../actions/api-actions';
-import {setAuthStatus} from '../../actions/actions';
+import {setAuthStatus, setIsGuestAuth} from '../../actions/actions';
 import {AppRouteList} from '../../router/enums';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const isAuth = useAppSelector(state => state.isAuth);
   const userData = useAppSelector(state => state.userData);
+  const isGuestAuth = useAppSelector(state => state.isGuestAuth);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -37,6 +38,9 @@ const Header = () => {
     if (label === 'Выйти') {
       dispatch(logout()).then(res => {
         dispatch(setAuthStatus(false))
+        if (isGuestAuth) {
+          dispatch(setIsGuestAuth(false))
+        }
         navigate(AppRouteList.Home)
       })
     }

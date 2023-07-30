@@ -7,7 +7,8 @@ import {
   setAuthStatus,
   setUserData,
   changeHabitList,
-  setCurrentTheme
+  setCurrentTheme,
+  setIsGuestAuth
 } from '../actions/actions';
 
 import {Habit, ProgressItem} from '../types';
@@ -21,6 +22,7 @@ type StateType = {
   isAuth: boolean,
   // TODO: присвоить тип
   userData: any,
+  isGuestAuth: boolean,
   currentTheme: 'light' | 'dark'
 }
 
@@ -32,6 +34,7 @@ const initialState: StateType = {
   changeableHabit: null,
   isAuth: true,
   userData: {},
+  isGuestAuth: false,
   currentTheme: 'light'
 };
 
@@ -66,6 +69,10 @@ const reducer = createReducer(initialState, builder => {
 
   builder.addCase(setCurrentTheme, (state, action) => {
     state.currentTheme = action.payload
+  });
+
+  builder.addCase(setIsGuestAuth, (state, action) => {
+    state.isGuestAuth = action.payload
   });
 });
 

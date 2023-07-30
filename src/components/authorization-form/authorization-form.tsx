@@ -3,7 +3,7 @@ import {Box, Button, Dialog, DialogContent} from '@mui/material';
 import './authorization-form.scss';
 import {login, createLogin, signInAsGuest} from '../../actions/api-actions';
 import {useAppDispatch} from '../../hooks/stateHooks';
-import {setAuthStatus, setUserData} from '../../actions/actions';
+import {changeHabitList, setAuthStatus, setIsGuestAuth, setUserData} from '../../actions/actions';
 import {useNavigate} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
 import {AppRouteList} from '../../router/enums';
@@ -11,6 +11,7 @@ import FormTextField from '../form-fields/form-text-field';
 import FormPasswordField from '../form-fields/form-password-field';
 import FormButton from '../form-fields/form-button';
 import {FormData} from '../../types';
+import {guestHabitsList} from '../../guestData';
 
 const AuthorizationForm = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -40,7 +41,9 @@ const AuthorizationForm = () => {
   const onClickGuestBtn = async () => {
     await dispatch(signInAsGuest()).then(res => {
       dispatch(setAuthStatus(true))
-      navigate(AppRouteList.CreateHabitPage)
+      dispatch(setIsGuestAuth(true))
+      dispatch(changeHabitList(guestHabitsList))
+      navigate(AppRouteList.HabitsPage)
     })
   };
 
