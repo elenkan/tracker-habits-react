@@ -39,6 +39,15 @@ const CreateHabitForm = () => {
     countDays.current = value
   };
 
+  const createDaysList = (period: number) => {
+    const list = new Array(period).fill({color: ''});
+    const daysArray = list.map(item => Object.assign({}, item));
+    daysArray.forEach(item => {
+      item.id = Math.random() * list.length;
+    });
+    return daysArray;
+  };
+
   useEffect(() => {
     if (!changeableHabit) {
       reset({habitName: '', habitDescription: ''})
@@ -66,7 +75,8 @@ const CreateHabitForm = () => {
       period: countDays.current,
       colorsValue: [],
       completedDays: 0,
-      value: 0
+      value: 0,
+      checkedDays: createDaysList(countDays.current)
     };
 
     if (changeableHabit) {

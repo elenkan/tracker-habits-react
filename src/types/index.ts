@@ -1,3 +1,10 @@
+export type ColorItem = {
+  color: string,
+  mood?: string,
+  value?: number,
+  id: number
+}
+
 export type Habit = {
   id: number | null,
   name: string,
@@ -5,14 +12,8 @@ export type Habit = {
   period: number,
   colorsValue: number[],
   completedDays: number,
-  value: number
-}
-
-export type ColorItem = {
-  color: string,
-  mood: string,
   value: number,
-  id: number
+  checkedDays: ColorItem[]
 }
 
 export type AuthData = {

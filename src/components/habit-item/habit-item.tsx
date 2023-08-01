@@ -3,7 +3,7 @@ import {IconButton, Typography} from '@mui/material';
 import CreateIcon from '@mui/icons-material/Create';
 import DeleteIcon from '@mui/icons-material/Delete';
 import {useAppSelector, useAppDispatch} from '../../hooks/stateHooks';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {addChangeableHabit, changeHabitList} from '../../actions/actions';
 import {useNavigate} from 'react-router-dom';
 import './habit-item.scss';
@@ -15,31 +15,24 @@ type PropsType = {
 }
 
 const HabitItem = ({item}: PropsType) => {
-  const habit = item;
+  const habit = cloneDeep(item)
+  const [list, setList] = useState<ColorItem[]>([]);
   const dispatch = useAppDispatch();
   let navigate = useNavigate();
 
   let color = useAppSelector(state => state.colorMood);
   let habitList = useAppSelector(state => state.challengeHabitsList);
-
-  const daysList = () => {
-    const list = new Array(habit.period).fill({color: ''});
-    const daysArray = list.map(item => Object.assign({}, item));
-    daysArray.forEach(item => {
-      item.id = Math.random() * list.length;
-    });
-    return daysArray;
-  };
-
-  const resultList = daysList();
-  const [list, setList] = useState(resultList);
+  console.log(habitList)
+  useEffect(() => {
+    setList(habit.checkedDays)
+  }, [])
 
   const getMoodValue = () => {
     const colors: ColorItem[] | [] = lists.moodList.map(item => Object.assign({}, item));
-    const newList = list.slice();
+    const newList = cloneDeep(list);
     newList.forEach(item => {
       if (item.color !== '') {
-        // @ts-ignore добавить функцию
+        // @ts-ignore
         colors.find(el => el.color === item.color).value += 1;
       }
     })
@@ -48,10 +41,11 @@ const HabitItem = ({item}: PropsType) => {
   };
   // TODO: добавить сортировку по цвету
   const getColorValueArray = (array: ColorItem[]) => {
+    // @ts-ignore
     const checkedColorAmount = array.reduce((acc, curr) => acc + curr.value, 0);
     return array.map(item => {
       Object.assign({}, item);
-      if (item.value !== 0) {
+      if (item.value && item.value !== 0) {
         item.value = Math.round(item.value / checkedColorAmount * 100);
       }
       return item.value;
@@ -72,18 +66,21 @@ const HabitItem = ({item}: PropsType) => {
         let el = data.find(item => item.id === habit.id)
         if (el) {
           el.value = progressData.value;
+          // @ts-ignore
           el.colorsValue = progressData.colorsValue;
           el.completedDays = progressData.completedDays;
+          el.checkedDays = list
         }
-      console.log(el)
         dispatch(changeHabitList(data))
     }
   }
   const setData = (item: ColorItem) => {
-    const newArr = list.slice();
-    const el = newArr.find(el => el.id === item.id);
-    el.color = el.color === '' ? color : '';
-    setList(newArr);
+    const data = [...list];
+    const el = data.find(el => el.id === item.id);
+    if (el?.color || el?.color === '') {
+      el.color= color
+    }
+    setList(data);
     getProgressValue();
     getMoodValue();
   };
@@ -97,7 +94,7 @@ const HabitItem = ({item}: PropsType) => {
     dispatch(changeHabitList(filterList))
   }
 
-  let dayListItem = list.map(day => {
+  let daysList = list.map(day => {
     return (
       <span className="days-list__item"
             onClick={() => setData(day)}
@@ -106,7 +103,7 @@ const HabitItem = ({item}: PropsType) => {
               'border': day.color ? '1px solid transparent' : '1px solid #89ccc5'
             }}
             key={day.id}>
-        </span>
+      </span>
     );
   });
 
@@ -133,7 +130,7 @@ const HabitItem = ({item}: PropsType) => {
       </div>
 
       <div className="days-list">
-        {dayListItem}
+        {daysList}
       </div>
       <div className="habit-item__button-group">
         <IconButton onClick={() => changeHabit(habit)}>
