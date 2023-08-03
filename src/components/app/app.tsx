@@ -30,6 +30,9 @@ const App = () => {
           },
           card: {
             background: '#d7ebe9'
+          },
+          modeIcon: {
+            default: '#fff',
           }
         }
         : {
@@ -38,6 +41,9 @@ const App = () => {
           },
           card: {
             background: 'rgba(255, 255, 255, 0.1)'
+          },
+          modeIcon: {
+            default: '#e2958c',
           }
         })
     },

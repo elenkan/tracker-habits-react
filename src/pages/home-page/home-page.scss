@@ -9,12 +9,19 @@
   background-repeat: no-repeat;
   background-size: cover;
 
-  span {
-    display: inline-block;
+  &_dark {
+    background-image: url("../../images/bg-dark-image.jpg");
+    background-color: #89ccc5;
+  }
+  &__name-app {
     padding: 40px;
-    background-color: rgba(137,204,197, 0.9);
     border-radius: 10px;
     font-size: 50px;
     line-height: 50px;
+    background-color: #89ccc5;
+
+    &_dark {
+      background-color: rgba(226, 149, 140, 0.5);
+    }
   }
 }

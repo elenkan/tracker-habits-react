@@ -7,6 +7,7 @@ import {useAppSelector, useAppDispatch} from '../../hooks/stateHooks';
 import {logout} from '../../actions/api-actions';
 import {setAuthStatus, setIsGuestAuth} from '../../actions/actions';
 import {AppRouteList} from '../../router/enums';
+import ColorMode from '../color-mode';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -108,7 +109,11 @@ const Header = () => {
                 Трекер Привычек
             </Typography>
         </>}
-        {!isAuth && <AuthorizationForm/>}
+        {!isAuth &&
+          <>
+            <AuthorizationForm/>
+            <ColorMode />
+          </>}
       </Toolbar>
     </AppBar>);
 }

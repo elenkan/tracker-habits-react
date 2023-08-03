@@ -43,7 +43,7 @@ const AuthorizationForm = () => {
       dispatch(setAuthStatus(true))
       dispatch(setIsGuestAuth(true))
       dispatch(changeHabitList(guestHabitsList))
-      navigate(AppRouteList.HabitsPage)
+      navigate(AppRouteList.ProgressPage)
     })
   };
 
@@ -94,7 +94,7 @@ const AuthorizationForm = () => {
             <Button variant="outlined"
                     className="auth_form__item"
                     sx={{
-                      color: '#272727',
+                      color: 'primary.main',
                       width: '180px',
                       margin: '0 auto',
                     }}
