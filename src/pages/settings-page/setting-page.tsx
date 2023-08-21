@@ -4,7 +4,7 @@ import {ChangeEvent, useState} from 'react';
 import './settings-page.scss'
 import {useAppDispatch, useAppSelector} from '../../hooks/stateHooks';
 import {setAuthStatus, setCurrentTheme} from '../../actions/actions';
-import {deleteAccount} from '../../actions/api-actions';
+import {deleteAccount, saveColorMode} from '../../actions/api-actions';
 import {AppRouteList} from '../../router/enums';
 import {useNavigate} from 'react-router-dom';
 
@@ -21,6 +21,7 @@ const SettingPage = () => {
 
   const handleChangeSwitch = () => {
     dispatch(setCurrentTheme(currentTheme === 'light' ? 'dark' : 'light'))
+    dispatch(saveColorMode(currentTheme === 'light' ? 'dark' : 'light'))
   };
 
   const deleteUserAccount = () => {

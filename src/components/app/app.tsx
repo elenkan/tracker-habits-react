@@ -1,12 +1,17 @@
 import AppRouter from '../../router';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
-import {useMemo} from 'react';
+import {useEffect, useMemo} from 'react';
 import {PaletteMode} from '@mui/material';
-import {useAppSelector} from '../../hooks/stateHooks';
+import {useAppDispatch, useAppSelector} from '../../hooks/stateHooks';
 import CssBaseline from '@mui/material/CssBaseline';
+import {setColorMode} from '../../actions/api-actions';
 
 const App = () => {
   const currentTheme = useAppSelector(state => state.currentTheme);
+  const dispatch = useAppDispatch()
+  useEffect(() => {
+    dispatch(setColorMode())
+  }, [])
   const getDesignTokens = (mode: PaletteMode) => ({
     palette: {
       mode,

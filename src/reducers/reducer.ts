@@ -1,6 +1,5 @@
 import {createReducer} from '@reduxjs/toolkit';
 import {
-  addHabit,
   addColorMood,
   addChangeableHabit,
   setAuthStatus,
@@ -34,10 +33,6 @@ const initialState: StateType = {
 };
 
 const reducer = createReducer(initialState, builder => {
-  builder.addCase(addHabit, (state, action) => {
-    state.challengeHabitsList.push(action.payload);
-  });
-
   builder.addCase(changeHabitList, (state, action) => {
     state.challengeHabitsList = action.payload
   });

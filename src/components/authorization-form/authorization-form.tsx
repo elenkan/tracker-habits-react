@@ -1,8 +1,8 @@
 import {useState, useEffect} from 'react';
 import {Box, Button, Dialog, DialogContent} from '@mui/material';
 import './authorization-form.scss';
-import {login, createLogin, signInAsGuest} from '../../actions/api-actions';
-import {useAppDispatch} from '../../hooks/stateHooks';
+import {login, createLogin, signInAsGuest, saveColorMode, fetchHabitList} from '../../actions/api-actions';
+import {useAppDispatch, useAppSelector} from '../../hooks/stateHooks';
 import {changeHabitList, setAuthStatus, setIsGuestAuth, setUserData} from '../../actions/actions';
 import {useNavigate} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
@@ -14,6 +14,7 @@ import {FormData} from '../../types';
 import {guestHabitsList} from '../../guestData';
 
 const AuthorizationForm = () => {
+  const currentTheme = useAppSelector(state => state.currentTheme);
   const [open, setOpen] = useState<boolean>(false);
   const [type, setType] = useState<string>('')
   const dispatch = useAppDispatch()
@@ -65,9 +66,11 @@ const AuthorizationForm = () => {
       if (user) {
         dispatch(setUserData(user))
         dispatch(setAuthStatus(true))
+        dispatch(fetchHabitList())
         navigate(AppRouteList.CreateHabitPage)
       }
     }
+    dispatch(saveColorMode(currentTheme === 'light' ? 'dark' : 'light'))
     setOpen(false);
   }
 
