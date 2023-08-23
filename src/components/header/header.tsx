@@ -18,7 +18,6 @@ const Header = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(userData)
   }, [userData])
 
   const menuItems = [

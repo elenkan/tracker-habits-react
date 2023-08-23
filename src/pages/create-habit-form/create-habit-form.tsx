@@ -4,7 +4,6 @@ import {useEffect, useRef} from 'react';
 import {useAppDispatch, useAppSelector} from '../../hooks/stateHooks';
 import {
   addChangeableHabit,
-  addHabit,
   changeHabitList
 } from '../../actions/actions';
 import {useNavigate} from 'react-router-dom';
@@ -12,9 +11,10 @@ import FormToggleButton from '../../components/form-fields/form-toggle-button';
 import FormTextField from '../../components/form-fields/form-text-field';
 import {useForm} from 'react-hook-form';
 import FormButton from '../../components/form-fields/form-button';
-import {FormData} from '../../types';
+import {FormData, Habit} from '../../types';
 import {cloneDeep} from 'lodash';
 import {Typography} from '@mui/material';
+import {addHabit} from '../../actions/api-actions';
 
 const CreateHabitForm = () => {
   const buttonData = [
@@ -79,8 +79,9 @@ const CreateHabitForm = () => {
       checkedDays: createDaysList(countDays.current)
     };
 
+    const habitsList = cloneDeep(challengeHabitsList)
+
     if (changeableHabit) {
-      const habitsList = cloneDeep(challengeHabitsList)
       const changeElement = habitsList.find(item => item.id === changeableHabit.id)
       if (changeElement) {
         for (let key in changeElement) {
@@ -92,7 +93,7 @@ const CreateHabitForm = () => {
         navigate('/habits-list');
       }
     } else {
-      dispatch(addHabit(habit))
+      dispatch(addHabit(habit as Habit))
       reset({habitName: '', habitDescription: ''})
       // TODO: выставлять дефолтное значение 21
     }

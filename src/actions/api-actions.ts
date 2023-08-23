@@ -10,7 +10,7 @@ import {
 import {AppDispatch} from '../types/state';
 import Notification from './../utils/notification/notification'
 import { ref, set, push, onValue } from 'firebase/database';
-import {changeHabitList, setCurrentTheme} from './actions';
+import {changeHabitList, setUserColorTheme} from './actions';
 
 //TODO: заменить тип user
 export const login = createAsyncThunk<any, AuthData>('login',
@@ -63,11 +63,13 @@ export const fetchHabitList = createAsyncThunk<void, undefined, {dispatch: AppDi
     try {
       const user = auth?.currentUser?.uid;
       await onValue(ref(database, `users/${user}/challengeHabitsList`), (snapshot) => {
+        let habitsList: Habit[] | [] = []
         if (snapshot) {
-          snapshot.forEach( item => {
-            console.log(item.val())
-            dispatch(changeHabitList(item.val()))
+          snapshot.forEach(item => {
+            // @ts-ignore
+            habitsList.push(item.val())
           })
+          dispatch(changeHabitList(habitsList))
         }
       }, {onlyOnce: true})
 
@@ -76,27 +78,27 @@ export const fetchHabitList = createAsyncThunk<void, undefined, {dispatch: AppDi
     }
   });
 
-// export const addHabitList = createAsyncThunk<void, Habit[], {dispatch: AppDispatch}>('habitListAction',
-//   async (challengeHabitsList, {dispatch}) => {
-//     try {
-//       const user = auth?.currentUser?.uid;
-//       await push(ref(database, `users/${user}/challengeHabitsList`), challengeHabitsList)
-//         .then((res) => console.log(res.key) );
-//     } catch (e) {
-//       Notification.showErrorNotification(e)
-//     }
-//   });
+export const addHabit = createAsyncThunk<void, Habit, {dispatch: AppDispatch}>('habitAction',
+  async (habit, {dispatch}) => {
+    try {
+      const user = auth?.currentUser?.uid;
+      await push(ref(database, `users/${user}/challengeHabitsList`), habit)
+        .then((res) => {
+          dispatch(fetchHabitList())
+        } );
+    } catch (e) {
+      Notification.showErrorNotification(e)
+    }
+  });
 
-export const setColorMode = createAsyncThunk<void, undefined, {dispatch: AppDispatch}>('setColorMode',
+export const getColorMode = createAsyncThunk<void, undefined, {dispatch: AppDispatch}>('getColorMode',
   async (_args, {dispatch}) => {
     try {
       const user = auth?.currentUser?.uid;
       await onValue(ref(database, `users/${user}/colorMode`), (snapshot) => {
-        if (snapshot) {
-          snapshot.forEach( item => {
-            dispatch(setCurrentTheme(item.val()))
-          })
-        }
+        snapshot.exists()
+          ? dispatch(setUserColorTheme(snapshot.val()))
+          : dispatch(setUserColorTheme(null))
       }, {onlyOnce: true})
     } catch (e) {
       Notification.showErrorNotification(e)

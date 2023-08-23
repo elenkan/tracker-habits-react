@@ -6,7 +6,7 @@ import {
   setUserData,
   changeHabitList,
   setCurrentTheme,
-  setIsGuestAuth
+  setIsGuestAuth, setUserColorTheme
 } from '../actions/actions';
 
 import {Habit} from '../types';
@@ -19,7 +19,8 @@ type StateType = {
   // TODO: присвоить тип
   userData: any,
   isGuestAuth: boolean,
-  currentTheme: 'light' | 'dark'
+  currentTheme: 'light' | 'dark',
+  userColorTheme: 'light' | 'dark' | null
 }
 
 const initialState: StateType = {
@@ -29,12 +30,14 @@ const initialState: StateType = {
   isAuth: true,
   userData: {},
   isGuestAuth: false,
-  currentTheme: 'light'
+  currentTheme: 'light',
+  userColorTheme: null
 };
 
 const reducer = createReducer(initialState, builder => {
   builder.addCase(changeHabitList, (state, action) => {
     state.challengeHabitsList = action.payload
+    console.log(state.challengeHabitsList)
   });
 
   builder.addCase(addColorMood, (state, action) => {
@@ -55,6 +58,10 @@ const reducer = createReducer(initialState, builder => {
 
   builder.addCase(setCurrentTheme, (state, action) => {
     state.currentTheme = action.payload
+  });
+
+  builder.addCase(setUserColorTheme, (state, action) => {
+    state.userColorTheme = action.payload
   });
 
   builder.addCase(setIsGuestAuth, (state, action) => {

@@ -1,9 +1,16 @@
 import {useState, useEffect} from 'react';
 import {Box, Button, Dialog, DialogContent} from '@mui/material';
 import './authorization-form.scss';
-import {login, createLogin, signInAsGuest, saveColorMode, fetchHabitList} from '../../actions/api-actions';
+import {
+  login,
+  createLogin,
+  signInAsGuest,
+  saveColorMode,
+  fetchHabitList,
+  getColorMode
+} from '../../actions/api-actions';
 import {useAppDispatch, useAppSelector} from '../../hooks/stateHooks';
-import {changeHabitList, setAuthStatus, setIsGuestAuth, setUserData} from '../../actions/actions';
+import {changeHabitList, setAuthStatus, setCurrentTheme, setIsGuestAuth, setUserData} from '../../actions/actions';
 import {useNavigate} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
 import {AppRouteList} from '../../router/enums';
@@ -15,8 +22,9 @@ import {guestHabitsList} from '../../guestData';
 
 const AuthorizationForm = () => {
   const currentTheme = useAppSelector(state => state.currentTheme);
+  const userColorTheme = useAppSelector(state => state.userColorTheme);
   const [open, setOpen] = useState<boolean>(false);
-  const [type, setType] = useState<string>('')
+  const [type, setType] = useState<string>('');
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const defaultValues = {
@@ -25,7 +33,6 @@ const AuthorizationForm = () => {
   }
   const methods = useForm<FormData>({defaultValues: defaultValues})
   const {handleSubmit, control, reset} = methods;
-
   const handleClickOpen = (type: string) => () => {
     setOpen(true);
     setType(type)
@@ -38,6 +45,14 @@ const AuthorizationForm = () => {
   useEffect(() => {
     reset({userName: '', email: ''})
   }, [open])
+
+  const saveMode = () => {
+    if (userColorTheme && userColorTheme !== currentTheme) {
+      dispatch(setCurrentTheme(userColorTheme))
+    } else {
+      dispatch(saveColorMode(currentTheme))
+    }
+  }
 
   const onClickGuestBtn = async () => {
     await dispatch(signInAsGuest()).then(res => {
@@ -66,11 +81,12 @@ const AuthorizationForm = () => {
       if (user) {
         dispatch(setUserData(user))
         dispatch(setAuthStatus(true))
+        dispatch(getColorMode())
+        saveMode()
         dispatch(fetchHabitList())
         navigate(AppRouteList.CreateHabitPage)
       }
     }
-    dispatch(saveColorMode(currentTheme === 'light' ? 'dark' : 'light'))
     setOpen(false);
   }
 
