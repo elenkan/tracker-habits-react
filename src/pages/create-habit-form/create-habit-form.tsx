@@ -14,7 +14,7 @@ import FormButton from '../../components/form-fields/form-button';
 import {FormData, Habit} from '../../types';
 import {cloneDeep} from 'lodash';
 import {Typography} from '@mui/material';
-import {addHabit} from '../../actions/api-actions';
+import {addHabit, updateHabit} from '../../actions/api-actions';
 
 const CreateHabitForm = () => {
   const buttonData = [
@@ -89,7 +89,7 @@ const CreateHabitForm = () => {
           changeElement.description = habit.description as string;
         }
         dispatch(addChangeableHabit(null));
-        dispatch(changeHabitList(habitsList))
+        dispatch(updateHabit(changeElement))
         navigate('/habits-list');
       }
     } else {

@@ -9,7 +9,7 @@ import {
 } from 'firebase/auth'
 import {AppDispatch} from '../types/state';
 import Notification from './../utils/notification/notification'
-import { ref, set, push, onValue } from 'firebase/database';
+import { ref, set, push, onValue, update, remove} from 'firebase/database';
 import {changeHabitList, setUserColorTheme} from './actions';
 
 //TODO: заменить тип user
@@ -86,6 +86,46 @@ export const addHabit = createAsyncThunk<void, Habit, {dispatch: AppDispatch}>('
         .then((res) => {
           dispatch(fetchHabitList())
         } );
+    } catch (e) {
+      Notification.showErrorNotification(e)
+    }
+  });
+//TODO: сделать общую функцию snapshot.forEach
+export const updateHabit = createAsyncThunk<void, Habit, {dispatch: AppDispatch}>('updateHabitAction',
+  async (habit, {dispatch}) => {
+    try {
+      const user = auth?.currentUser?.uid;
+      await onValue(ref(database, `users/${user}/challengeHabitsList`), (snapshot) => {
+        if (snapshot.exists()) {
+          snapshot.forEach(item => {
+            if (item.val().id === habit.id) {
+              update(ref(database, `users/${user}/challengeHabitsList/${item.key}`), habit).then(_ => {
+                dispatch(fetchHabitList())
+              })
+            }
+          })
+        }
+      }, {onlyOnce: true})
+    } catch (e) {
+      Notification.showErrorNotification(e)
+    }
+  });
+
+export const deleteHabit = createAsyncThunk<void, number, {dispatch: AppDispatch}>('deleteHabitAction',
+  async (habitId, {dispatch}) => {
+    try {
+      const user = auth?.currentUser?.uid;
+      await onValue(ref(database, `users/${user}/challengeHabitsList`), (snapshot) => {
+        if (snapshot.exists()) {
+          snapshot.forEach(item => {
+            if (item.val().id === habitId) {
+              remove(ref(database, `users/${user}/challengeHabitsList/${item.key}`)).then(_ => {
+                dispatch(fetchHabitList())
+              })
+            }
+          })
+        }
+      }, {onlyOnce: true})
     } catch (e) {
       Notification.showErrorNotification(e)
     }

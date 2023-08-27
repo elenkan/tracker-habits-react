@@ -4,11 +4,12 @@ import CreateIcon from '@mui/icons-material/Create';
 import DeleteIcon from '@mui/icons-material/Delete';
 import {useAppSelector, useAppDispatch} from '../../hooks/stateHooks';
 import {useEffect, useState} from 'react';
-import {addChangeableHabit, changeHabitList} from '../../actions/actions';
+import {addChangeableHabit} from '../../actions/actions';
 import {useNavigate} from 'react-router-dom';
 import './habit-item.scss';
 import lists from '../../lists.json'
 import {cloneDeep} from 'lodash';
+import {deleteHabit, updateHabit} from '../../actions/api-actions';
 
 type PropsType = {
   item: Habit
@@ -21,8 +22,6 @@ const HabitItem = ({item}: PropsType) => {
   let navigate = useNavigate();
 
   let color = useAppSelector(state => state.colorMood);
-  let habitList = useAppSelector(state => state.challengeHabitsList);
-  console.log(habitList)
   useEffect(() => {
     setList(habit.checkedDays)
   }, [])
@@ -62,16 +61,12 @@ const HabitItem = ({item}: PropsType) => {
         colorsValue: getColorValueArray(getMoodValue()),
         completedDays: checkedDays.length,
       };
-        let data = cloneDeep(habitList)
-        let el = data.find(item => item.id === habit.id)
-        if (el) {
-          el.value = progressData.value;
-          // @ts-ignore
-          el.colorsValue = progressData.colorsValue;
-          el.completedDays = progressData.completedDays;
-          el.checkedDays = list
-        }
-        dispatch(changeHabitList(data))
+      habit.value = progressData.value;
+      // @ts-ignore
+      habit.colorsValue = progressData.colorsValue;
+      habit.completedDays = progressData.completedDays;
+      habit.checkedDays = list
+      dispatch(updateHabit(habit))
     }
   }
   const setData = (item: ColorItem) => {
@@ -81,17 +76,16 @@ const HabitItem = ({item}: PropsType) => {
       el.color= color
     }
     setList(data);
-    getProgressValue();
     getMoodValue();
+    getProgressValue();
   };
 
   const changeHabit = (habit: Habit) => {
     dispatch(addChangeableHabit(habit));
     navigate('/create-habit');
   };
-  const deleteHabit = (habitId: number | null) => {
-    const filterList = habitList.filter(item => item.id !== habitId);
-    dispatch(changeHabitList(filterList))
+  const deleteHabitAction = (habitId: number) => {
+    dispatch(deleteHabit(habitId))
   }
 
   let daysList = list.map(day => {
@@ -136,7 +130,7 @@ const HabitItem = ({item}: PropsType) => {
         <IconButton onClick={() => changeHabit(habit)}>
           <CreateIcon/>
         </IconButton>
-        <IconButton onClick={() => deleteHabit(habit.id)}>
+        <IconButton onClick={() => deleteHabitAction(habit.id)}>
           <DeleteIcon/>
         </IconButton>
       </div>

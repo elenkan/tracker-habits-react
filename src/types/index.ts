@@ -6,7 +6,7 @@ export type ColorItem = {
 }
 
 export type Habit = {
-  id: number | null,
+  id: number,
   name: string,
   description: string,
   period: number,
