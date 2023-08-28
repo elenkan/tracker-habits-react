@@ -41,11 +41,12 @@ const MoodStatistics = ({colorsValue}: PropsType) => {
       x: {
         grid: {
           display: false
-        }
+        },
       },
       y: {
-        min: 0,
         max: 100,
+        offset: true,
+        beginAtZero: true,
         ticks: {
           stepSize: 10
         }

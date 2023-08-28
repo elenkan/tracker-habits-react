@@ -27,7 +27,7 @@ const initialState: StateType = {
   challengeHabitsList: [],
   colorMood: '',
   changeableHabit: null,
-  isAuth: true,
+  isAuth: false,
   userData: {},
   isGuestAuth: false,
   currentTheme: 'light',

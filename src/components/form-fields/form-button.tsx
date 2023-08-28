@@ -17,7 +17,8 @@ const FormButton = ({buttonWidth, buttonTitle, action}: PropsType) => {
         margin: '0 auto',
         ':hover': {
           backgroundColor: 'rgba(226,149,140, 0.9)',
-          borderColor: '#e2958c'
+          borderColor: '#e2958c',
+          color: '#fff'
         }
       }}
       variant="outlined"

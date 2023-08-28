@@ -36,5 +36,12 @@
     &::after {
       margin-left: 5px;
     }
+
+    &_dark {
+      &::before,
+      &::after {
+        background-color: #e2958c;
+      }
+    }
   }
 }

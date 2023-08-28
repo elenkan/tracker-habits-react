@@ -19,6 +19,7 @@ import FormPasswordField from '../form-fields/form-password-field';
 import FormButton from '../form-fields/form-button';
 import {FormData} from '../../types';
 import {guestHabitsList} from '../../guestData';
+import classNames from 'classnames';
 
 const AuthorizationForm = () => {
   const currentTheme = useAppSelector(state => state.currentTheme);
@@ -31,6 +32,8 @@ const AuthorizationForm = () => {
     userName: '',
     email: ''
   }
+
+  const dividerClass = classNames('auth-form__divider', {'auth-form__divider_dark': currentTheme === 'dark'})
   const methods = useForm<FormData>({defaultValues: defaultValues})
   const {handleSubmit, control, reset} = methods;
   const handleClickOpen = (type: string) => () => {
@@ -122,7 +125,7 @@ const AuthorizationForm = () => {
               Войти как гость
             </Button>
 
-            <span className="auth-form__divider">Или</span>
+            <span className={dividerClass}>Или</span>
 
             {type === 'signup' &&
             <FormTextField fieldName="userName" control={control}/>
