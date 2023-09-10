@@ -10,6 +10,10 @@
   font-size: 20px;
   line-height: 28px;
 
+  @media (max-width: 600px) {
+    width: 100%;
+  }
+
   &__divider {
     display: flex;
     width: 100%;

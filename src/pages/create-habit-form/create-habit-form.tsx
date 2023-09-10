@@ -103,7 +103,6 @@ const CreateHabitForm = () => {
     <Box
       component="form"
       sx={{
-        '& .MuiTextField-root': {m: 1, width: '25ch'},
         bgcolor: 'background.default'
       }}
       autoComplete="off"
@@ -114,7 +113,11 @@ const CreateHabitForm = () => {
         sx={{
           fontSize: '18px',
           lineHeight: '18px',
-          marginBottom: '20px'
+          marginBottom: '20px',
+          '@media (max-width: 600px)': {
+            fontSize: '16px',
+            lineHeight: '16px',
+          }
         }}>
         Создать новую привычку
       </Typography>

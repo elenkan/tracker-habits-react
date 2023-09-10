@@ -95,10 +95,24 @@ const AuthorizationForm = () => {
 
   return (
     <div className="auth">
-      <Button sx={{color: '#fff', fontFamily: '"Raleway-Medium",Arial,sans-serif'}}
-              onClick={handleClickOpen('signup')}>Регистрация</Button>
-      <Button sx={{color: '#fff', fontFamily: '"Raleway-Medium",Arial,sans-serif'}}
-              onClick={handleClickOpen('signin')}>Войти</Button>
+      <Button sx={{
+        color: '#fff',
+        fontFamily: '"Raleway-Medium",Arial,sans-serif',
+        '@media (max-width: 600px)': {
+          fontSize: '13px',
+        }
+      }} onClick={handleClickOpen('signup')}>
+        Регистрация
+      </Button>
+      <Button sx={{
+        color: '#fff',
+        fontFamily: '"Raleway-Medium",Arial,sans-serif',
+        '@media (max-width: 600px)': {
+          fontSize: '13px',
+        }
+      }} onClick={handleClickOpen('signin')}>
+        Войти
+      </Button>
       <Dialog
         open={open}
         onClose={handleClose}
@@ -106,12 +120,17 @@ const AuthorizationForm = () => {
           borderRadius: '10px'
         }}
       >
-        <DialogContent>
+        <DialogContent
+        sx={{
+          '@media (max-width: 600px)': {
+            paddingLeft:' 15px',
+            paddingRight: '15px'
+          }
+        }}>
           <Box
             component="form"
             autoComplete="off"
-            className="auth-form"
-            sx={{m: 'auto'}}>
+            className="auth-form">
 
             <Button variant="outlined"
                     className="auth_form__item"
@@ -119,6 +138,9 @@ const AuthorizationForm = () => {
                       color: 'primary.main',
                       width: '180px',
                       margin: '0 auto',
+                      '@media (max-width: 600px)': {
+                        fontSize: '13px'
+                      }
                     }}
                     onClick={onClickGuestBtn}
             >

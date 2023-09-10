@@ -50,7 +50,7 @@ const FormPasswordField = ({control}: PropsType) => {
       }}
       onChange={onChange}
       sx={{
-        width: '250px',
+        width: '280px',
         position: 'relative',
         margin: '0 auto 40px auto'
       }}
@@ -61,7 +61,20 @@ const FormPasswordField = ({control}: PropsType) => {
               aria-label="toggle password visibility"
               onClick={handleClickShowPassword}
             >
-              {showPassword ? <Visibility/> : <VisibilityOff/>}
+              {showPassword
+                ? <Visibility
+                  sx={{
+                    '@media (max-width: 600px)': {
+                      width: '20px'
+                    }
+                  }}/>
+                : <VisibilityOff
+                  sx={{
+                    '@media (max-width: 600px)': {
+                      width: '20px'
+                    }
+                  }} />
+              }
             </IconButton>
           </InputAdornment>
         )

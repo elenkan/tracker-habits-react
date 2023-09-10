@@ -19,6 +19,12 @@
     font-size: 50px;
     line-height: 50px;
     background-color: #89ccc5;
+    transition: .4s ease;
+
+    @media (max-width: 600px) {
+      font-size: 28px;
+      line-height: 28px;
+    }
 
     &_dark {
       background-color: rgba(226, 149, 140, 0.5);

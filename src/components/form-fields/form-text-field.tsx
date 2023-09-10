@@ -42,7 +42,7 @@ const FormTextField = ({ fieldName,control }: PropsType) => {
         value={value}
         name={fieldName}
         sx={{
-          width: '250px',
+          width: '280px',
           position: 'relative',
           margin: '0 auto 25px auto'
         }}

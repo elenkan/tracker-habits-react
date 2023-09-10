@@ -19,6 +19,10 @@ const FormButton = ({buttonWidth, buttonTitle, action}: PropsType) => {
           backgroundColor: 'rgba(226,149,140, 0.9)',
           borderColor: '#e2958c',
           color: '#fff'
+        },
+        '@media (max-width: 600px)': {
+          width: '100%',
+          fontSize: '13px'
         }
       }}
       variant="outlined"

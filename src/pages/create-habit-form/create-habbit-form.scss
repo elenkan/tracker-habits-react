@@ -13,6 +13,13 @@
   box-shadow: 0 1px 12px -4px #bababa;
   margin-top: 70px;
 
+  @media (max-width: 600px) {
+    width: calc(100% - 32px);
+    max-width: 400px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
   &__period {
     display: flex;
     flex-direction: column;
