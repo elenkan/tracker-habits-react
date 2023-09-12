@@ -5,10 +5,19 @@
   justify-content: center;
   position: fixed;
   z-index: 9;
+
+  @media(max-width: 795px) {
+    flex-wrap: wrap;
+  }
 }
 .mood__title {
   margin-right: 10px;
   font-family: "Raleway-Medium", Arial, sans-serif;
+
+  @media(max-width: 795px) {
+    font-size: 18px;
+    width: 100%;
+  }
 }
 
 .mood-list {
@@ -26,6 +35,10 @@
     margin-right: 10px;
     cursor: pointer;
     max-height: 50px;
+
+    @media(max-width: 795px) {
+      margin-right: 5px;
+    }
 
     &:last-child {
       margin-right: 0;

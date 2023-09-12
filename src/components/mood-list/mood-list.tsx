@@ -28,6 +28,9 @@ const MoodList = () => {
           sx={{
             fontSize: '16px',
             lineHeight: '16px',
+            '@media (max-width: 795px)': {
+              fontSize: '15px'
+            }
           }}>
           {item.mood}
         </Typography>

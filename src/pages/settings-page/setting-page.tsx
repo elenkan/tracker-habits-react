@@ -38,11 +38,19 @@ const SettingPage = () => {
         <div className="setting__item">
           <Typography
             component="span"
-            color="text.primary">
+            color="text.primary"
+            sx={{
+              '@media (max-width: 600px)': {
+                fontSize: '14px'
+              }}}>
             Удалить аккаунт
           </Typography>
           <Button
             variant="outlined"
+            sx={{
+              '@media (max-width: 600px)': {
+                fontSize: '15px'
+              }}}
             onClick={deleteUserAccount}>Удалить</Button>
         </div>
       );
@@ -51,38 +59,49 @@ const SettingPage = () => {
         <div className="setting__item">
           <Typography
             component="span"
-            color="text.primary">
+            color="text.primary"
+            sx={{
+              '@media (max-width: 600px)': {
+                fontSize: '15px'
+              }}}>
             Темная тема
           </Typography>
-          <Switch checked={currentTheme === 'dark'} onChange={handleChangeSwitch}/>
+          <Switch
+            checked={currentTheme === 'dark'}
+            onChange={handleChangeSwitch}
+          />
         </div>
       );
     }
   }
   return (
-    <div className="setting">
-      <Box component="form"
-           sx={{
-             '& .MuiTextField-root': {m: 1, width: '25ch'},
-             boxShadow: '0 1px 12px -4px #bababa',
-             borderRadius: '10px',
-             width: '400px',
-             minHeight: '300px',
-             fontSize:'20px',
-             lineHeight: '28px',
-             bgcolor: 'background.default'
-           }}
-           noValidate
-           autoComplete="off">
-        <Tabs value={value}
-              variant="fullWidth"
-              onChange={handleChange}>
-          <Tab label="Аккаунт"/>
-          <Tab label="Темы"/>
-        </Tabs>
-        {tabsContent(value)}
-      </Box>
-    </div>);
+
+    <Box component="div"
+         className="setting"
+         sx={{
+           '& .MuiTextField-root': {m: 1, width: '25ch'},
+           boxShadow: '0 1px 12px -4px #bababa',
+           marginTop: '70px',
+           borderRadius: '10px',
+           width: '400px',
+           minHeight: '300px',
+           fontSize: '20px',
+           lineHeight: '28px',
+           bgcolor: 'background.default',
+           '@media (max-width: 600px)': {
+             width: '100%',
+             maxWidth: '400px'
+           }
+         }}>
+      <Tabs value={value}
+            variant="fullWidth"
+            className="setting__tabs"
+            onChange={handleChange}>
+        <Tab label="Аккаунт"/>
+        <Tab label="Темы"/>
+      </Tabs>
+      {tabsContent(value)}
+    </Box>);
 }
 
 export default SettingPage;

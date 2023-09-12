@@ -122,7 +122,6 @@ const HabitItem = ({item}: PropsType) => {
           {habit.description}
         </Typography>
       </div>
-
       <div className="days-list">
         {daysList}
       </div>

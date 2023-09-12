@@ -133,7 +133,6 @@ const AuthorizationForm = () => {
             className="auth-form">
 
             <Button variant="outlined"
-                    className="auth_form__item"
                     sx={{
                       color: 'primary.main',
                       width: '180px',

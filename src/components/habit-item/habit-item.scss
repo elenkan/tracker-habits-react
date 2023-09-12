@@ -5,6 +5,11 @@
   margin-bottom: 35px;
   align-self: flex-start;
 
+  @media(max-width: 795px) {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
   &__data {
     width: 350px;
     max-width: 350px;
@@ -15,6 +20,19 @@
     line-height: 18px;
     align-items: flex-start;
     text-align: left;
+
+    @media(max-width: 795px) {
+      margin-bottom: 20px;
+      order: -2;
+      width: 220px;
+      max-width: 220px;
+    }
+  }
+  &__button-group {
+    @media(max-width: 795px) {
+      order: -1;
+      width: 100px;
+    }
   }
 }
 
