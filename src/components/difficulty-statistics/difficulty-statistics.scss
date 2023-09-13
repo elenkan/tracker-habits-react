@@ -1,0 +1,10 @@
+.difficulty-chart-container {
+  position: relative;
+  height: 250px;
+  width: 500px;
+
+  @media(max-width: 900px) {
+    height: 50%;
+    width: 100%;
+  }
+}

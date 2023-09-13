@@ -1,7 +1,7 @@
 import {useAppSelector} from '../../hooks/stateHooks';
 import {Box} from '@mui/material';
 import GoalBar from '../../components/goal-bar';
-import MoodStatistics from '../../components/mood-statistics';
+import DifficultyStatistics from '../../components/difficulty-statistics';
 import './progress-list.scss';
 
 const ProgressList = () => {
@@ -16,7 +16,7 @@ const ProgressList = () => {
         <h2 className="progress-list__title">{item.name}</h2>
         <div className="progress-list__content">
           <GoalBar progressValue={item}/>
-          <MoodStatistics colorsValue={item.colorsValue}/>
+          <DifficultyStatistics colorsValue={item.colorsValue}/>
         </div>
       </Box>)
   })

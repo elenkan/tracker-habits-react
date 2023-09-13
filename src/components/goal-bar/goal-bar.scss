@@ -10,6 +10,11 @@
     font-family: "Montserrat-Regular", Arial, sans-serif;
     font-size: 18px;
     line-height: 18px;
+
+    @media(max-width: 900px) {
+      font-size: 14px;
+      line-height: 14px;
+    }
   }
 
   &__circle {
@@ -30,6 +35,11 @@
       font-weight: bold;
       font-size: 26px;
       line-height: 26px;
+
+      @media(max-width: 900px) {
+        font-size: 20px;
+        line-height: 20px;
+      }
     }
   }
 }

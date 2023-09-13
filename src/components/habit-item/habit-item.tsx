@@ -21,13 +21,13 @@ const HabitItem = ({item}: PropsType) => {
   const dispatch = useAppDispatch();
   let navigate = useNavigate();
 
-  let color = useAppSelector(state => state.colorMood);
+  let color = useAppSelector(state => state.colorDifficulty);
   useEffect(() => {
     setList(habit.checkedDays)
   }, [])
 
-  const getMoodValue = () => {
-    const colors: ColorItem[] | [] = lists.moodList.map(item => Object.assign({}, item));
+  const getDifficultyValue = () => {
+    const colors: ColorItem[] | [] = lists.difficultyList.map(item => Object.assign({}, item));
     const newList = cloneDeep(list);
     newList.forEach(item => {
       if (item.color !== '') {
@@ -58,7 +58,7 @@ const HabitItem = ({item}: PropsType) => {
       const progressValue = Math.round(checkedDays.length / habit.period * 100);
       const progressData = {
         value: progressValue,
-        colorsValue: getColorValueArray(getMoodValue()),
+        colorsValue: getColorValueArray(getDifficultyValue()),
         completedDays: checkedDays.length,
       };
       habit.value = progressData.value;
@@ -76,7 +76,7 @@ const HabitItem = ({item}: PropsType) => {
       el.color= color
     }
     setList(data);
-    getMoodValue();
+    getDifficultyValue();
     getProgressValue();
   };
 

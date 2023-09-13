@@ -1,6 +1,6 @@
 export type ColorItem = {
   color: string,
-  mood?: string,
+  difficulty?: string,
   value?: number,
   id: number
 }

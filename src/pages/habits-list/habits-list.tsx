@@ -1,6 +1,6 @@
 import HabitItem from '../../components/habit-item';
 import {useAppSelector} from '../../hooks/stateHooks';
-import MoodList from '../../components/mood-list';
+import DifficultyList from '../../components/difficulty-list';
 import './habits-list.scss'
 
 const HabitsList = () => {
@@ -10,7 +10,7 @@ const HabitsList = () => {
   })
   return (
     <div className="habits-page">
-      <MoodList/>
+      <DifficultyList/>
       <ul className="habits-list">
         {list}
       </ul>

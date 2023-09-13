@@ -34,7 +34,11 @@ const GoalBar = ({progressValue}: PropsType) => {
             color="text.secondary"
             sx={{
               fontSize: '16px',
-              lineHeight: '16px'
+              lineHeight: '16px',
+              '@media(max-width: 900px)': {
+                fontSize: '14px',
+                lineHeight: '14px'
+              }
             }}>
             {`${Math.round(value)}%`}
           </Typography>

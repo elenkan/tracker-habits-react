@@ -1,20 +1,20 @@
 {
-  "moodList": [
+  "difficultyList": [
     {
       "color": "#cc6699",
-      "mood": "Сложно",
+      "difficulty": "Сложно",
       "value": 0,
       "id": 1
     },
     {
       "color": "#08d9d6",
-      "mood": "Средне",
+      "difficulty": "Средне",
       "value": 0,
       "id": 2
     },
     {
       "color": "#66ff66",
-      "mood": "Легко!",
+      "difficulty": "Легко!",
       "value": 0,
       "id": 3
     }

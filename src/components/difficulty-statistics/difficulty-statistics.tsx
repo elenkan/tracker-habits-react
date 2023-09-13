@@ -11,6 +11,7 @@ import {
 } from 'chart.js'
 import {Line} from 'react-chartjs-2'
 import {useEffect, useRef, useState} from 'react';
+import './difficulty-statistics.scss'
 
 ChartJS.register(
   CategoryScale,
@@ -25,13 +26,14 @@ type PropsType = {
   colorsValue: number[]
 }
 
-const MoodStatistics = ({colorsValue}: PropsType) => {
+const DifficultyStatistics = ({colorsValue}: PropsType) => {
   const chartRef = useRef<ChartJS>(null);
   const [chartData, setChartData] = useState<ChartData<'line'>>({
     datasets: [],
   });
   const labels = ['Сложно','Средне', 'Легко']
   const options = {
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         display: false
@@ -97,12 +99,14 @@ const MoodStatistics = ({colorsValue}: PropsType) => {
   }, []);
 
   return (
-    <Line
-      ref={chartRef}
-      data={chartData}
-      options={options}
-    />
+    <div className="difficulty-chart-container">
+      <Line
+        ref={chartRef}
+        data={chartData}
+        options={options}
+      />
+    </div>
   );
 };
 
-export default MoodStatistics;
+export default DifficultyStatistics;
