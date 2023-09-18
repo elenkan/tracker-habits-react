@@ -1,12 +1,17 @@
 import AppRouter from '../../router';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
-import {useMemo} from 'react';
+import {useEffect, useMemo} from 'react';
 import {PaletteMode} from '@mui/material';
-import {useAppSelector} from '../../hooks/stateHooks';
+import {useAppSelector, useAppDispatch} from '../../hooks/stateHooks';
 import CssBaseline from '@mui/material/CssBaseline';
+import {changeHabitList, setAuthStatus, setIsGuestAuth} from '../../actions/actions';
+import {auth} from '../../index';
+import {fetchHabitList} from '../../actions/api-actions';
+import {guestHabitsList} from '../../guestData';
 
 const App = () => {
   const currentTheme = useAppSelector(state => state.currentTheme);
+  const habitList = useAppSelector(state => state.challengeHabitsList);
   const getDesignTokens = (mode: PaletteMode) => ({
     palette: {
       mode,
@@ -53,6 +58,26 @@ const App = () => {
   });
 
   const theme = useMemo(() => createTheme(getDesignTokens(currentTheme)), [currentTheme]);
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    const checkAuth = localStorage.getItem('checkAuth')
+    if (checkAuth === 'true') {
+      auth.onAuthStateChanged(user => {
+        if (user && !habitList.length) {
+          dispatch(setAuthStatus(true))
+          if (user.isAnonymous) {
+            dispatch(setIsGuestAuth(true))
+            dispatch(changeHabitList(guestHabitsList))
+          } else {
+            dispatch(fetchHabitList())
+          }
+        } else {
+          dispatch(setAuthStatus(false))
+        }
+      })
+    }
+  }, [])
 
   return (
     <ThemeProvider theme={theme}>

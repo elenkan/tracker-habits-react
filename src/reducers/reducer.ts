@@ -6,7 +6,8 @@ import {
   setUserData,
   changeHabitList,
   setCurrentTheme,
-  setIsGuestAuth, setUserColorTheme
+  setIsGuestAuth,
+  setUserColorTheme,
 } from '../actions/actions';
 
 import {Habit} from '../types';

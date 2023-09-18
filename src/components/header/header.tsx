@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import {AppBar, Toolbar, IconButton, Typography, List, ListItem, Drawer, Button} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import {Link as RouterLink, useNavigate} from 'react-router-dom';
@@ -12,13 +12,9 @@ import ColorMode from '../color-mode';
 const Header = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const isAuth = useAppSelector(state => state.isAuth);
-  const userData = useAppSelector(state => state.userData);
   const isGuestAuth = useAppSelector(state => state.isGuestAuth);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
-  useEffect(() => {
-  }, [userData])
 
   const menuItems = [
     {path: '/progress', label: 'Прогресс'},
@@ -41,6 +37,7 @@ const Header = () => {
         if (isGuestAuth) {
           dispatch(setIsGuestAuth(false))
         }
+        localStorage.setItem('checkAuth', 'false')
         navigate(AppRouteList.Home)
       })
     }

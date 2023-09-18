@@ -10,7 +10,13 @@ import {
   getColorMode
 } from '../../actions/api-actions';
 import {useAppDispatch, useAppSelector} from '../../hooks/stateHooks';
-import {changeHabitList, setAuthStatus, setCurrentTheme, setIsGuestAuth, setUserData} from '../../actions/actions';
+import {
+  changeHabitList,
+  setAuthStatus,
+  setCurrentTheme,
+  setIsGuestAuth,
+  setUserData
+} from '../../actions/actions';
 import {useNavigate} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
 import {AppRouteList} from '../../router/enums';
@@ -57,11 +63,12 @@ const AuthorizationForm = () => {
     }
   }
 
-  const onClickGuestBtn = async () => {
-    await dispatch(signInAsGuest()).then(res => {
+  const onClickGuestBtn = () => {
+    dispatch(signInAsGuest()).then(_ => {
       dispatch(setAuthStatus(true))
       dispatch(setIsGuestAuth(true))
       dispatch(changeHabitList(guestHabitsList))
+      localStorage.setItem('checkAuth', 'true')
       navigate(AppRouteList.ProgressPage)
     })
   };
@@ -87,6 +94,7 @@ const AuthorizationForm = () => {
         dispatch(getColorMode())
         saveMode()
         dispatch(fetchHabitList())
+        localStorage.setItem('checkAuth', 'true')
         navigate(AppRouteList.CreateHabitPage)
       }
     }
@@ -121,12 +129,12 @@ const AuthorizationForm = () => {
         }}
       >
         <DialogContent
-        sx={{
-          '@media (max-width: 600px)': {
-            paddingLeft:' 15px',
-            paddingRight: '15px'
-          }
-        }}>
+          sx={{
+            '@media (max-width: 600px)': {
+              paddingLeft: '15px',
+              paddingRight: '15px'
+            }
+          }}>
           <Box
             component="form"
             autoComplete="off"
