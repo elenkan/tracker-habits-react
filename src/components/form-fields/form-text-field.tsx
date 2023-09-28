@@ -1,4 +1,4 @@
-import { useController, Control, RegisterOptions } from "react-hook-form";
+import {useController, Control, RegisterOptions} from 'react-hook-form';
 import TextField from '@mui/material/TextField';
 import {Field, FormData} from '../../types';
 import fieldsData from './../../fields.json';
@@ -8,7 +8,7 @@ type PropsType = {
   fieldName: 'userName' | 'email' | 'habitName' | 'habitDescription',
   control: Control<FormData>
 }
-const FormTextField = ({ fieldName,control }: PropsType) => {
+const FormTextField = ({fieldName, control}: PropsType) => {
   const data: Field = fieldsData;
   let fieldRules = data[fieldName].rules;
 
@@ -17,12 +17,12 @@ const FormTextField = ({ fieldName,control }: PropsType) => {
   }
 
   const {
-    field: { onChange, value},
-    fieldState: { error }
+    field: {onChange, value},
+    fieldState: {error}
   } = useController({
     name: fieldName,
     control,
-    rules: { ...fieldRules as Exclude<RegisterOptions, 'valueAsNumber' | 'valueAsDate' | 'setValueAs' >},
+    rules: {...fieldRules as Exclude<RegisterOptions, 'valueAsNumber' | 'valueAsDate' | 'setValueAs'>},
   });
 
   return (
@@ -37,7 +37,7 @@ const FormTextField = ({ fieldName,control }: PropsType) => {
             top: '36px'
           }
         }}
-        error={ !!error }
+        error={!!error}
         onChange={onChange}
         value={value}
         name={fieldName}

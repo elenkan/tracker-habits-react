@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import {IconButton, InputAdornment} from '@mui/material';
 import {Visibility, VisibilityOff} from '@mui/icons-material';
 import {useState} from 'react';
-import {FormData} from './../../types/index'
+import {FormData} from '../../types'
 
 type PropsType = {
   control: Control<FormData>
@@ -11,18 +11,18 @@ type PropsType = {
 const FormPasswordField = ({control}: PropsType) => {
   const {
     field: {onChange, value},
-    fieldState: { error }
+    fieldState: {error}
   } = useController({
     name: "password",
     control,
     rules: {
       required: {
         value: true,
-        message: "Обязательное поле"
+        message: 'Обязательное поле'
       },
       minLength: {
         value: 6,
-        message: "Минимальная длина 6 символов"
+        message: 'Минимальная длина 6 символов'
       }
     }
   });
@@ -40,8 +40,9 @@ const FormPasswordField = ({control}: PropsType) => {
       margin="normal"
       name="password"
       type={showPassword ? 'text' : 'password'}
-      error={ !!error }
+      error={!!error}
       helperText={error && error.message}
+      autoComplete="on"
       FormHelperTextProps={{
         sx: {
           position: 'absolute',
@@ -73,7 +74,7 @@ const FormPasswordField = ({control}: PropsType) => {
                     '@media (max-width: 600px)': {
                       width: '20px'
                     }
-                  }} />
+                  }}/>
               }
             </IconButton>
           </InputAdornment>

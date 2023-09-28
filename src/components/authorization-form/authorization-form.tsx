@@ -36,7 +36,8 @@ const AuthorizationForm = () => {
   const navigate = useNavigate()
   const defaultValues = {
     userName: '',
-    email: ''
+    email: '',
+    password: ''
   }
 
   const dividerClass = classNames('auth-form__divider', {'auth-form__divider_dark': currentTheme === 'dark'})
@@ -52,7 +53,7 @@ const AuthorizationForm = () => {
   };
 
   useEffect(() => {
-    reset({userName: '', email: ''})
+    reset({userName: '', email: '', password: ''})
   }, [open])
 
   const saveMode = () => {
