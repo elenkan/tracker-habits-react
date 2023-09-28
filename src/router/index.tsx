@@ -1,5 +1,6 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import {AppRouteList} from './enums';
+import PrivateRoute from './private-route';
 import HomePage from '../pages/home-page';
 import CreateHabitForm from '../pages/create-habit-form';
 import HabitsList from '../pages/habits-list';
@@ -8,17 +9,18 @@ import SettingPage from '../pages/settings-page/setting-page';
 import Header from '../components/header';
 
 const AppRouter = () => {
-    return (
-        <BrowserRouter>
-            <Header/>
-            <Routes>
-                <Route path={AppRouteList.Home} element={<HomePage/>}/>
-                <Route path={AppRouteList.CreateHabitPage} element={<CreateHabitForm/>}/>
-                <Route path={AppRouteList.HabitsPage} element={<HabitsList/>}/>
-                <Route path={AppRouteList.ProgressPage} element={<ProgressList/>}/>
-                <Route path={AppRouteList.SettingsPage} element={<SettingPage/>}/>
-            </Routes>
-        </BrowserRouter>);
+  const isAuth = localStorage.getItem('checkAuth');
+  return (
+    <BrowserRouter>
+      <Header/>
+      <Routes>
+        <Route path={AppRouteList.Home} element={<HomePage/>}/>
+        <Route path={AppRouteList.CreateHabitPage} element={<PrivateRoute isAuth={isAuth}><CreateHabitForm/></PrivateRoute>}/>
+        <Route path={AppRouteList.HabitsPage} element={<PrivateRoute isAuth={isAuth}><HabitsList/></PrivateRoute>}/>
+        <Route path={AppRouteList.ProgressPage} element={<PrivateRoute isAuth={isAuth}><ProgressList/></PrivateRoute>}/>
+        <Route path={AppRouteList.SettingsPage} element={<PrivateRoute isAuth={isAuth}><SettingPage/></PrivateRoute>}/>
+      </Routes>
+    </BrowserRouter>);
 };
 
 export default AppRouter;
