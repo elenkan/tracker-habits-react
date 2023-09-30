@@ -6,6 +6,7 @@ import CreateHabitForm from '../pages/create-habit-form';
 import HabitsList from '../pages/habits-list';
 import ProgressList from '../pages/progress-list';
 import SettingPage from '../pages/settings-page/setting-page';
+import NotFoundPage from '../pages/not-found-page'
 import Header from '../components/header';
 
 const AppRouter = () => {
@@ -19,6 +20,7 @@ const AppRouter = () => {
         <Route path={AppRouteList.HabitsPage} element={<PrivateRoute isAuth={isAuth}><HabitsList/></PrivateRoute>}/>
         <Route path={AppRouteList.ProgressPage} element={<PrivateRoute isAuth={isAuth}><ProgressList/></PrivateRoute>}/>
         <Route path={AppRouteList.SettingsPage} element={<PrivateRoute isAuth={isAuth}><SettingPage/></PrivateRoute>}/>
+        <Route path={AppRouteList.NotFoundPage} element={<NotFoundPage/>}/>
       </Routes>
     </BrowserRouter>);
 };

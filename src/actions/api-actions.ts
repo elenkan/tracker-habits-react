@@ -62,14 +62,13 @@ export const fetchHabitList = createAsyncThunk<void, undefined, {dispatch: AppDi
   async (_args, {dispatch}) => {
     try {
       const user = auth?.currentUser?.uid;
-      await onValue(ref(database, `users/${user}/challengeHabitsList`), (snapshot) => {
-        let habitsList: Habit[] | [] = []
+      onValue(ref(database, `users/${user}/challengeHabitsList`), (snapshot) => {
+        let habitsList: Habit[] | null = null;
         if (snapshot) {
           snapshot.forEach(item => {
-            // @ts-ignore
-            habitsList.push(item.val())
-          })
-          dispatch(changeHabitList(habitsList))
+            habitsList?.push(item.val());
+          });
+          dispatch(changeHabitList(habitsList));
         }
       }, {onlyOnce: true})
 

@@ -30,9 +30,9 @@ const HabitItem = ({item}: PropsType) => {
     const colors: ColorItem[] | [] = lists.difficultyList.map(item => Object.assign({}, item));
     const newList = cloneDeep(list);
     newList.forEach(item => {
-      if (item.color !== '') {
-        // @ts-ignore
-        colors.find(el => el.color === item.color).value += 1;
+      const colorItem = colors.find(el => el.color === item.color);
+      if (colorItem) {
+        colorItem.value += 1
       }
     })
     setList(newList);
@@ -40,7 +40,6 @@ const HabitItem = ({item}: PropsType) => {
   };
   // TODO: добавить сортировку по цвету
   const getColorValueArray = (array: ColorItem[]) => {
-    // @ts-ignore
     const checkedColorAmount = array.reduce((acc, curr) => acc + curr.value, 0);
     return array.map(item => {
       Object.assign({}, item);
@@ -62,7 +61,6 @@ const HabitItem = ({item}: PropsType) => {
         completedDays: checkedDays.length,
       };
       habit.value = progressData.value;
-      // @ts-ignore
       habit.colorsValue = progressData.colorsValue;
       habit.completedDays = progressData.completedDays;
       habit.checkedDays = list

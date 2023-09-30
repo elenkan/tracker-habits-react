@@ -1,4 +1,5 @@
 import errors from './errors.json';
+import {ErrorsText} from '../../types';
 import {toast} from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 
@@ -6,10 +7,10 @@ export default class Notification {
   //TODO: определить тип
   static showErrorNotification(errorData: any) {
     let errorText: string = errorData.message
-    for (let key in errors) {
+    const errorDataText: ErrorsText = errors
+    for (let key in errorDataText) {
       if (errorText.includes(key)) {
-        // @ts-ignore
-        errorText = errors[key]
+        errorText = errorDataText[key]
       }
     }
     toast(errorText, {

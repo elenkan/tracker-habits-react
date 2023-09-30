@@ -3,5 +3,6 @@ export enum AppRouteList {
     CreateHabitPage = '/create-habit',
     HabitsPage = '/habits-list',
     ProgressPage = '/progress',
-    SettingsPage = '/settings'
+    SettingsPage = '/settings',
+    NotFoundPage = '*'
 }

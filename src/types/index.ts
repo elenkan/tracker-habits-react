@@ -1,11 +1,11 @@
-export type ColorItem = {
+export interface ColorItem {
   color: string,
   difficulty?: string,
-  value?: number,
+  value: number,
   id: number
 }
 
-export type Habit = {
+export interface Habit {
   id: number,
   name: string,
   description: string,
@@ -16,13 +16,13 @@ export type Habit = {
   checkedDays: ColorItem[]
 }
 
-export type AuthData = {
+export interface AuthData {
   email: string,
   password: string,
   name?: string
 }
 
-export type Field = {
+export interface Field {
   [key: string]: {
     placeholder: string,
     rules?: {
@@ -44,13 +44,17 @@ export type Field = {
   }
 }
 
-export type FormData = {
+export interface FormData {
   userName?: string,
-  email?: string,
-  password?: string,
+  email: string,
+  password: string,
   habitName?: string,
   habitDescription?: string,
   period?: number
+}
+
+export interface ErrorsText {
+  [key: string] :string
 }
 
 

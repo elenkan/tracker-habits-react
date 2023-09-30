@@ -38,7 +38,6 @@ const initialState: StateType = {
 const reducer = createReducer(initialState, builder => {
   builder.addCase(changeHabitList, (state, action) => {
     state.challengeHabitsList = action.payload
-    console.log(state.challengeHabitsList)
   });
 
   builder.addCase(addColorDifficulty, (state, action) => {

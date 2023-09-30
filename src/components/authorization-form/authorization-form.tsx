@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react';
 import {Box, Button, Dialog, DialogContent} from '@mui/material';
+import BaseButton from '../base-button';
 import './authorization-form.scss';
 import {
   login,
@@ -77,8 +78,6 @@ const AuthorizationForm = () => {
   const onSubmit = async (data: FormData) => {
     const {userName: name, email, password} = data
     if (type === 'signup') {
-      // TODO: разобраться с типами
-      // @ts-ignore
       const user = await dispatch(createLogin({name, email, password}))
       if (user.payload?.users) {
         dispatch(setUserData(user))
@@ -86,8 +85,6 @@ const AuthorizationForm = () => {
         navigate(AppRouteList.CreateHabitPage)
       }
     } else {
-      // TODO: разобраться с типами
-      // @ts-ignore
       const user = await dispatch(login({email, password}))
       if (user) {
         dispatch(setUserData(user))
@@ -141,20 +138,14 @@ const AuthorizationForm = () => {
             autoComplete="off"
             className="auth-form">
 
-            <Button variant="outlined"
-                    sx={{
-                      color: 'primary.main',
-                      width: '180px',
-                      margin: '0 auto',
-                      '@media (max-width: 600px)': {
-                        fontSize: '13px'
-                      }
-                    }}
-                    onClick={onClickGuestBtn}
-            >
-              Войти как гость
-            </Button>
-
+            <BaseButton
+              buttonTitle='Войти как гость'
+              buttonWidth='180px'
+              action={onClickGuestBtn}
+              style={{
+                margin: '0 auto'
+              }}
+            />
             <span className={dividerClass}>Или</span>
 
             {type === 'signup' &&

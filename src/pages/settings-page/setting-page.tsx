@@ -1,5 +1,6 @@
 import Box from '@mui/material/Box';
-import {Button, Tabs, Tab, Switch, Typography} from '@mui/material';
+import {Tabs, Tab, Switch, Typography} from '@mui/material';
+import BaseButton from '../../components/base-button';
 import {ChangeEvent, useState} from 'react';
 import './settings-page.scss'
 import {useAppDispatch, useAppSelector} from '../../hooks/stateHooks';
@@ -45,13 +46,11 @@ const SettingPage = () => {
               }}}>
             Удалить аккаунт
           </Typography>
-          <Button
-            variant="outlined"
-            sx={{
-              '@media (max-width: 600px)': {
-                fontSize: '15px'
-              }}}
-            onClick={deleteUserAccount}>Удалить</Button>
+          <BaseButton
+            buttonTitle='Удалить'
+            buttonWidth='150px'
+            action={deleteUserAccount}
+          />
         </div>
       );
     } else {
