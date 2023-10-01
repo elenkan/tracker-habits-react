@@ -24,6 +24,12 @@
   display: flex;
   padding-left: 0;
   margin: 0;
+  border: none;
+
+  input[type=radio]
+  {
+    display: none;
+  }
 
   &__item {
     display: flex;
@@ -42,6 +48,13 @@
 
     &:last-child {
       margin-right: 0;
+    }
+
+    &_checked {
+      box-shadow: rgb(137, 204, 197) 4px 5px 2px;
+      &-dark {
+        box-shadow: rgb(226,149,140) 4px 5px 2px;
+      }
     }
   }
 }

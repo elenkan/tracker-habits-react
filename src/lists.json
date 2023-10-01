@@ -3,18 +3,21 @@
     {
       "color": "#cc6699",
       "difficulty": "Сложно",
+      "checked": false,
       "value": 0,
       "id": 1
     },
     {
       "color": "#08d9d6",
       "difficulty": "Средне",
+      "checked": false,
       "value": 0,
       "id": 2
     },
     {
       "color": "#66ff66",
       "difficulty": "Легко!",
+      "checked": true,
       "value": 0,
       "id": 3
     }

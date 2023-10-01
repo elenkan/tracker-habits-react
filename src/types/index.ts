@@ -2,6 +2,7 @@ export interface ColorItem {
   color: string,
   difficulty?: string,
   value: number,
+  checked?: boolean,
   id: number
 }
 

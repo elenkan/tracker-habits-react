@@ -24,4 +24,17 @@ export default class Notification {
       theme: "colored",
     });
   }
+
+  static infoErrorNotification(message: string) {
+    toast(message, {
+      position: "top-right",
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      autoClose: 3000,
+      theme: "colored",
+    });
+  }
 }

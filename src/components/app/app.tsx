@@ -64,7 +64,7 @@ const App = () => {
     const checkAuth = localStorage.getItem('checkAuth')
     if (checkAuth === 'true') {
       auth.onAuthStateChanged(user => {
-        if (user && !habitList.length) {
+        if (user && !habitList?.length) {
           dispatch(setAuthStatus(true))
           if (user.isAnonymous) {
             dispatch(setIsGuestAuth(true))

@@ -1,11 +1,18 @@
 import lists from '../../lists.json';
 import {Box, Typography} from '@mui/material';
 import './difficulty-list.scss';
-import {useAppDispatch} from '../../hooks/stateHooks';
+import {useAppDispatch, useAppSelector} from '../../hooks/stateHooks';
 import {addColorDifficulty} from '../../actions/actions';
+import {ChangeEvent, useState} from 'react';
+import classNames from 'classnames';
+import {cloneDeep} from 'lodash';
+import {ColorItem} from '../../types';
+import {log} from 'util';
 
 const DifficultyList = () => {
-  const list = lists.difficultyList;
+  const currentTheme = useAppSelector(state => state.currentTheme);
+  const difficultyList = cloneDeep(lists.difficultyList)
+  const [list, setList] = useState<ColorItem[]>(difficultyList);
   const dispatch = useAppDispatch();
 
   // TODO: заменить на useEffect ?
@@ -14,13 +21,36 @@ const DifficultyList = () => {
       backgroundColor: color
     }
   }
-  const setColorDifficulty = (color: string) => {
-    dispatch(addColorDifficulty(color))
+  const setColorDifficulty = (e: ChangeEvent<HTMLInputElement>) => {
+    dispatch(addColorDifficulty(e.target.value))
+    difficultyList.forEach(item => {
+      item.checked = false
+      if (item.color === e.target.value) {
+        item.checked = e.target.checked
+      }
+    })
+    setList(difficultyList)
   };
 
   const difficultyListItems = list.map(item => {
     return (
-      <li className="difficulty-list__item" key={item.difficulty} onClick={() => setColorDifficulty(item.color)}>
+      <label
+        className={classNames(
+          'difficulty-list__item',
+          {
+            'difficulty-list__item_checked': item.checked,
+            'difficulty-list__item_checked-dark': item.checked && currentTheme === 'dark'
+          }
+        )}
+        key={item.difficulty}
+      >
+        <input
+          name="difficulty"
+          type="radio"
+          value={item.color}
+          checked={item.checked}
+          onChange={setColorDifficulty}
+        />
         <span className="difficulty-list__color" style={colorStyle(item.color)}/>
         <Typography
           component="span"
@@ -34,15 +64,15 @@ const DifficultyList = () => {
           }}>
           {item.difficulty}
         </Typography>
-      </li>
+      </label>
     );
   });
   return (
     <Box component="div" sx={{bgcolor: 'background.default'}} className="difficulty">
       <h3 className="difficulty__title">Как справился (-ась):</h3>
-      <ul className="difficulty-list">
+      <fieldset className="difficulty-list">
         {difficultyListItems}
-      </ul>
+      </fieldset>
     </Box>);
 };
 
