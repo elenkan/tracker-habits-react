@@ -3,8 +3,7 @@ import './create-habbit-form.scss';
 import {useEffect, useRef} from 'react';
 import {useAppDispatch, useAppSelector} from '../../hooks/stateHooks';
 import {
-  addChangeableHabit,
-  changeHabitList
+  addChangeableHabit
 } from '../../actions/actions';
 import {useNavigate} from 'react-router-dom';
 import FormToggleButton from '../../components/form-fields/form-toggle-button';
@@ -15,6 +14,8 @@ import {FormData, Habit} from '../../types';
 import {cloneDeep} from 'lodash';
 import {Typography} from '@mui/material';
 import {addHabit, updateHabit} from '../../actions/api-actions';
+import BaseButton from '../../components/base-button';
+import {AppRouteList} from '../../router/enums';
 
 const CreateHabitForm = () => {
   const buttonData = [
@@ -99,6 +100,10 @@ const CreateHabitForm = () => {
     }
   };
 
+  const handleCancel = () => {
+    navigate(AppRouteList.HabitsPage)
+  }
+
   return (
     <Box
       component="form"
@@ -147,6 +152,15 @@ const CreateHabitForm = () => {
           buttonTitle="Сохранить"
           action={handleSubmit(saveHabit)}
         />
+        {
+          changeableHabit &&
+          <BaseButton
+            buttonWidth='200px'
+            buttonTitle='Отменить'
+            action={handleCancel}
+            style={{marginTop: '15px'}}
+          />
+        }
       </div>
     </Box>
   );

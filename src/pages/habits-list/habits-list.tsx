@@ -15,7 +15,7 @@ const HabitsList = () => {
     : []
 
   useEffect(() => {
-    Notification.infoErrorNotification('Выберите опцию на панели Как справился (-ась), чтобы отметить цветом кружок')
+    Notification.showInfoNotification('Выберите опцию на панели Как справился (-ась), чтобы отметить цветом кружок')
   }, [])
   return (
     <div className="habits-page">

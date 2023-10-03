@@ -71,7 +71,11 @@ const HabitItem = ({item}: PropsType) => {
     const data = [...list];
     const el = data.find(el => el.id === item.id);
     if (el?.color || el?.color === '') {
-      el.color= color
+      if (el.color === color) {
+        el.color = ''
+      } else {
+        el.color = color
+      }
     }
     setList(data);
     getDifficultyValue();

@@ -29,7 +29,7 @@ const DifficultyList = () => {
         item.checked = e.target.checked
       }
     })
-    setList(difficultyList)
+    setList([...difficultyList])
   };
 
   const difficultyListItems = list.map(item => {

@@ -25,7 +25,7 @@ export default class Notification {
     });
   }
 
-  static infoErrorNotification(message: string) {
+  static showInfoNotification(message: string) {
     toast(message, {
       position: "top-right",
       hideProgressBar: true,
