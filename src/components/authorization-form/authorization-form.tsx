@@ -16,7 +16,6 @@ import {
   setAuthStatus,
   setCurrentTheme,
   setIsGuestAuth,
-  setUserData
 } from '../../actions/actions';
 import {useNavigate} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
@@ -27,6 +26,7 @@ import FormButton from '../form-fields/form-button';
 import {FormData} from '../../types';
 import {guestHabitsList} from '../../guestData';
 import classNames from 'classnames';
+import {auth} from '../../index';
 
 const AuthorizationForm = () => {
   const currentTheme = useAppSelector(state => state.currentTheme);
@@ -58,10 +58,13 @@ const AuthorizationForm = () => {
   }, [open])
 
   const saveMode = () => {
-    if (userColorTheme && userColorTheme !== currentTheme) {
-      dispatch(setCurrentTheme(userColorTheme))
-    } else {
+    if (userColorTheme === 'light' && currentTheme === 'dark') {
+      dispatch(setCurrentTheme(currentTheme))
       dispatch(saveColorMode(currentTheme))
+      localStorage.setItem('theme', currentTheme)
+    } else {
+      dispatch(setCurrentTheme(userColorTheme))
+      localStorage.setItem('theme', userColorTheme)
     }
   }
 
@@ -78,18 +81,16 @@ const AuthorizationForm = () => {
   const onSubmit = async (data: FormData) => {
     const {userName: name, email, password} = data
     if (type === 'signup') {
-      const user = await dispatch(createLogin({name, email, password}))
-      if (user.payload?.users) {
-        dispatch(setUserData(user))
+      await dispatch(createLogin({name, email, password}))
+      if (auth.currentUser) {
         dispatch(setAuthStatus(true))
         navigate(AppRouteList.CreateHabitPage)
       }
     } else {
-      const user = await dispatch(login({email, password}))
-      if (user) {
-        dispatch(setUserData(user))
+      await dispatch(login({email, password}))
+      if (auth.currentUser) {
         dispatch(setAuthStatus(true))
-        dispatch(getColorMode())
+        await dispatch(getColorMode())
         saveMode()
         dispatch(fetchHabitList())
         localStorage.setItem('checkAuth', 'true')

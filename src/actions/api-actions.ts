@@ -16,10 +16,10 @@ import {changeHabitList, setUserColorTheme} from './actions';
 export const login = createAsyncThunk<any, AuthData>('login',
   async ({email, password}) => {
     try {
-      const {user} = await signInWithEmailAndPassword(auth, email, password)
-      return user ? user : {}
+      await signInWithEmailAndPassword(auth, email, password)
     } catch (e) {
       Notification.showErrorNotification(e)
+      return null
     }
   });
 
@@ -32,10 +32,10 @@ export const logout = createAsyncThunk<void, undefined>('logout',
 export const createLogin = createAsyncThunk<any, AuthData>('createLogin',
   async ({email, password, name}) => {
     try {
-      const {user} = await createUserWithEmailAndPassword(auth, email, password)
-      return user ? user : {}
+      await createUserWithEmailAndPassword(auth, email, password)
     } catch (e) {
       Notification.showErrorNotification(e)
+      return null
     }
   });
 
@@ -137,7 +137,7 @@ export const getColorMode = createAsyncThunk<void, undefined, {dispatch: AppDisp
       await onValue(ref(database, `users/${user}/colorMode`), (snapshot) => {
         snapshot.exists()
           ? dispatch(setUserColorTheme(snapshot.val()))
-          : dispatch(setUserColorTheme(null))
+          : dispatch(setUserColorTheme('light'))
       }, {onlyOnce: true})
     } catch (e) {
       Notification.showErrorNotification(e)

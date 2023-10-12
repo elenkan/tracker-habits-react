@@ -4,9 +4,9 @@ import {useEffect, useMemo} from 'react';
 import {PaletteMode} from '@mui/material';
 import {useAppSelector, useAppDispatch} from '../../hooks/stateHooks';
 import CssBaseline from '@mui/material/CssBaseline';
-import {changeHabitList, setAuthStatus, setIsGuestAuth} from '../../actions/actions';
+import {changeHabitList, setAuthStatus, setCurrentTheme, setIsGuestAuth} from '../../actions/actions';
 import {auth} from '../../index';
-import {fetchHabitList} from '../../actions/api-actions';
+import {fetchHabitList, getColorMode} from '../../actions/api-actions';
 import {guestHabitsList} from '../../guestData';
 
 const App = () => {
@@ -62,9 +62,11 @@ const App = () => {
 
   useEffect(() => {
     const checkAuth = localStorage.getItem('checkAuth')
+    const theme = localStorage.getItem('theme') ? localStorage.getItem('theme') : 'light'
     if (checkAuth === 'true') {
-      auth.onAuthStateChanged(user => {
+      auth.onAuthStateChanged(async (user) => {
         if (user && !habitList?.length) {
+          await dispatch(getColorMode())
           dispatch(setAuthStatus(true))
           if (user.isAnonymous) {
             dispatch(setIsGuestAuth(true))
@@ -72,6 +74,7 @@ const App = () => {
           } else {
             dispatch(fetchHabitList())
           }
+          dispatch(setCurrentTheme(theme))
         } else {
           dispatch(setAuthStatus(false))
         }

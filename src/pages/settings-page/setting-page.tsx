@@ -21,8 +21,10 @@ const SettingPage = () => {
   };
 
   const handleChangeSwitch = () => {
-    dispatch(setCurrentTheme(currentTheme === 'light' ? 'dark' : 'light'))
-    dispatch(saveColorMode(currentTheme === 'light' ? 'dark' : 'light'))
+    const theme = currentTheme === 'light' ? 'dark' : 'light'
+    dispatch(setCurrentTheme(theme))
+    dispatch(saveColorMode(theme))
+    localStorage.setItem('theme', theme)
   };
 
   const deleteUserAccount = () => {

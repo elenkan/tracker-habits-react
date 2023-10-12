@@ -3,7 +3,6 @@ import {
   addColorDifficulty,
   addChangeableHabit,
   setAuthStatus,
-  setUserData,
   changeHabitList,
   setCurrentTheme,
   setIsGuestAuth,
@@ -21,7 +20,7 @@ type StateType = {
   userData: any,
   isGuestAuth: boolean,
   currentTheme: 'light' | 'dark',
-  userColorTheme: 'light' | 'dark' | null
+  userColorTheme: 'light' | 'dark'
 }
 
 const initialState: StateType = {
@@ -32,7 +31,7 @@ const initialState: StateType = {
   userData: {},
   isGuestAuth: false,
   currentTheme: 'light',
-  userColorTheme: null
+  userColorTheme: 'light'
 };
 
 const reducer = createReducer(initialState, builder => {
@@ -50,10 +49,6 @@ const reducer = createReducer(initialState, builder => {
 
   builder.addCase(setAuthStatus, (state, action) => {
     state.isAuth = action.payload
-  });
-
-  builder.addCase(setUserData, (state, action) => {
-    state.userData = action.payload
   });
 
   builder.addCase(setCurrentTheme, (state, action) => {
