@@ -84,7 +84,7 @@ const AuthorizationForm = () => {
       await dispatch(createLogin({name, email, password}))
       if (auth.currentUser) {
         dispatch(setAuthStatus(true))
-        navigate(AppRouteList.CreateHabitPage)
+        navigate(AppRouteList.HabitsPage)
       }
     } else {
       await dispatch(login({email, password}))
@@ -94,7 +94,7 @@ const AuthorizationForm = () => {
         saveMode()
         dispatch(fetchHabitList())
         localStorage.setItem('checkAuth', 'true')
-        navigate(AppRouteList.CreateHabitPage)
+        navigate(AppRouteList.HabitsPage)
       }
     }
     setOpen(false);
@@ -155,7 +155,7 @@ const AuthorizationForm = () => {
 
             <FormTextField fieldName="email" control={control}/>
 
-            <FormPasswordField control={control}/>
+            <FormPasswordField control={control} keyDownAction={handleSubmit(onSubmit)}/>
 
             <FormButton
               buttonWidth="300px"

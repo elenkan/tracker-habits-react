@@ -7,8 +7,9 @@ import {FormData} from '../../types'
 
 type PropsType = {
   control: Control<FormData>
+  keyDownAction: () => void
 }
-const FormPasswordField = ({control}: PropsType) => {
+const FormPasswordField = ({control, keyDownAction}: PropsType) => {
   const {
     field: {onChange, value},
     fieldState: {error}
@@ -56,6 +57,11 @@ const FormPasswordField = ({control}: PropsType) => {
         margin: '0 auto 40px auto'
       }}
       InputProps={{
+        onKeyDown(event) {
+          if (event.code === 'Enter') {
+            keyDownAction()
+          }
+        },
         endAdornment: (
           <InputAdornment position="end">
             <IconButton
