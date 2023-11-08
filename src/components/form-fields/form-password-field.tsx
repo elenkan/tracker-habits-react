@@ -1,36 +1,37 @@
-import {useController, Control} from 'react-hook-form';
+import {useController} from 'react-hook-form';
+import type {Control} from 'react-hook-form';
 import TextField from '@mui/material/TextField';
 import {IconButton, InputAdornment} from '@mui/material';
 import {Visibility, VisibilityOff} from '@mui/icons-material';
 import {useState} from 'react';
-import {FormData} from '../../types'
+import type {FormData} from '../../types';
 
-type PropsType = {
-  control: Control<FormData>
-  keyDownAction: () => void
+interface PropsType {
+  control: Control<FormData>;
+  keyDownAction: () => void;
 }
 const FormPasswordField = ({control, keyDownAction}: PropsType) => {
   const {
     field: {onChange, value},
-    fieldState: {error}
+    fieldState: {error},
   } = useController({
-    name: "password",
+    name: 'password',
     control,
     rules: {
       required: {
         value: true,
-        message: 'Обязательное поле'
+        message: 'Обязательное поле',
       },
       minLength: {
         value: 6,
-        message: 'Минимальная длина 6 символов'
-      }
-    }
+        message: 'Минимальная длина 6 символов',
+      },
+    },
   });
 
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const handleClickShowPassword = () => {
-    setShowPassword(!showPassword)
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -42,51 +43,52 @@ const FormPasswordField = ({control, keyDownAction}: PropsType) => {
       name="password"
       type={showPassword ? 'text' : 'password'}
       error={!!error}
-      helperText={error && error.message}
+      helperText={error?.message}
       autoComplete="on"
       FormHelperTextProps={{
         sx: {
           position: 'absolute',
-          top: '36px'
-        }
+          top: '36px',
+        },
       }}
       onChange={onChange}
       sx={{
         width: '280px',
         position: 'relative',
-        margin: '0 auto 40px auto'
+        margin: '0 auto 40px auto',
       }}
       InputProps={{
         onKeyDown(event) {
           if (event.code === 'Enter') {
-            keyDownAction()
+            keyDownAction();
           }
         },
         endAdornment: (
           <InputAdornment position="end">
-            <IconButton
-              aria-label="toggle password visibility"
-              onClick={handleClickShowPassword}
-            >
-              {showPassword
-                ? <Visibility
+            <IconButton aria-label="toggle password visibility" onClick={handleClickShowPassword}>
+              {showPassword ? (
+                <Visibility
                   sx={{
                     '@media (max-width: 600px)': {
-                      width: '20px'
-                    }
-                  }}/>
-                : <VisibilityOff
+                      width: '20px',
+                    },
+                  }}
+                />
+              ) : (
+                <VisibilityOff
                   sx={{
                     '@media (max-width: 600px)': {
-                      width: '20px'
-                    }
-                  }}/>
-              }
+                      width: '20px',
+                    },
+                  }}
+                />
+              )}
             </IconButton>
           </InputAdornment>
-        )
-      }}/>
+        ),
+      }}
+    />
   );
-}
+};
 
-export default FormPasswordField
+export default FormPasswordField;

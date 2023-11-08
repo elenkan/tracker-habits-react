@@ -6,24 +6,16 @@ import {
   LineElement,
   Title,
   Tooltip,
-  ChartArea,
-  ChartData
-} from 'chart.js'
-import {Line} from 'react-chartjs-2'
+} from 'chart.js';
+import type {ChartArea, ChartData} from 'chart.js';
+import {Line} from 'react-chartjs-2';
 import {useEffect, useRef, useState} from 'react';
-import './difficulty-statistics.scss'
+import './difficulty-statistics.scss';
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip
-)
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip);
 
-type PropsType = {
-  colorsValue: number[]
+interface PropsType {
+  colorsValue: number[];
 }
 
 const DifficultyStatistics = ({colorsValue}: PropsType) => {
@@ -31,18 +23,18 @@ const DifficultyStatistics = ({colorsValue}: PropsType) => {
   const [chartData, setChartData] = useState<ChartData<'line'>>({
     datasets: [],
   });
-  const labels = ['Сложно','Средне', 'Легко']
+  const labels = ['Сложно', 'Средне', 'Легко'];
   const options = {
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        display: false
-      }
+        display: false,
+      },
     },
     scales: {
       x: {
         grid: {
-          display: false
+          display: false,
         },
       },
       y: {
@@ -50,10 +42,10 @@ const DifficultyStatistics = ({colorsValue}: PropsType) => {
         offset: true,
         beginAtZero: true,
         ticks: {
-          stepSize: 10
-        }
-      }
-    }
+          stepSize: 10,
+        },
+      },
+    },
   };
 
   function createGradient(ctx: CanvasRenderingContext2D, area: ChartArea) {
@@ -71,14 +63,14 @@ const DifficultyStatistics = ({colorsValue}: PropsType) => {
   }
 
   const lineChartData = {
-    labels: labels,
+    labels,
     datasets: [
       {
         data: colorsValue,
-        lineTension: 0.5
-      }
-    ]
-  }
+        lineTension: 0.5,
+      },
+    ],
+  };
 
   useEffect(() => {
     const chart = chartRef.current;
@@ -100,11 +92,7 @@ const DifficultyStatistics = ({colorsValue}: PropsType) => {
 
   return (
     <div className="difficulty-chart-container">
-      <Line
-        ref={chartRef}
-        data={chartData}
-        options={options}
-      />
+      <Line ref={chartRef} data={chartData} options={options} />
     </div>
   );
 };

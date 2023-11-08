@@ -1,10 +1,10 @@
 import {Button} from '@mui/material';
 
-type PropsType = {
-  buttonWidth: string,
-  buttonTitle: string,
-  action: () => void,
-  style?: {[key: string]: string}
+interface PropsType {
+  buttonWidth: string;
+  buttonTitle: string;
+  action: () => void;
+  style?: Record<string, string>;
 }
 
 const BaseButton = ({buttonWidth, buttonTitle, action, style}: PropsType) => {
@@ -15,14 +15,14 @@ const BaseButton = ({buttonWidth, buttonTitle, action, style}: PropsType) => {
         color: 'primary.main',
         width: buttonWidth,
         '@media (max-width: 600px)': {
-          fontSize: '13px'
+          fontSize: '13px',
         },
-      ...style}
-      }
+        ...style,
+      }}
       onClick={action}>
       {buttonTitle}
     </Button>
-  )
-}
+  );
+};
 
 export default BaseButton;

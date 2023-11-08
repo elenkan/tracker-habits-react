@@ -1,4 +1,4 @@
-import {Habit, ColorItem} from '../../types';
+import type {Habit, ColorItem} from '../../types';
 import {IconButton, Typography} from '@mui/material';
 import CreateIcon from '@mui/icons-material/Create';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -7,24 +7,24 @@ import {useEffect, useState} from 'react';
 import {addChangeableHabit} from '../../actions/actions';
 import {useNavigate} from 'react-router-dom';
 import './habit-item.scss';
-import lists from '../../lists.json'
+import lists from '../../lists.json';
 import {cloneDeep} from 'lodash';
 import {deleteHabit, updateHabit} from '../../actions/api-actions';
 
-type PropsType = {
-  item: Habit
+interface PropsType {
+  item: Habit;
 }
 
 const HabitItem = ({item}: PropsType) => {
-  const habit = cloneDeep(item)
+  const habit = cloneDeep(item);
   const [list, setList] = useState<ColorItem[]>([]);
   const dispatch = useAppDispatch();
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
-  let color = useAppSelector(state => state.colorDifficulty);
+  const color = useAppSelector(state => state.colorDifficulty);
   useEffect(() => {
-    setList(habit.checkedDays)
-  }, [])
+    setList(habit.checkedDays);
+  }, []);
 
   const getDifficultyValue = () => {
     const colors: ColorItem[] | [] = lists.difficultyList.map(item => Object.assign({}, item));
@@ -32,9 +32,9 @@ const HabitItem = ({item}: PropsType) => {
     newList.forEach(item => {
       const colorItem = colors.find(el => el.color === item.color);
       if (colorItem) {
-        colorItem.value += 1
+        colorItem.value += 1;
       }
-    })
+    });
     setList(newList);
     return colors;
   };
@@ -44,17 +44,16 @@ const HabitItem = ({item}: PropsType) => {
     return array.map(item => {
       Object.assign({}, item);
       if (item.value && item.value !== 0) {
-        item.value = Math.round(item.value / checkedColorAmount * 100);
+        item.value = Math.round((item.value / checkedColorAmount) * 100);
       }
       return item.value;
     });
   };
 
-
   const getProgressValue = () => {
     const checkedDays = list.filter(item => item.color !== '');
     if (checkedDays.length > 0) {
-      const progressValue = Math.round(checkedDays.length / habit.period * 100);
+      const progressValue = Math.round((checkedDays.length / habit.period) * 100);
       const progressData = {
         value: progressValue,
         colorsValue: getColorValueArray(getDifficultyValue()),
@@ -63,18 +62,18 @@ const HabitItem = ({item}: PropsType) => {
       habit.value = progressData.value;
       habit.colorsValue = progressData.colorsValue;
       habit.completedDays = progressData.completedDays;
-      habit.checkedDays = list
-      dispatch(updateHabit(habit))
+      habit.checkedDays = list;
+      dispatch(updateHabit(habit));
     }
-  }
+  };
   const setData = (item: ColorItem) => {
     const data = [...list];
     const el = data.find(el => el.id === item.id);
     if (el?.color || el?.color === '') {
       if (el.color === color) {
-        el.color = ''
+        el.color = '';
       } else {
-        el.color = color
+        el.color = color;
       }
     }
     setList(data);
@@ -87,19 +86,21 @@ const HabitItem = ({item}: PropsType) => {
     navigate('/create-habit');
   };
   const deleteHabitAction = (habitId: number) => {
-    dispatch(deleteHabit(habitId))
-  }
+    dispatch(deleteHabit(habitId));
+  };
 
-  let daysList = list.map(day => {
+  const daysList = list.map(day => {
     return (
-      <span className="days-list__item"
-            onClick={() => setData(day)}
-            style={{
-              'backgroundColor': day.color ? day.color : 'transparent',
-              'border': day.color ? '1px solid transparent' : '1px solid #89ccc5'
-            }}
-            key={day.id}>
-      </span>
+      <span
+        className="days-list__item"
+        onClick={() => {
+          setData(day);
+        }}
+        style={{
+          backgroundColor: day.color ? day.color : 'transparent',
+          border: day.color ? '1px solid transparent' : '1px solid #89ccc5',
+        }}
+        key={day.id}></span>
     );
   });
 
@@ -110,33 +111,43 @@ const HabitItem = ({item}: PropsType) => {
           component="span"
           color="text.primary"
           sx={{
-            marginBottom: '10px'
+            marginBottom: habit.description ? '10px' : '0',
           }}>
           {habit.name}
         </Typography>
-        <Typography
-          component="span"
-          color="text.primary"
-          sx={{
-            fontSize: '14px',
-            lineHeight: '14px'
-          }}>
-          {habit.description}
-        </Typography>
+        {habit.description && (
+          <Typography
+            component="span"
+            color="text.primary"
+            sx={{
+              fontSize: '14px',
+              lineHeight: '14px',
+              '@media (max-width: 795px)': {
+                display: 'inline-block',
+                marginBottom: '10px',
+              },
+            }}>
+            {habit.description}
+          </Typography>
+        )}
       </div>
-      <div className="days-list">
-        {daysList}
-      </div>
+      <div className="days-list">{daysList}</div>
       <div className="habit-item__button-group">
-        <IconButton onClick={() => changeHabit(habit)}>
-          <CreateIcon/>
+        <IconButton
+          onClick={() => {
+            changeHabit(habit);
+          }}>
+          <CreateIcon />
         </IconButton>
-        <IconButton onClick={() => deleteHabitAction(habit.id)}>
-          <DeleteIcon/>
+        <IconButton
+          onClick={() => {
+            deleteHabitAction(habit.id);
+          }}>
+          <DeleteIcon />
         </IconButton>
       </div>
     </li>
-  )
+  );
 };
 
 export default HabitItem;

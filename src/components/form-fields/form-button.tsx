@@ -1,9 +1,9 @@
 import Button from '@mui/material/Button';
 
-type PropsType = {
-  buttonWidth: string,
-  buttonTitle: string,
-  action: () => void
+interface PropsType {
+  buttonWidth: string;
+  buttonTitle: string;
+  action: () => void;
 }
 
 const FormButton = ({buttonWidth, buttonTitle, action}: PropsType) => {
@@ -18,16 +18,15 @@ const FormButton = ({buttonWidth, buttonTitle, action}: PropsType) => {
         ':hover': {
           backgroundColor: 'rgba(226,149,140, 0.9)',
           borderColor: '#e2958c',
-          color: '#fff'
+          color: '#fff',
         },
         '@media (max-width: 600px)': {
           width: '100%',
-          fontSize: '13px'
-        }
+          fontSize: '13px',
+        },
       }}
       variant="outlined"
-      onClick={action}
-    >
+      onClick={action}>
       {buttonTitle}
     </Button>
   );

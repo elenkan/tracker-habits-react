@@ -9,31 +9,37 @@ const ColorMode = () => {
   const dispatch = useAppDispatch();
 
   const handleChangeSwitch = () => {
-    dispatch(setCurrentTheme(currentTheme === 'light' ? 'dark' : 'light'))
+    dispatch(setCurrentTheme(currentTheme === 'light' ? 'dark' : 'light'));
   };
   return (
-    <IconButton sx={{
-      ml: 1,
-      color: 'modeIcon.default',
-      '@media (max-width: 600px)': {
-        padding: 0
-      }
-    }} onClick={handleChangeSwitch}>
-      {
-        currentTheme === 'dark'
-          ?
-          <Brightness7Icon sx={{
+    <IconButton
+      sx={{
+        ml: 1,
+        color: 'modeIcon.default',
+        '@media (max-width: 600px)': {
+          padding: 0,
+        },
+      }}
+      onClick={handleChangeSwitch}>
+      {currentTheme === 'dark' ? (
+        <Brightness7Icon
+          sx={{
             '@media (max-width: 600px)': {
-              width: '20px'
-            }
-          }}/>
-          : <Brightness4Icon sx={{
+              width: '20px',
+            },
+          }}
+        />
+      ) : (
+        <Brightness4Icon
+          sx={{
             '@media (max-width: 600px)': {
-              width: '20px'
-            }
-          }}/>}
+              width: '20px',
+            },
+          }}
+        />
+      )}
     </IconButton>
-  )
+  );
 };
 
 export default ColorMode;

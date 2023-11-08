@@ -18,6 +18,10 @@
     font-size: 18px;
     width: 100%;
   }
+
+  @media(max-width: 600px) {
+    margin: 10px 0;
+  }
 }
 
 .difficulty-list {
@@ -50,6 +54,11 @@
       margin-right: 0;
     }
 
+    @media(max-width: 600px) {
+      flex-direction: column;
+      max-height: 100%;
+    }
+
     &_checked {
       box-shadow: rgb(137, 204, 197) 4px 5px 2px;
       &-dark {
@@ -66,4 +75,10 @@
   border-radius: 50%;
   cursor: pointer;
   margin-right: 10px;
+
+  @media(max-width: 600px) {
+    min-height: 35px;
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
 }

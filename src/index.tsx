@@ -1,18 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.scss'
+import './index.scss';
 import App from './components/app/app';
 import {Provider} from 'react-redux';
 import {store} from './store';
 import {initializeApp} from 'firebase/app';
 import {getAuth} from 'firebase/auth';
-import { getDatabase } from 'firebase/database';
+import {getDatabase} from 'firebase/database';
 import {ToastContainer} from 'react-toastify';
 import reportWebVitals from './reportWebVitals';
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -22,7 +20,7 @@ const firebaseConfig = {
   messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
   measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
-  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL
+  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
 };
 
 const app = initializeApp(firebaseConfig);
@@ -32,10 +30,10 @@ export const auth = getAuth(app);
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App/>
-      <ToastContainer className="toast"/>
+      <App />
+      <ToastContainer className="toast" />
     </Provider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function

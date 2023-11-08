@@ -8,37 +8,29 @@ import classNames from 'classnames';
 
 const MessageScreen = () => {
   const currentTheme = useAppSelector(state => state.currentTheme);
-  const contentClass = classNames(
-    'message-screen__content',
-    {'message-screen__content_dark': currentTheme === 'dark'}
-  )
+  const contentClass = classNames('message-screen__content', {
+    'message-screen__content_dark': currentTheme === 'dark',
+  });
 
   const navigate = useNavigate();
   const onClick = () => {
-    navigate(AppRouteList.CreateHabitPage)
-  }
+    navigate(AppRouteList.CreateHabitPage);
+  };
   return (
-    <div className='message-screen'>
-      <Box
-        component="div"
-        className={contentClass}
-        sx={{color: '#fff'}}>
+    <div className="message-screen">
+      <Box component="div" className={contentClass} sx={{color: '#fff'}}>
         <Typography
           component="span"
           color="text.primary"
           sx={{
-            marginBottom: '20px'
+            marginBottom: '20px',
           }}>
-           Кажется список полезных привычек пуст...
+          Кажется список полезных привычек пуст...
         </Typography>
-        <BaseButton
-          buttonWidth='250px'
-          buttonTitle='Создать привычку'
-          action={onClick}
-        />
+        <BaseButton buttonWidth="250px" buttonTitle="Создать привычку" action={onClick} />
       </Box>
     </div>
-  )
-}
+  );
+};
 
 export default MessageScreen;

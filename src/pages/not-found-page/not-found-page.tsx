@@ -6,15 +6,15 @@ import {AppRouteList} from '../../router/enums';
 const NotFoundPage = () => {
   const navigate = useNavigate();
   const onClick = () => {
-    navigate(AppRouteList.Home)
-  }
+    navigate(AppRouteList.Home);
+  };
   return (
     <div style={{marginTop: '90px'}}>
       <Typography
         variant="h1"
         color="text.primary"
         sx={{
-          marginBottom: '10px'
+          marginBottom: '10px',
         }}>
         404
       </Typography>
@@ -22,16 +22,11 @@ const NotFoundPage = () => {
         variant="subtitle1"
         color="text.primary"
         sx={{
-          marginBottom: '20px'
+          marginBottom: '20px',
         }}>
         Такой страницы не существует
       </Typography>
-      <BaseButton
-        buttonWidth='250px'
-        buttonTitle='Перейти на главную страницу'
-        action={onClick}
-      />
-
+      <BaseButton buttonWidth="250px" buttonTitle="Перейти на главную страницу" action={onClick} />
     </div>
   );
 };
