@@ -1,5 +1,6 @@
 import lists from '../../lists.json';
-import {Box, Typography} from '@mui/material';
+import {Box, Typography, IconButton, Tooltip} from '@mui/material';
+import HelpIcon from '@mui/icons-material/Help';
 import './difficulty-list.scss';
 import {useAppDispatch, useAppSelector} from '../../hooks/stateHooks';
 import {addColorDifficulty} from '../../actions/actions';
@@ -13,6 +14,7 @@ const DifficultyList = () => {
   const currentTheme = useAppSelector(state => state.currentTheme);
   const difficultyList = cloneDeep(lists.difficultyList);
   const [list, setList] = useState<ColorItem[]>(difficultyList);
+  const tooltipText = 'Выберите опцию на панели Как справился (-ась), чтобы отметить цветом кружок';
   const dispatch = useAppDispatch();
 
   // TODO: заменить на useEffect ?
@@ -67,6 +69,14 @@ const DifficultyList = () => {
     <Box component="div" sx={{bgcolor: 'background.default'}} className="difficulty">
       <h3 className="difficulty__title">Как справился (-ась):</h3>
       <fieldset className="difficulty-list">{difficultyListItems}</fieldset>
+      <Tooltip title={tooltipText}>
+        <IconButton
+          sx={{
+            color: 'modeIcon.secondary',
+          }}>
+          <HelpIcon />
+        </IconButton>
+      </Tooltip>
     </Box>
   );
 };

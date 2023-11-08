@@ -24,25 +24,4 @@ export default class Notification {
       theme: 'colored',
     });
   }
-
-  static showInfoNotification(message: string, toastId: string) {
-    toast(message, {
-      toastId,
-      position: 'top-right',
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      autoClose: 3000,
-      theme: 'colored',
-    });
-  }
-
-  static dismissNotification(id: string) {
-    console.log(id);
-    if (id) {
-      toast.dismiss(id);
-    }
-  }
 }

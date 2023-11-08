@@ -134,12 +134,18 @@ const HabitItem = ({item}: PropsType) => {
       <div className="days-list">{daysList}</div>
       <div className="habit-item__button-group">
         <IconButton
+          sx={{
+            color: 'modeIcon.secondary',
+          }}
           onClick={() => {
             changeHabit(habit);
           }}>
           <CreateIcon />
         </IconButton>
         <IconButton
+          sx={{
+            color: 'modeIcon.secondary',
+          }}
           onClick={() => {
             deleteHabitAction(habit.id);
           }}>

@@ -43,6 +43,7 @@ const App = () => {
             },
             modeIcon: {
               default: '#fff',
+              secondary: 'rgba(0, 0, 0, 0.7)',
             },
           }
         : {
@@ -54,6 +55,7 @@ const App = () => {
             },
             modeIcon: {
               default: '#e2958c',
+              secondary: '#fff',
             },
           }),
     },
