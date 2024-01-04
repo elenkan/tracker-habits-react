@@ -29,6 +29,7 @@ const Header = () => {
     {path: '/progress', label: 'Прогресс'},
     {path: '/create-habit', label: 'Создать привычку'},
     {path: '/habits-list', label: 'Зачекать привычку'},
+    {path: '/archive-habits', label: 'Архив привычек'},
     {path: '/settings', label: 'Настройки'},
     {path: '', label: 'Выйти'},
   ];

@@ -9,7 +9,12 @@ import {useNavigate} from 'react-router-dom';
 import './habit-item.scss';
 import lists from '../../lists.json';
 import {cloneDeep} from 'lodash';
-import {deleteHabit, updateHabit} from '../../actions/api-actions';
+import {
+  addArchiveHabit,
+  deleteHabit,
+  fetchArchiveHabitList,
+  updateHabit,
+} from '../../actions/api-actions';
 
 interface PropsType {
   item: Habit;
@@ -63,7 +68,14 @@ const HabitItem = ({item}: PropsType) => {
       habit.colorsValue = progressData.colorsValue;
       habit.completedDays = progressData.completedDays;
       habit.checkedDays = list;
-      dispatch(updateHabit(habit));
+      if (habit.completedDays === habit.period) {
+        // TODO: добавить запуск анимации
+        dispatch(addArchiveHabit(habit));
+        deleteHabitAction(habit.id);
+        dispatch(fetchArchiveHabitList());
+      } else {
+        dispatch(updateHabit(habit));
+      }
     }
   };
   const setData = (item: ColorItem) => {

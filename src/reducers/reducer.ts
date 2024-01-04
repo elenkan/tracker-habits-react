@@ -4,6 +4,7 @@ import {
   addChangeableHabit,
   setAuthStatus,
   changeHabitList,
+  changeArchiveHabitList,
   setCurrentTheme,
   setIsGuestAuth,
   setUserColorTheme,
@@ -13,6 +14,7 @@ import type {Habit} from '../types';
 
 interface StateType {
   challengeHabitsList: Habit[];
+  archiveHabitsList: Habit[];
   colorDifficulty: string;
   changeableHabit: Habit | null;
   isAuth: boolean;
@@ -25,6 +27,7 @@ interface StateType {
 
 const initialState: StateType = {
   challengeHabitsList: [],
+  archiveHabitsList: [],
   colorDifficulty: '',
   changeableHabit: null,
   isAuth: false,
@@ -37,6 +40,10 @@ const initialState: StateType = {
 const reducer = createReducer(initialState, builder => {
   builder.addCase(changeHabitList, (state, action) => {
     state.challengeHabitsList = action.payload;
+  });
+
+  builder.addCase(changeArchiveHabitList, (state, action) => {
+    state.archiveHabitsList = action.payload;
   });
 
   builder.addCase(addColorDifficulty, (state, action) => {

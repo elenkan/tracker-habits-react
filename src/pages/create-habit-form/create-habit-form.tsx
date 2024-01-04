@@ -87,6 +87,7 @@ const CreateHabitForm = () => {
         changeElement.description = habit.description as string;
         dispatch(addChangeableHabit(null));
         dispatch(updateHabit(changeElement));
+        dispatch(addChangeableHabit(null));
         navigate('/habits-list');
       }
     } else {
@@ -97,6 +98,7 @@ const CreateHabitForm = () => {
   };
 
   const handleCancel = () => {
+    dispatch(addChangeableHabit(null));
     navigate(AppRouteList.HabitsPage);
   };
 
@@ -124,25 +126,29 @@ const CreateHabitForm = () => {
       </Typography>
       <FormTextField fieldName="habitName" control={control} />
       <FormTextField fieldName="habitDescription" control={control} />
-      <div className="habit-form__period">
-        <Typography
-          component="span"
-          color="text.primary"
-          sx={{
-            fontSize: '16px',
-            lineHeight: '16px',
-            marginBottom: '15px',
-          }}>
-          Выбрать период:
-        </Typography>
-        <FormToggleButton
-          groupData={buttonData}
-          action={setCountDays}
-          defaultValue={defaultValues.period}
-          styleData={{
-            marginBottom: '20px',
-          }}
-        />
+      <div className="habit-form__action">
+        {!changeableHabit && (
+          <>
+            <Typography
+              component="span"
+              color="text.primary"
+              sx={{
+                fontSize: '16px',
+                lineHeight: '16px',
+                marginBottom: '15px',
+              }}>
+              Выбрать период:
+            </Typography>
+            <FormToggleButton
+              groupData={buttonData}
+              action={setCountDays}
+              defaultValue={defaultValues.period}
+              styleData={{
+                marginBottom: '20px',
+              }}
+            />
+          </>
+        )}
         <FormButton buttonWidth="200px" buttonTitle="Сохранить" action={handleSubmit(saveHabit)} />
         {changeableHabit && (
           <BaseButton

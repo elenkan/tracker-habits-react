@@ -1,6 +1,9 @@
 import {createAction} from '@reduxjs/toolkit';
 
 export const changeHabitList = createAction('changeHabitList', list => ({payload: list}));
+export const changeArchiveHabitList = createAction('changeArchiveHabitList', list => ({
+  payload: list,
+}));
 export const addColorDifficulty = createAction('addColorDifficulty', colorDifficulty => ({
   payload: colorDifficulty,
 }));

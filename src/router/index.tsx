@@ -4,6 +4,7 @@ import PrivateRoute from './private-route';
 import HomePage from '../pages/home-page';
 import CreateHabitForm from '../pages/create-habit-form';
 import HabitsList from '../pages/habits-list';
+import ArchiveHabitsList from '../pages/archive-habits';
 import ProgressList from '../pages/progress-list';
 import SettingPage from '../pages/settings-page/setting-page';
 import NotFoundPage from '../pages/not-found-page';
@@ -29,6 +30,14 @@ const AppRouter = () => {
           element={
             <PrivateRoute isAuth={isAuth}>
               <HabitsList />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={AppRouteList.ArchiveHabits}
+          element={
+            <PrivateRoute isAuth={isAuth}>
+              <ArchiveHabitsList />
             </PrivateRoute>
           }
         />

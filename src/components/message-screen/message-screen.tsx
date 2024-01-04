@@ -6,7 +6,13 @@ import {AppRouteList} from '../../router/enums';
 import {useAppSelector} from '../../hooks/stateHooks';
 import classNames from 'classnames';
 
-const MessageScreen = () => {
+interface PropsType {
+  title?: string;
+  buttonTitle?: string;
+  buttonLink?: string;
+}
+
+const MessageScreen = ({title, buttonTitle, buttonLink}: PropsType) => {
   const currentTheme = useAppSelector(state => state.currentTheme);
   const contentClass = classNames('message-screen__content', {
     'message-screen__content_dark': currentTheme === 'dark',
@@ -14,7 +20,8 @@ const MessageScreen = () => {
 
   const navigate = useNavigate();
   const onClick = () => {
-    navigate(AppRouteList.CreateHabitPage);
+    const link = buttonLink || AppRouteList.CreateHabitPage;
+    navigate(link);
   };
   return (
     <div className="message-screen">
@@ -25,9 +32,13 @@ const MessageScreen = () => {
           sx={{
             marginBottom: '20px',
           }}>
-          Кажется список полезных привычек пуст...
+          {title || 'Кажется список полезных привычек пуст...'}
         </Typography>
-        <BaseButton buttonWidth="250px" buttonTitle="Создать привычку" action={onClick} />
+        <BaseButton
+          buttonWidth="250px"
+          buttonTitle={buttonTitle || 'Создать привычку'}
+          action={onClick}
+        />
       </Box>
     </div>
   );

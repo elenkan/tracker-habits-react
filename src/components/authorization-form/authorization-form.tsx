@@ -9,6 +9,7 @@ import {
   saveColorMode,
   fetchHabitList,
   getColorMode,
+  fetchArchiveHabitList,
 } from '../../actions/api-actions';
 import {useAppDispatch, useAppSelector} from '../../hooks/stateHooks';
 import {
@@ -96,6 +97,7 @@ const AuthorizationForm = () => {
         await dispatch(getColorMode());
         saveMode();
         dispatch(fetchHabitList());
+        dispatch(fetchArchiveHabitList());
         localStorage.setItem('checkAuth', 'true');
         navigate(AppRouteList.HabitsPage);
       }

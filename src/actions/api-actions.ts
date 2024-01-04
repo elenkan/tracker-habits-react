@@ -10,7 +10,7 @@ import {
 import type {AppDispatch} from '../types/state';
 import Notification from './../utils/notification/notification';
 import {ref, set, push, onValue, update, remove} from 'firebase/database';
-import {changeHabitList, setUserColorTheme} from './actions';
+import {changeArchiveHabitList, changeHabitList, setUserColorTheme} from './actions';
 
 // TODO: заменить тип user
 export const login = createAsyncThunk<any, AuthData>('login', async ({email, password}) => {
@@ -80,6 +80,30 @@ export const fetchHabitList = createAsyncThunk<void, undefined, {dispatch: AppDi
   },
 );
 
+export const fetchArchiveHabitList = createAsyncThunk<void, undefined, {dispatch: AppDispatch}>(
+  'fetchArchiveHabitList',
+  async (_args, {dispatch}) => {
+    try {
+      const user = auth?.currentUser?.uid;
+      onValue(
+        ref(database, `users/${user}/archiveHabitsList`),
+        snapshot => {
+          const habitsList: Habit[] = [];
+          if (snapshot) {
+            snapshot.forEach(item => {
+              habitsList?.push(item.val());
+            });
+            dispatch(changeArchiveHabitList(habitsList));
+          }
+        },
+        {onlyOnce: true},
+      );
+    } catch (e) {
+      Notification.showErrorNotification(e);
+    }
+  },
+);
+
 export const addHabit = createAsyncThunk<void, Habit, {dispatch: AppDispatch}>(
   'habitAction',
   async (habit, {dispatch}) => {
@@ -87,6 +111,20 @@ export const addHabit = createAsyncThunk<void, Habit, {dispatch: AppDispatch}>(
       const user = auth?.currentUser?.uid;
       await push(ref(database, `users/${user}/challengeHabitsList`), habit).then(res => {
         dispatch(fetchHabitList());
+      });
+    } catch (e) {
+      Notification.showErrorNotification(e);
+    }
+  },
+);
+
+export const addArchiveHabit = createAsyncThunk<void, Habit, {dispatch: AppDispatch}>(
+  'archiveHabitAction',
+  async (habit, {dispatch}) => {
+    try {
+      const user = auth?.currentUser?.uid;
+      await push(ref(database, `users/${user}/archiveHabitsList`), habit).then(res => {
+        dispatch(fetchArchiveHabitList());
       });
     } catch (e) {
       Notification.showErrorNotification(e);
