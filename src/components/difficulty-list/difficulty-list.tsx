@@ -5,7 +5,7 @@ import './difficulty-list.scss';
 import {useAppDispatch, useAppSelector} from '../../hooks/stateHooks';
 import {addColorDifficulty} from '../../actions/actions';
 import type {ChangeEvent} from 'react';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import classNames from 'classnames';
 import {cloneDeep} from 'lodash';
 import type {ColorItem} from '../../types';
@@ -16,13 +16,19 @@ const DifficultyList = () => {
   const [list, setList] = useState<ColorItem[]>(difficultyList);
   const tooltipText = 'Выберите опцию на панели Как справился (-ась), чтобы отметить цветом кружок';
   const dispatch = useAppDispatch();
-
-  // TODO: заменить на useEffect ?
   const colorStyle = (color: string) => {
     return {
       backgroundColor: color,
     };
   };
+
+  useEffect(() => {
+    difficultyList.forEach(item => {
+      if (item.checked) {
+        dispatch(addColorDifficulty(item.color));
+      }
+    });
+  }, []);
   const setColorDifficulty = (e: ChangeEvent<HTMLInputElement>) => {
     dispatch(addColorDifficulty(e.target.value));
     difficultyList.forEach(item => {

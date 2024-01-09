@@ -4,8 +4,22 @@
   width: 100%;
   padding-top: 70px;
 
-  @media(max-width: 795px) {
-    padding-top: 48px;
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #89ccc5;
+    margin-bottom: 20px;
+    min-width: 300px;
+    &_dark {
+      border: 1px solid rgba(226, 149, 140, 0.5);
+    }
+     span {
+       display: inline-block;
+       margin-right: 20px;
+     }
   }
 }
 
