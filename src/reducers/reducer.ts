@@ -9,6 +9,7 @@ import {
   setIsGuestAuth,
   setUserColorTheme,
   setIsLoading,
+  setShowCongratulation,
 } from '../actions/actions';
 
 import type {Habit} from '../types';
@@ -25,6 +26,7 @@ interface StateType {
   currentTheme: 'light' | 'dark';
   userColorTheme: 'light' | 'dark';
   isLoading: boolean;
+  showCongratulation: boolean;
 }
 
 const initialState: StateType = {
@@ -38,6 +40,7 @@ const initialState: StateType = {
   currentTheme: 'light',
   userColorTheme: 'light',
   isLoading: false,
+  showCongratulation: false,
 };
 
 const reducer = createReducer(initialState, builder => {
@@ -75,6 +78,10 @@ const reducer = createReducer(initialState, builder => {
 
   builder.addCase(setIsLoading, (state, action) => {
     state.isLoading = action.payload;
+  });
+
+  builder.addCase(setShowCongratulation, (state, action) => {
+    state.showCongratulation = action.payload;
   });
 });
 

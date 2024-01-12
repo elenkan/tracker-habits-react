@@ -4,7 +4,7 @@ import CreateIcon from '@mui/icons-material/Create';
 import DeleteIcon from '@mui/icons-material/Delete';
 import {useAppSelector, useAppDispatch} from '../../hooks/stateHooks';
 import {useEffect, useState} from 'react';
-import {addChangeableHabit} from '../../actions/actions';
+import {addChangeableHabit, setShowCongratulation} from '../../actions/actions';
 import {useNavigate} from 'react-router-dom';
 import './habit-item.scss';
 import lists from '../../lists.json';
@@ -69,9 +69,9 @@ const HabitItem = ({item}: PropsType) => {
       habit.completedDays = progressData.completedDays;
       habit.checkedDays = list;
       if (habit.completedDays === habit.period) {
-        // TODO: добавить запуск анимации
         dispatch(addArchiveHabit(habit));
         deleteHabitAction(habit.id);
+        dispatch(setShowCongratulation(true));
         dispatch(fetchArchiveHabitList());
       } else {
         dispatch(updateHabit(habit));

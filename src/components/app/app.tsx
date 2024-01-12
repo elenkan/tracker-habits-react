@@ -8,10 +8,12 @@ import CssBaseline from '@mui/material/CssBaseline';
 import {setAuthStatus, setCurrentTheme, setIsGuestAuth} from '../../actions/actions';
 import {auth} from '../../index';
 import {fetchArchiveHabitList, fetchHabitList, getColorMode} from '../../actions/api-actions';
+import CongratulationsScreen from '../congratulations-screen';
 
 const App = () => {
   const currentTheme = useAppSelector(state => state.currentTheme);
   const isLoading = useAppSelector(state => state.isLoading);
+  const showCongratulation = useAppSelector(state => state.showCongratulation);
   const habitList = useAppSelector(state => state.challengeHabitsList);
   const getDesignTokens = (mode: PaletteMode) => ({
     palette: {
@@ -90,6 +92,7 @@ const App = () => {
       <div className="content">
         <AppRouter />
         {isLoading && <LoadingScreen />}
+        {showCongratulation && <CongratulationsScreen />}
       </div>
     </ThemeProvider>
   );
