@@ -21,5 +21,12 @@
        margin-right: 20px;
      }
   }
+
+  &__results {
+    display: flex;
+    span {
+      margin-right: 10px;
+    }
+  }
 }
 

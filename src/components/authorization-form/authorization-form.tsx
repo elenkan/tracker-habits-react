@@ -10,21 +10,17 @@ import {
   fetchHabitList,
   getColorMode,
   fetchArchiveHabitList,
+  addGuestHabits,
 } from '../../actions/api-actions';
 import {useAppDispatch, useAppSelector} from '../../hooks/stateHooks';
-import {
-  changeHabitList,
-  setAuthStatus,
-  setCurrentTheme,
-  setIsGuestAuth,
-} from '../../actions/actions';
+import {setAuthStatus, setCurrentTheme, setIsGuestAuth} from '../../actions/actions';
 import {useNavigate} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
 import {AppRouteList} from '../../router/enums';
 import FormTextField from '../form-fields/form-text-field';
 import FormPasswordField from '../form-fields/form-password-field';
 import FormButton from '../form-fields/form-button';
-import type {FormData} from '../../types';
+import type {FormData, Habit} from '../../types';
 import {guestHabitsList} from '../../guestData';
 import classNames from 'classnames';
 import {auth} from '../../index';
@@ -56,6 +52,11 @@ const AuthorizationForm = () => {
     setOpen(false);
   };
 
+  const setAuthValues = () => {
+    localStorage.setItem('checkAuth', 'true');
+    dispatch(setAuthStatus(true));
+  };
+
   useEffect(() => {
     reset({userName: '', email: '', password: ''});
   }, [open]);
@@ -72,33 +73,32 @@ const AuthorizationForm = () => {
   };
 
   const onClickGuestBtn = () => {
+    handleClose();
     dispatch(signInAsGuest()).then(_ => {
-      dispatch(setAuthStatus(true));
+      setAuthValues();
       dispatch(setIsGuestAuth(true));
-      dispatch(changeHabitList(guestHabitsList));
-      localStorage.setItem('checkAuth', 'true');
+      dispatch(addGuestHabits(guestHabitsList as Habit[]));
       navigate(AppRouteList.ProgressPage);
     });
   };
 
   const onSubmit = async (data: FormData) => {
+    handleClose();
     const {userName: name, email, password} = data;
     if (type === 'signup') {
       await dispatch(createLogin({name, email, password}));
       if (auth.currentUser) {
-        dispatch(setAuthStatus(true));
-        localStorage.setItem('checkAuth', 'true');
+        setAuthValues();
         navigate(AppRouteList.HabitsPage);
       }
     } else {
       await dispatch(login({email, password}));
       if (auth.currentUser) {
-        dispatch(setAuthStatus(true));
+        setAuthValues();
         await dispatch(getColorMode());
         saveMode();
         dispatch(fetchHabitList());
         dispatch(fetchArchiveHabitList());
-        localStorage.setItem('checkAuth', 'true');
         navigate(AppRouteList.HabitsPage);
       }
     }

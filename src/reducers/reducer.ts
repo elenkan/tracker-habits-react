@@ -8,6 +8,7 @@ import {
   setCurrentTheme,
   setIsGuestAuth,
   setUserColorTheme,
+  setIsLoading,
 } from '../actions/actions';
 
 import type {Habit} from '../types';
@@ -23,6 +24,7 @@ interface StateType {
   isGuestAuth: boolean;
   currentTheme: 'light' | 'dark';
   userColorTheme: 'light' | 'dark';
+  isLoading: boolean;
 }
 
 const initialState: StateType = {
@@ -35,6 +37,7 @@ const initialState: StateType = {
   isGuestAuth: false,
   currentTheme: 'light',
   userColorTheme: 'light',
+  isLoading: false,
 };
 
 const reducer = createReducer(initialState, builder => {
@@ -68,6 +71,10 @@ const reducer = createReducer(initialState, builder => {
 
   builder.addCase(setIsGuestAuth, (state, action) => {
     state.isGuestAuth = action.payload;
+  });
+
+  builder.addCase(setIsLoading, (state, action) => {
+    state.isLoading = action.payload;
   });
 });
 

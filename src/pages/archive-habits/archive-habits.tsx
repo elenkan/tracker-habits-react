@@ -30,7 +30,12 @@ const ArchiveHabitsList = () => {
               <Typography component="span" color="text.primary">
                 {item.name}
               </Typography>
-              <CheckCircleSharpIcon color="primary" />
+              <div className="archive-habits__results">
+                <Typography component="span" color="text.primary">
+                  {item.completedDays}
+                </Typography>
+                <CheckCircleSharpIcon color="primary" />
+              </div>
             </Box>
           ))}
         </div>

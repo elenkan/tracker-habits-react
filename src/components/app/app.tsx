@@ -1,21 +1,17 @@
 import AppRouter from '../../router';
+import LoadingScreen from '../loading-screen';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 import {useEffect, useMemo} from 'react';
 import type {PaletteMode} from '@mui/material';
 import {useAppSelector, useAppDispatch} from '../../hooks/stateHooks';
 import CssBaseline from '@mui/material/CssBaseline';
-import {
-  changeHabitList,
-  setAuthStatus,
-  setCurrentTheme,
-  setIsGuestAuth,
-} from '../../actions/actions';
+import {setAuthStatus, setCurrentTheme, setIsGuestAuth} from '../../actions/actions';
 import {auth} from '../../index';
-import {fetchHabitList, getColorMode} from '../../actions/api-actions';
-import {guestHabitsList} from '../../guestData';
+import {fetchArchiveHabitList, fetchHabitList, getColorMode} from '../../actions/api-actions';
 
 const App = () => {
   const currentTheme = useAppSelector(state => state.currentTheme);
+  const isLoading = useAppSelector(state => state.isLoading);
   const habitList = useAppSelector(state => state.challengeHabitsList);
   const getDesignTokens = (mode: PaletteMode) => ({
     palette: {
@@ -77,10 +73,9 @@ const App = () => {
           dispatch(setAuthStatus(true));
           if (user.isAnonymous) {
             dispatch(setIsGuestAuth(true));
-            dispatch(changeHabitList(guestHabitsList));
-          } else {
-            dispatch(fetchHabitList());
           }
+          dispatch(fetchHabitList());
+          dispatch(fetchArchiveHabitList());
           dispatch(setCurrentTheme(theme));
         } else {
           dispatch(setAuthStatus(false));
@@ -94,6 +89,7 @@ const App = () => {
       <CssBaseline />
       <div className="content">
         <AppRouter />
+        {isLoading && <LoadingScreen />}
       </div>
     </ThemeProvider>
   );

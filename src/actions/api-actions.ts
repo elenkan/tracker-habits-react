@@ -10,28 +10,35 @@ import {
 import type {AppDispatch} from '../types/state';
 import Notification from './../utils/notification/notification';
 import {ref, set, push, onValue, update, remove} from 'firebase/database';
-import {changeArchiveHabitList, changeHabitList, setUserColorTheme} from './actions';
+import {changeArchiveHabitList, changeHabitList, setUserColorTheme, setIsLoading} from './actions';
 
 // TODO: заменить тип user
-export const login = createAsyncThunk<any, AuthData>('login', async ({email, password}) => {
-  try {
-    await signInWithEmailAndPassword(auth, email, password);
-  } catch (e) {
-    Notification.showErrorNotification(e);
-    return null;
-  }
-});
+export const login = createAsyncThunk<any, AuthData, {dispatch: AppDispatch}>(
+  'login',
+  async ({email, password}, {dispatch}) => {
+    try {
+      dispatch(setIsLoading(true));
+      await signInWithEmailAndPassword(auth, email, password);
+      dispatch(setIsLoading(false));
+    } catch (e) {
+      Notification.showErrorNotification(e);
+      return null;
+    }
+  },
+);
 
 export const logout = createAsyncThunk<void, undefined>('logout', async () => {
   await auth.signOut();
 });
 
 // TODO: заменить тип user
-export const createLogin = createAsyncThunk<any, AuthData>(
+export const createLogin = createAsyncThunk<any, AuthData, {dispatch: AppDispatch}>(
   'createLogin',
-  async ({email, password, name}) => {
+  async ({email, password, name}, {dispatch}) => {
     try {
+      dispatch(setIsLoading(true));
       await createUserWithEmailAndPassword(auth, email, password);
+      dispatch(setIsLoading(false));
     } catch (e) {
       Notification.showErrorNotification(e);
       return null;
@@ -48,13 +55,18 @@ export const deleteAccount = createAsyncThunk<void>('deleteAccount', async () =>
   }
 });
 
-export const signInAsGuest = createAsyncThunk<void>('signInAsGuest', async () => {
-  try {
-    await signInAnonymously(auth);
-  } catch (e) {
-    Notification.showErrorNotification(e);
-  }
-});
+export const signInAsGuest = createAsyncThunk<void, undefined, {dispatch: AppDispatch}>(
+  'signInAsGuest',
+  async (_args, {dispatch}) => {
+    try {
+      dispatch(setIsLoading(true));
+      await signInAnonymously(auth);
+      dispatch(setIsLoading(false));
+    } catch (e) {
+      Notification.showErrorNotification(e);
+    }
+  },
+);
 
 export const fetchHabitList = createAsyncThunk<void, undefined, {dispatch: AppDispatch}>(
   'fetchHabitList',
@@ -112,6 +124,19 @@ export const addHabit = createAsyncThunk<void, Habit, {dispatch: AppDispatch}>(
       await push(ref(database, `users/${user}/challengeHabitsList`), habit).then(res => {
         dispatch(fetchHabitList());
       });
+    } catch (e) {
+      Notification.showErrorNotification(e);
+    }
+  },
+);
+
+export const addGuestHabits = createAsyncThunk<void, Habit[], {dispatch: AppDispatch}>(
+  'habitsAction',
+  async (habits, {dispatch}) => {
+    try {
+      for (const habit of habits) {
+        await dispatch(addHabit(habit));
+      }
     } catch (e) {
       Notification.showErrorNotification(e);
     }

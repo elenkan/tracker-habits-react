@@ -14,3 +14,4 @@ export const setAuthStatus = createAction('setAuthStatus', value => ({payload: v
 export const setUserColorTheme = createAction('setUserColorTheme', value => ({payload: value}));
 export const setCurrentTheme = createAction('setCurrentTheme', value => ({payload: value}));
 export const setIsGuestAuth = createAction('setIsGuestAuth', value => ({payload: value}));
+export const setIsLoading = createAction('setIsLoading', value => ({payload: value}));

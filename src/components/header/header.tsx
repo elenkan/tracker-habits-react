@@ -49,7 +49,7 @@ const Header = () => {
         if (isGuestAuth) {
           dispatch(setIsGuestAuth(false));
         }
-        localStorage.setItem('checkAuth', 'false');
+        localStorage.clear();
         navigate(AppRouteList.Home);
       });
     }
