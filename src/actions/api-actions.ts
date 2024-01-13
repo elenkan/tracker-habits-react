@@ -12,8 +12,7 @@ import Notification from './../utils/notification/notification';
 import {ref, set, push, onValue, update, remove} from 'firebase/database';
 import {changeArchiveHabitList, changeHabitList, setUserColorTheme, setIsLoading} from './actions';
 
-// TODO: заменить тип user
-export const login = createAsyncThunk<any, AuthData, {dispatch: AppDispatch}>(
+export const login = createAsyncThunk<void, AuthData, {dispatch: AppDispatch}>(
   'login',
   async ({email, password}, {dispatch}) => {
     try {
@@ -22,7 +21,6 @@ export const login = createAsyncThunk<any, AuthData, {dispatch: AppDispatch}>(
       dispatch(setIsLoading(false));
     } catch (e) {
       Notification.showErrorNotification(e);
-      return null;
     }
   },
 );
@@ -31,8 +29,7 @@ export const logout = createAsyncThunk<void, undefined>('logout', async () => {
   await auth.signOut();
 });
 
-// TODO: заменить тип user
-export const createLogin = createAsyncThunk<any, AuthData, {dispatch: AppDispatch}>(
+export const createLogin = createAsyncThunk<void, AuthData, {dispatch: AppDispatch}>(
   'createLogin',
   async ({email, password, name}, {dispatch}) => {
     try {
@@ -41,7 +38,6 @@ export const createLogin = createAsyncThunk<any, AuthData, {dispatch: AppDispatc
       dispatch(setIsLoading(false));
     } catch (e) {
       Notification.showErrorNotification(e);
-      return null;
     }
   },
 );

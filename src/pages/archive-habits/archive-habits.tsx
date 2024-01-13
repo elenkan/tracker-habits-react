@@ -5,8 +5,6 @@ import {AppRouteList} from '../../router/enums';
 import {Box, Typography} from '@mui/material';
 import CheckCircleSharpIcon from '@mui/icons-material/CheckCircleSharp';
 import classNames from 'classnames';
-// import {useEffect} from 'react';
-// import {fetchArchiveHabitList} from '../../actions/api-actions';
 
 const ArchiveHabitsList = () => {
   const archiveHabitsList = useAppSelector(state => state.archiveHabitsList);
@@ -14,13 +12,7 @@ const ArchiveHabitsList = () => {
   const contentClass = classNames('archive-habits__item', {
     'archive-habits__item_dark': currentTheme === 'dark',
   });
-  // const dispatch = useAppDispatch();
-  // TODO: получать список при обновлении страницы
-  // useEffect(() => {
-  //   if (!archiveHabitsList.length) {
-  //     dispatch(fetchArchiveHabitList());
-  //   }
-  // }, []);
+
   return (
     <div className="archive-habits">
       {archiveHabitsList.length ? (

@@ -20,8 +20,6 @@ interface StateType {
   colorDifficulty: string;
   changeableHabit: Habit | null;
   isAuth: boolean;
-  // TODO: присвоить тип
-  userData: any;
   isGuestAuth: boolean;
   currentTheme: 'light' | 'dark';
   userColorTheme: 'light' | 'dark';
@@ -35,7 +33,6 @@ const initialState: StateType = {
   colorDifficulty: '',
   changeableHabit: null,
   isAuth: false,
-  userData: {},
   isGuestAuth: false,
   currentTheme: 'light',
   userColorTheme: 'light',

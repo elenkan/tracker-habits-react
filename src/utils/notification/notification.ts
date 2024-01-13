@@ -4,7 +4,6 @@ import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default class Notification {
-  // TODO: определить тип
   static showErrorNotification(errorData: any) {
     let errorText: string = errorData.message;
     const errorDataText: ErrorsText = errors;
