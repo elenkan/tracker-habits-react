@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import {createRoot} from 'react-dom/client';
 import './index.scss';
 import App from './components/app/app';
 import {Provider} from 'react-redux';
@@ -10,7 +10,8 @@ import {getDatabase} from 'firebase/database';
 import {ToastContainer} from 'react-toastify';
 import reportWebVitals from './reportWebVitals';
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+const domNode = document.getElementById('root');
+const root = createRoot(domNode as HTMLElement);
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,

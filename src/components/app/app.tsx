@@ -9,6 +9,7 @@ import {setAuthStatus, setCurrentTheme, setIsGuestAuth} from '../../actions/acti
 import {auth} from '../../index';
 import {fetchArchiveHabitList, fetchHabitList, getColorMode} from '../../actions/api-actions';
 import CongratulationsScreen from '../congratulations-screen';
+import {paletteDark, paletteLight} from '../../paletteData';
 
 const App = () => {
   const currentTheme = useAppSelector(state => state.currentTheme);
@@ -18,44 +19,7 @@ const App = () => {
   const getDesignTokens = (mode: PaletteMode) => ({
     palette: {
       mode,
-      ...(mode === 'light'
-        ? {
-            primary: {
-              main: '#89ccc5',
-            },
-            secondary: {
-              main: '#fff',
-            },
-            text: {
-              primary: '#272727',
-            },
-            button: {
-              text: '#fff',
-              background: '#e2958c',
-            },
-            background: {
-              default: '#fff',
-            },
-            card: {
-              background: '#d7ebe9',
-            },
-            modeIcon: {
-              default: '#fff',
-              secondary: 'rgba(0, 0, 0, 0.7)',
-            },
-          }
-        : {
-            primary: {
-              main: '#e2958c',
-            },
-            card: {
-              background: 'rgba(255, 255, 255, 0.1)',
-            },
-            modeIcon: {
-              default: '#e2958c',
-              secondary: '#fff',
-            },
-          }),
+      ...(mode === 'light' ? paletteLight : paletteDark),
     },
     typography: {
       fontFamily: 'Montserrat-Regular, Arial, sans-serif;',
