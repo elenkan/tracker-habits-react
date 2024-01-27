@@ -19,9 +19,9 @@ describe('тест компонента BaseButton', () => {
   });
 
   test('тест рендера компонента', () => {
-    const buttonTitle = screen.getByText(/test title/i);
-    expect(buttonTitle).toBeInTheDocument();
-    expect(buttonTitle).toHaveStyle({width: '100px', margin: '0 auto'});
+    const button = screen.getByText(/test title/i);
+    expect(button).toBeInTheDocument();
+    expect(button).toHaveStyle({width: '100px', margin: '0 auto'});
   });
 
   test('тест вызова переданной функции', () => {

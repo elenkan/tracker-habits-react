@@ -10,7 +10,10 @@ const CongratulationsScreen = () => {
     dispatch(setShowCongratulation(false));
   };
   return (
-    <div className="congratulations-screen" onClick={handleClickOpen}>
+    <div
+      className="congratulations-screen"
+      onClick={handleClickOpen}
+      data-testid="congratulations-screen">
       <Box component="div" className="congratulations-screen__content">
         <Typography component="span" color="text.primary">
           Поздравляем!
