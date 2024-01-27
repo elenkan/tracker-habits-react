@@ -8,30 +8,19 @@ interface PropsType {
     label: string;
     toggleValue: number | string;
   }>;
-  action?: (value: number) => void;
-  actionStringValue?: (value: string) => void;
-  defaultValue?: number | string;
+  action: (value: number) => void;
+  defaultValue?: number;
   color?: 'secondary' | 'primary';
   styleData?: object;
 }
 
-const FormToggleButton = ({
-  groupData,
-  action,
-  actionStringValue,
-  defaultValue,
-  color,
-  styleData = {},
-}: PropsType) => {
-  const [value, setValue] = useState<number | string | null>(defaultValue ?? null);
+const FormToggleButton = ({groupData, action, defaultValue, color, styleData = {}}: PropsType) => {
+  const [value, setValue] = useState<number>(defaultValue ?? 21);
 
   const handleValue = (event: MouseEvent, value: any) => {
+    if (value === null) return;
     setValue(value);
-    if (action) {
-      action(value);
-    } else if (actionStringValue) {
-      actionStringValue(value);
-    }
+    action(Number(value));
   };
 
   return (

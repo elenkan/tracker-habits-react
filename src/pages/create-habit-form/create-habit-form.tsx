@@ -92,7 +92,6 @@ const CreateHabitForm = () => {
     } else {
       dispatch(addHabit(habit as Habit));
       reset({habitName: '', habitDescription: ''});
-      // TODO: выставлять дефолтное значение 21
     }
   };
 
