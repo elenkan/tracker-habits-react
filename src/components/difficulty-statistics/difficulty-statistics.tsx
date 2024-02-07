@@ -19,7 +19,7 @@ interface PropsType {
 }
 
 const DifficultyStatistics = ({colorsValue}: PropsType) => {
-  const chartRef = useRef<ChartJS>(null);
+  const chartRef = useRef<ChartJS<'line', number[], string>>(null);
   const [chartData, setChartData] = useState<ChartData<'line'>>({
     datasets: [],
   });
