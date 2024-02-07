@@ -1,4 +1,4 @@
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import {HashRouter, Routes, Route} from 'react-router-dom';
 import {AppRouteList} from './enums';
 import PrivateRoute from './private-route';
 import HomePage from '../pages/home-page';
@@ -13,7 +13,7 @@ import Header from '../components/header';
 const AppRouter = () => {
   const isAuth = localStorage.getItem('checkAuth');
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Header />
       <Routes>
         <Route path={AppRouteList.Home} element={<HomePage />} />
@@ -59,7 +59,7 @@ const AppRouter = () => {
         />
         <Route path={AppRouteList.NotFoundPage} element={<NotFoundPage />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 
