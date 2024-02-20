@@ -1,8 +1,8 @@
 import {useController} from 'react-hook-form';
 import type {Control, RegisterOptions} from 'react-hook-form';
 import TextField from '@mui/material/TextField';
-import type {Field, FormData} from '../../types';
-import fieldsData from './../../fields.json';
+import type {Field, FormData} from 'types';
+import fieldsData from 'fields.json';
 import {Fragment} from 'react';
 
 interface PropsType {

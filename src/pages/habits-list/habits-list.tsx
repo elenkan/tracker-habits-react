@@ -1,7 +1,7 @@
-import HabitItem from '../../components/habit-item';
-import {useAppSelector} from '../../hooks/stateHooks';
-import DifficultyList from '../../components/difficulty-list';
-import MessageScreen from '../../components/message-screen';
+import HabitItem from 'components/habit-item';
+import {useAppSelector} from 'hooks/stateHooks';
+import DifficultyList from 'components/difficulty-list';
+import MessageScreen from 'components/message-screen';
 import './habits-list.scss';
 
 const HabitsList = () => {

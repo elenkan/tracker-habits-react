@@ -1,20 +1,20 @@
-import type {Habit, ColorItem} from '../../types';
+import type {Habit, ColorItem} from 'types';
 import {IconButton, Typography} from '@mui/material';
 import CreateIcon from '@mui/icons-material/Create';
 import DeleteIcon from '@mui/icons-material/Delete';
-import {useAppSelector, useAppDispatch} from '../../hooks/stateHooks';
+import {useAppSelector, useAppDispatch} from 'hooks/stateHooks';
 import {useEffect, useState} from 'react';
-import {addChangeableHabit, setShowCongratulation} from '../../actions/actions';
+import {addChangeableHabit, setShowCongratulation} from 'actions/actions';
 import {useNavigate} from 'react-router-dom';
 import './habit-item.scss';
-import lists from '../../lists.json';
+import lists from 'lists.json';
 import {cloneDeep} from 'lodash';
 import {
   addArchiveHabit,
   deleteHabit,
   fetchArchiveHabitList,
   updateHabit,
-} from '../../actions/api-actions';
+} from 'actions/api-actions';
 
 interface PropsType {
   item: Habit;

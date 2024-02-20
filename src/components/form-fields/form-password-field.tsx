@@ -4,7 +4,7 @@ import TextField from '@mui/material/TextField';
 import {IconButton, InputAdornment} from '@mui/material';
 import {Visibility, VisibilityOff} from '@mui/icons-material';
 import {useState} from 'react';
-import type {FormData} from '../../types';
+import type {FormData} from 'types';
 
 interface PropsType {
   control: Control<FormData>;

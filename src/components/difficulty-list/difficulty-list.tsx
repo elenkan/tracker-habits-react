@@ -1,14 +1,14 @@
-import lists from '../../lists.json';
+import lists from 'lists.json';
 import {Box, Typography, IconButton, Tooltip} from '@mui/material';
 import HelpIcon from '@mui/icons-material/Help';
-import './difficulty-list.scss';
-import {useAppDispatch, useAppSelector} from '../../hooks/stateHooks';
-import {addColorDifficulty} from '../../actions/actions';
+import {useAppDispatch, useAppSelector} from 'hooks/stateHooks';
+import {addColorDifficulty} from 'actions/actions';
 import type {ChangeEvent} from 'react';
 import {useEffect, useState} from 'react';
 import classNames from 'classnames';
 import {cloneDeep} from 'lodash';
-import type {ColorItem} from '../../types';
+import type {ColorItem} from 'types';
+import './difficulty-list.scss';
 
 const DifficultyList = () => {
   const currentTheme = useAppSelector(state => state.currentTheme);

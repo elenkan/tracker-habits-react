@@ -6,10 +6,10 @@ import type {PaletteMode} from '@mui/material';
 import {useAppSelector, useAppDispatch} from '../../hooks/stateHooks';
 import CssBaseline from '@mui/material/CssBaseline';
 import {setAuthStatus, setCurrentTheme, setIsGuestAuth} from '../../actions/actions';
-import {auth} from '../../index';
+import {auth} from 'index';
 import {fetchArchiveHabitList, fetchHabitList, getColorMode} from '../../actions/api-actions';
 import CongratulationsScreen from '../congratulations-screen';
-import {paletteDark, paletteLight} from '../../paletteData';
+import {paletteDark, paletteLight} from 'paletteData';
 
 const App = () => {
   const currentTheme = useAppSelector(state => state.currentTheme);

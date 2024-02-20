@@ -1,7 +1,6 @@
 import {useState, useEffect} from 'react';
 import {Box, Button, Dialog, DialogContent} from '@mui/material';
-import BaseButton from '../base-button';
-import './authorization-form.scss';
+import BaseButton from 'components/base-button';
 import {
   login,
   createLogin,
@@ -21,9 +20,10 @@ import FormTextField from '../form-fields/form-text-field';
 import FormPasswordField from '../form-fields/form-password-field';
 import FormButton from '../form-fields/form-button';
 import type {FormData, Habit} from '../../types';
-import {guestHabitsList} from '../../guestData';
+import {guestHabitsList} from 'guestData';
 import classNames from 'classnames';
-import {auth} from '../../index';
+import {auth} from 'index';
+import './authorization-form.scss';
 
 const AuthorizationForm = () => {
   const currentTheme = useAppSelector(state => state.currentTheme);

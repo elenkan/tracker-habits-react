@@ -1,19 +1,19 @@
 import Box from '@mui/material/Box';
-import './create-habbit-form.scss';
 import {useEffect, useRef} from 'react';
-import {useAppDispatch, useAppSelector} from '../../hooks/stateHooks';
-import {addChangeableHabit} from '../../actions/actions';
+import {useAppDispatch, useAppSelector} from 'hooks/stateHooks';
+import {addChangeableHabit} from 'actions/actions';
 import {useNavigate} from 'react-router-dom';
-import FormToggleButton from '../../components/form-fields/form-toggle-button';
-import FormTextField from '../../components/form-fields/form-text-field';
+import FormToggleButton from 'components/form-fields/form-toggle-button';
+import FormTextField from 'components/form-fields/form-text-field';
 import {useForm} from 'react-hook-form';
-import FormButton from '../../components/form-fields/form-button';
-import type {FormData, Habit} from '../../types';
+import FormButton from 'components/form-fields/form-button';
+import type {FormData, Habit} from 'types';
 import {cloneDeep} from 'lodash';
 import {Typography} from '@mui/material';
-import {addHabit, updateHabit} from '../../actions/api-actions';
-import BaseButton from '../../components/base-button';
-import {AppRouteList} from '../../router/enums';
+import {addHabit, updateHabit} from 'actions/api-actions';
+import BaseButton from 'components/base-button';
+import {AppRouteList} from 'router/enums';
+import './create-habbit-form.scss';
 
 const CreateHabitForm = () => {
   const buttonData = [

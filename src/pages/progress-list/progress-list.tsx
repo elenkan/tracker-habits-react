@@ -1,9 +1,9 @@
-import {useAppSelector} from '../../hooks/stateHooks';
+import {useAppSelector} from 'hooks/stateHooks';
 import {Box} from '@mui/material';
-import GoalBar from '../../components/goal-bar';
-import DifficultyStatistics from '../../components/difficulty-statistics';
+import GoalBar from 'components/goal-bar';
+import DifficultyStatistics from 'components/difficulty-statistics';
+import MessageScreen from 'components/message-screen';
 import './progress-list.scss';
-import MessageScreen from '../../components/message-screen';
 
 const ProgressList = () => {
   const progressData = useAppSelector(state => state.challengeHabitsList);

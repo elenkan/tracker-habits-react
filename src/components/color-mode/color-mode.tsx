@@ -1,8 +1,8 @@
 import IconButton from '@mui/material/IconButton';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
-import {useAppDispatch, useAppSelector} from '../../hooks/stateHooks';
-import {setCurrentTheme} from '../../actions/actions';
+import {useAppDispatch, useAppSelector} from 'hooks/stateHooks';
+import {setCurrentTheme} from 'actions/actions';
 
 const ColorMode = () => {
   const currentTheme = useAppSelector(state => state.currentTheme);
@@ -20,7 +20,8 @@ const ColorMode = () => {
           padding: 0,
         },
       }}
-      onClick={handleChangeSwitch}>
+      onClick={handleChangeSwitch}
+      data-testid="wrapper">
       {currentTheme === 'dark' ? (
         <Brightness7Icon
           sx={{
@@ -28,6 +29,7 @@ const ColorMode = () => {
               width: '20px',
             },
           }}
+          data-testid="icon-dark"
         />
       ) : (
         <Brightness4Icon
@@ -36,6 +38,7 @@ const ColorMode = () => {
               width: '20px',
             },
           }}
+          data-testid="icon-light"
         />
       )}
     </IconButton>

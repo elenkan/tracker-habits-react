@@ -11,12 +11,12 @@ import {
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import {Link as RouterLink, useNavigate} from 'react-router-dom';
-import AuthorizationForm from '../authorization-form';
-import {useAppSelector, useAppDispatch} from '../../hooks/stateHooks';
-import {logout} from '../../actions/api-actions';
-import {setAuthStatus, setIsGuestAuth} from '../../actions/actions';
-import {AppRouteList} from '../../router/enums';
-import ColorMode from '../color-mode';
+import AuthorizationForm from 'components/authorization-form';
+import {useAppSelector, useAppDispatch} from 'hooks/stateHooks';
+import {logout} from 'actions/api-actions';
+import {setAuthStatus, setIsGuestAuth} from 'actions/actions';
+import {AppRouteList} from 'router/enums';
+import ColorMode from 'components/color-mode';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);

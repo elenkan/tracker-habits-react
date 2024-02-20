@@ -1,8 +1,8 @@
-import './congratulations-screen.scss';
 import {Typography} from '@mui/material';
 import Box from '@mui/material/Box';
-import {useAppDispatch} from '../../hooks/stateHooks';
-import {setShowCongratulation} from '../../actions/actions';
+import {useAppDispatch} from 'hooks/stateHooks';
+import {setShowCongratulation} from 'actions/actions';
+import './congratulations-screen.scss';
 
 const CongratulationsScreen = () => {
   const dispatch = useAppDispatch();

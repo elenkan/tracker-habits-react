@@ -1,7 +1,7 @@
-import './home-page.scss';
 import {Box} from '@mui/material';
-import {useAppSelector} from '../../hooks/stateHooks';
+import {useAppSelector} from 'hooks/stateHooks';
 import classNames from 'classnames';
+import './home-page.scss';
 
 const HomePage = () => {
   const currentTheme = useAppSelector(state => state.currentTheme);

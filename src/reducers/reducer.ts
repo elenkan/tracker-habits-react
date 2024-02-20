@@ -10,9 +10,9 @@ import {
   setUserColorTheme,
   setIsLoading,
   setShowCongratulation,
-} from '../actions/actions';
+} from 'actions/actions';
 
-import type {Habit} from '../types';
+import type {Habit} from 'types';
 
 interface StateType {
   challengeHabitsList: Habit[];

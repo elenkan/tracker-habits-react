@@ -1,14 +1,14 @@
-import {auth, database} from '../index';
+import {auth, database} from 'index';
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import type {AuthData, Habit} from '../types';
+import type {AuthData, Habit} from 'types';
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   deleteUser,
   signInAnonymously,
 } from 'firebase/auth';
-import type {AppDispatch} from '../types/state';
-import Notification from './../utils/notification/notification';
+import type {AppDispatch} from 'types/state';
+import Notification from 'utils/notification/notification';
 import {ref, set, push, onValue, update, remove} from 'firebase/database';
 import {changeArchiveHabitList, changeHabitList, setUserColorTheme, setIsLoading} from './actions';
 

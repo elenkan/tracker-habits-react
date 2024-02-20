@@ -1,14 +1,14 @@
 import Box from '@mui/material/Box';
 import {Tabs, Tab, Switch, Typography} from '@mui/material';
-import BaseButton from '../../components/base-button';
+import BaseButton from 'components/base-button';
 import type {SyntheticEvent} from 'react';
 import {useState} from 'react';
-import './settings-page.scss';
-import {useAppDispatch, useAppSelector} from '../../hooks/stateHooks';
-import {setAuthStatus, setCurrentTheme} from '../../actions/actions';
-import {deleteAccount, saveColorMode} from '../../actions/api-actions';
-import {AppRouteList} from '../../router/enums';
+import {useAppDispatch, useAppSelector} from 'hooks/stateHooks';
+import {setAuthStatus, setCurrentTheme} from 'actions/actions';
+import {deleteAccount, saveColorMode} from 'actions/api-actions';
+import {AppRouteList} from 'router/enums';
 import {useNavigate} from 'react-router-dom';
+import './settings-page.scss';
 
 const SettingPage = () => {
   const [value, setValue] = useState(0);

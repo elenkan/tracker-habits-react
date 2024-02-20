@@ -1,10 +1,10 @@
-import MessageScreen from '../../components/message-screen';
-import './archive-habits.scss';
-import {useAppSelector} from '../../hooks/stateHooks';
-import {AppRouteList} from '../../router/enums';
+import MessageScreen from 'components/message-screen';
+import {useAppSelector} from 'hooks/stateHooks';
+import {AppRouteList} from 'router/enums';
 import {Box, Typography} from '@mui/material';
 import CheckCircleSharpIcon from '@mui/icons-material/CheckCircleSharp';
 import classNames from 'classnames';
+import './archive-habits.scss';
 
 const ArchiveHabitsList = () => {
   const archiveHabitsList = useAppSelector(state => state.archiveHabitsList);
