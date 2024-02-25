@@ -1,4 +1,4 @@
-type Palette = Record<string, Record<string, string>>;
+type Palette = Record<string, Record<string, string>>
 
 export const paletteLight: Palette = {
   primary: {
@@ -24,7 +24,7 @@ export const paletteLight: Palette = {
     default: '#fff',
     secondary: 'rgba(0, 0, 0, 0.7)',
   },
-};
+}
 
 export const paletteDark: Palette = {
   primary: {
@@ -37,4 +37,4 @@ export const paletteDark: Palette = {
     default: '#e2958c',
     secondary: '#fff',
   },
-};
+}

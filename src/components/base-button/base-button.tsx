@@ -1,10 +1,11 @@
+import type { CSSProperties } from 'react'
 import { Button } from '@mui/material'
 
 interface PropsType {
   buttonWidth: string
   buttonTitle: string
   action: () => void
-  style?: Record<string, string>
+  style?: CSSProperties
 }
 
 const BaseButton = ({ buttonWidth, buttonTitle, action, style }: PropsType) => {

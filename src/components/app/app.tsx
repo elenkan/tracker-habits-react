@@ -16,6 +16,7 @@ import { auth } from 'index'
 import { fetchArchiveHabitList, fetchHabitList, getColorMode } from 'actions/api-actions'
 import CongratulationsScreen from '../congratulations-screen'
 import { paletteDark, paletteLight } from 'paletteData'
+import { ThemeModes } from 'components/app/enums'
 
 const App = () => {
   const currentTheme = useAppSelector(currentThemeSelector)
@@ -25,7 +26,7 @@ const App = () => {
   const getDesignTokens = (mode: PaletteMode) => ({
     palette: {
       mode,
-      ...(mode === 'light' ? paletteLight : paletteDark),
+      ...(mode === ThemeModes.Light ? paletteLight : paletteDark),
     },
     typography: {
       fontFamily: 'Montserrat-Regular, Arial, sans-serif;',
@@ -37,7 +38,10 @@ const App = () => {
 
   useEffect(() => {
     const checkAuth = localStorage.getItem('checkAuth')
-    const theme = localStorage.getItem('theme') ? localStorage.getItem('theme') : 'light'
+    const theme = localStorage.getItem('theme') ? localStorage.getItem('theme') : ThemeModes.Light
+    if (checkAuth !== 'true') {
+      return
+    }
     if (checkAuth === 'true') {
       auth.onAuthStateChanged(user => {
         if (user && !habitList?.length) {
