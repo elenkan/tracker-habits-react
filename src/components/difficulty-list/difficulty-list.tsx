@@ -1,44 +1,45 @@
-import lists from 'lists.json';
-import {Box, Typography, IconButton, Tooltip} from '@mui/material';
-import HelpIcon from '@mui/icons-material/Help';
-import {useAppDispatch, useAppSelector} from 'hooks/stateHooks';
-import {addColorDifficulty} from 'actions/actions';
-import type {ChangeEvent} from 'react';
-import {useEffect, useState} from 'react';
-import classNames from 'classnames';
-import {cloneDeep} from 'lodash';
-import type {ColorItem} from 'types';
-import './difficulty-list.scss';
+import lists from 'lists.json'
+import { Box, Typography, IconButton, Tooltip } from '@mui/material'
+import HelpIcon from '@mui/icons-material/Help'
+import { useAppDispatch, useAppSelector } from 'hooks/stateHooks'
+import { currentThemeSelector } from 'selectors/selectors'
+import { addColorDifficulty } from 'actions/actions'
+import type { ChangeEvent } from 'react'
+import { useEffect, useState } from 'react'
+import classNames from 'classnames'
+import { cloneDeep } from 'lodash'
+import type { ColorItem } from 'types'
+import './difficulty-list.scss'
 
 const DifficultyList = () => {
-  const currentTheme = useAppSelector(state => state.currentTheme);
-  const difficultyList = cloneDeep(lists.difficultyList);
-  const [list, setList] = useState<ColorItem[]>(difficultyList);
-  const tooltipText = 'Выберите опцию на панели Как справился (-ась), чтобы отметить цветом кружок';
-  const dispatch = useAppDispatch();
+  const currentTheme = useAppSelector(currentThemeSelector)
+  const difficultyList = cloneDeep(lists.difficultyList)
+  const [list, setList] = useState<ColorItem[]>(difficultyList)
+  const tooltipText = 'Выберите опцию на панели Как справился (-ась), чтобы отметить цветом кружок'
+  const dispatch = useAppDispatch()
   const colorStyle = (color: string) => {
     return {
       backgroundColor: color,
-    };
-  };
+    }
+  }
 
   useEffect(() => {
     difficultyList.forEach(item => {
       if (item.checked) {
-        dispatch(addColorDifficulty(item.color));
+        dispatch(addColorDifficulty(item.color))
       }
-    });
-  }, []);
+    })
+  }, [])
   const setColorDifficulty = (e: ChangeEvent<HTMLInputElement>) => {
-    dispatch(addColorDifficulty(e.target.value));
+    dispatch(addColorDifficulty(e.target.value))
     difficultyList.forEach(item => {
-      item.checked = false;
+      item.checked = false
       if (item.color === e.target.value) {
-        item.checked = e.target.checked;
+        item.checked = e.target.checked
       }
-    });
-    setList([...difficultyList]);
-  };
+    })
+    setList([...difficultyList])
+  }
 
   const difficultyListItems = list.map(item => {
     return (
@@ -69,10 +70,10 @@ const DifficultyList = () => {
           {item.difficulty}
         </Typography>
       </label>
-    );
-  });
+    )
+  })
   return (
-    <Box component="div" sx={{bgcolor: 'background.default'}} className="difficulty">
+    <Box component="div" sx={{ bgcolor: 'background.default' }} className="difficulty">
       <h3 className="difficulty__title">Как справился (-ась):</h3>
       <fieldset className="difficulty-list">{difficultyListItems}</fieldset>
       <Tooltip title={tooltipText}>
@@ -84,7 +85,7 @@ const DifficultyList = () => {
         </IconButton>
       </Tooltip>
     </Box>
-  );
-};
+  )
+}
 
-export default DifficultyList;
+export default DifficultyList

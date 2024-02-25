@@ -1,6 +1,6 @@
-import {useState, useEffect} from 'react';
-import {Box, Button, Dialog, DialogContent} from '@mui/material';
-import BaseButton from 'components/base-button';
+import { useState, useEffect } from 'react'
+import { Box, Button, Dialog, DialogContent } from '@mui/material'
+import BaseButton from 'components/base-button'
 import {
   login,
   createLogin,
@@ -10,100 +10,102 @@ import {
   getColorMode,
   fetchArchiveHabitList,
   addGuestHabits,
-} from '../../actions/api-actions';
-import {useAppDispatch, useAppSelector} from '../../hooks/stateHooks';
-import {setAuthStatus, setCurrentTheme, setIsGuestAuth} from '../../actions/actions';
-import {useNavigate} from 'react-router-dom';
-import {useForm} from 'react-hook-form';
-import {AppRouteList} from '../../router/enums';
-import FormTextField from '../form-fields/form-text-field';
-import FormPasswordField from '../form-fields/form-password-field';
-import FormButton from '../form-fields/form-button';
-import type {FormData, Habit} from '../../types';
-import {guestHabitsList} from 'guestData';
-import classNames from 'classnames';
-import {auth} from 'index';
-import './authorization-form.scss';
+} from '../../actions/api-actions'
+import { useAppDispatch, useAppSelector } from 'hooks/stateHooks'
+import { userColorThemeSelector, currentThemeSelector } from 'selectors/selectors'
+
+import { setAuthStatus, setCurrentTheme, setIsGuestAuth } from 'actions/actions'
+import { useNavigate } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
+import { AppRouteList } from 'router/enums'
+import FormTextField from '../form-fields/form-text-field'
+import FormPasswordField from '../form-fields/form-password-field'
+import FormButton from '../form-fields/form-button'
+import type { FormData, Habit } from 'types'
+import { guestHabitsList } from 'guestData'
+import classNames from 'classnames'
+import { auth } from 'index'
+import './authorization-form.scss'
 
 const AuthorizationForm = () => {
-  const currentTheme = useAppSelector(state => state.currentTheme);
-  const userColorTheme = useAppSelector(state => state.userColorTheme);
-  const [open, setOpen] = useState<boolean>(false);
-  const [type, setType] = useState<string>('');
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  const currentTheme = useAppSelector(currentThemeSelector)
+  const userColorTheme = useAppSelector(userColorThemeSelector)
+  const [open, setOpen] = useState<boolean>(false)
+  const [type, setType] = useState<string>('')
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
   const defaultValues = {
     userName: '',
     email: '',
     password: '',
-  };
+  }
 
   const dividerClass = classNames('auth-form__divider', {
     'auth-form__divider_dark': currentTheme === 'dark',
-  });
-  const methods = useForm<FormData>({defaultValues});
-  const {handleSubmit, control, reset} = methods;
+  })
+  const methods = useForm<FormData>({ defaultValues })
+  const { handleSubmit, control, reset } = methods
   const handleClickOpen = (type: string) => () => {
-    setOpen(true);
-    setType(type);
-  };
+    setOpen(true)
+    setType(type)
+  }
 
   const handleClose = () => {
-    setOpen(false);
-  };
+    setOpen(false)
+  }
 
   const setAuthValues = () => {
-    localStorage.setItem('checkAuth', 'true');
-    dispatch(setAuthStatus(true));
-  };
+    localStorage.setItem('checkAuth', 'true')
+    dispatch(setAuthStatus(true))
+  }
 
   useEffect(() => {
-    reset({userName: '', email: '', password: ''});
-  }, [open]);
+    reset({ userName: '', email: '', password: '' })
+  }, [open])
 
   const saveMode = () => {
     if (userColorTheme === 'light' && currentTheme === 'dark') {
-      dispatch(setCurrentTheme(currentTheme));
-      dispatch(saveColorMode(currentTheme));
-      localStorage.setItem('theme', currentTheme);
+      dispatch(setCurrentTheme(currentTheme))
+      dispatch(saveColorMode(currentTheme))
+      localStorage.setItem('theme', currentTheme)
     } else {
-      dispatch(setCurrentTheme(userColorTheme));
-      localStorage.setItem('theme', userColorTheme);
+      dispatch(setCurrentTheme(userColorTheme))
+      localStorage.setItem('theme', userColorTheme)
     }
-  };
+  }
 
   const onClickGuestBtn = () => {
-    handleClose();
+    handleClose()
     dispatch(signInAsGuest()).then(_ => {
-      setAuthValues();
-      dispatch(setIsGuestAuth(true));
-      dispatch(addGuestHabits(guestHabitsList as Habit[]));
-      navigate(AppRouteList.ProgressPage);
-    });
-  };
+      setAuthValues()
+      dispatch(setIsGuestAuth(true))
+      dispatch(addGuestHabits(guestHabitsList as Habit[]))
+      navigate(AppRouteList.ProgressPage)
+    })
+  }
 
   const onSubmit = async (data: FormData) => {
-    handleClose();
-    const {userName: name, email, password} = data;
+    handleClose()
+    const { userName: name, email, password } = data
     if (type === 'signup') {
-      await dispatch(createLogin({name, email, password}));
+      await dispatch(createLogin({ name, email, password }))
       if (auth.currentUser) {
-        setAuthValues();
-        navigate(AppRouteList.HabitsPage);
+        setAuthValues()
+        navigate(AppRouteList.HabitsPage)
       }
     } else {
-      await dispatch(login({email, password}));
+      await dispatch(login({ email, password }))
       if (auth.currentUser) {
-        setAuthValues();
-        await dispatch(getColorMode());
-        saveMode();
-        dispatch(fetchHabitList());
-        dispatch(fetchArchiveHabitList());
-        navigate(AppRouteList.HabitsPage);
+        setAuthValues()
+        await dispatch(getColorMode())
+        saveMode()
+        dispatch(fetchHabitList())
+        dispatch(fetchArchiveHabitList())
+        navigate(AppRouteList.HabitsPage)
       }
     }
-    setOpen(false);
-  };
+    setOpen(false)
+  }
 
   return (
     <div className="auth">
@@ -168,7 +170,7 @@ const AuthorizationForm = () => {
         </DialogContent>
       </Dialog>
     </div>
-  );
-};
+  )
+}
 
-export default AuthorizationForm;
+export default AuthorizationForm

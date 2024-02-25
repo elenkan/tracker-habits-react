@@ -1,13 +1,13 @@
-import {Button} from '@mui/material';
+import { Button } from '@mui/material'
 
 interface PropsType {
-  buttonWidth: string;
-  buttonTitle: string;
-  action: () => void;
-  style?: Record<string, string>;
+  buttonWidth: string
+  buttonTitle: string
+  action: () => void
+  style?: Record<string, string>
 }
 
-const BaseButton = ({buttonWidth, buttonTitle, action, style}: PropsType) => {
+const BaseButton = ({ buttonWidth, buttonTitle, action, style }: PropsType) => {
   return (
     <Button
       variant="outlined"
@@ -22,7 +22,7 @@ const BaseButton = ({buttonWidth, buttonTitle, action, style}: PropsType) => {
       onClick={action}>
       {buttonTitle}
     </Button>
-  );
-};
+  )
+}
 
-export default BaseButton;
+export default BaseButton

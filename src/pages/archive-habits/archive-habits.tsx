@@ -1,17 +1,18 @@
-import MessageScreen from 'components/message-screen';
-import {useAppSelector} from 'hooks/stateHooks';
-import {AppRouteList} from 'router/enums';
-import {Box, Typography} from '@mui/material';
-import CheckCircleSharpIcon from '@mui/icons-material/CheckCircleSharp';
-import classNames from 'classnames';
-import './archive-habits.scss';
+import MessageScreen from 'components/message-screen'
+import { useAppSelector } from 'hooks/stateHooks'
+import { currentThemeSelector, archiveHabitsListSelector } from 'selectors/selectors'
+import { AppRouteList } from 'router/enums'
+import { Box, Typography } from '@mui/material'
+import CheckCircleSharpIcon from '@mui/icons-material/CheckCircleSharp'
+import classNames from 'classnames'
+import './archive-habits.scss'
 
 const ArchiveHabitsList = () => {
-  const archiveHabitsList = useAppSelector(state => state.archiveHabitsList);
-  const currentTheme = useAppSelector(state => state.currentTheme);
+  const archiveHabitsList = useAppSelector(archiveHabitsListSelector)
+  const currentTheme = useAppSelector(currentThemeSelector)
   const contentClass = classNames('archive-habits__item', {
     'archive-habits__item_dark': currentTheme === 'dark',
-  });
+  })
 
   return (
     <div className="archive-habits">
@@ -39,7 +40,7 @@ const ArchiveHabitsList = () => {
         />
       )}
     </div>
-  );
-};
+  )
+}
 
-export default ArchiveHabitsList;
+export default ArchiveHabitsList

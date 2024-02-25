@@ -1,31 +1,32 @@
-import './message-screen.scss';
-import {Box, Typography} from '@mui/material';
-import BaseButton from '../base-button';
-import {useNavigate} from 'react-router-dom';
-import {AppRouteList} from '../../router/enums';
-import {useAppSelector} from '../../hooks/stateHooks';
-import classNames from 'classnames';
+import { Box, Typography } from '@mui/material'
+import BaseButton from '../base-button'
+import { useNavigate } from 'react-router-dom'
+import { AppRouteList } from 'router/enums'
+import { useAppSelector } from 'hooks/stateHooks'
+import { currentThemeSelector } from 'selectors/selectors'
+import classNames from 'classnames'
+import './message-screen.scss'
 
 interface PropsType {
-  title?: string;
-  buttonTitle?: string;
-  buttonLink?: string;
+  title?: string
+  buttonTitle?: string
+  buttonLink?: string
 }
 
-const MessageScreen = ({title, buttonTitle, buttonLink}: PropsType) => {
-  const currentTheme = useAppSelector(state => state.currentTheme);
+const MessageScreen = ({ title, buttonTitle, buttonLink }: PropsType) => {
+  const currentTheme = useAppSelector(currentThemeSelector)
   const contentClass = classNames('message-screen__content', {
     'message-screen__content_dark': currentTheme === 'dark',
-  });
+  })
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const onClick = () => {
-    const link = buttonLink || AppRouteList.CreateHabitPage;
-    navigate(link);
-  };
+    const link = buttonLink || AppRouteList.CreateHabitPage
+    navigate(link)
+  }
   return (
     <div className="message-screen">
-      <Box component="div" className={contentClass} sx={{color: '#fff'}}>
+      <Box component="div" className={contentClass} sx={{ color: '#fff' }}>
         <Typography
           component="span"
           color="text.primary"
@@ -41,7 +42,7 @@ const MessageScreen = ({title, buttonTitle, buttonLink}: PropsType) => {
         />
       </Box>
     </div>
-  );
-};
+  )
+}
 
-export default MessageScreen;
+export default MessageScreen

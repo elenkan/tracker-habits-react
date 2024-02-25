@@ -1,38 +1,39 @@
-import Box from '@mui/material/Box';
-import {Tabs, Tab, Switch, Typography} from '@mui/material';
-import BaseButton from 'components/base-button';
-import type {SyntheticEvent} from 'react';
-import {useState} from 'react';
-import {useAppDispatch, useAppSelector} from 'hooks/stateHooks';
-import {setAuthStatus, setCurrentTheme} from 'actions/actions';
-import {deleteAccount, saveColorMode} from 'actions/api-actions';
-import {AppRouteList} from 'router/enums';
-import {useNavigate} from 'react-router-dom';
-import './settings-page.scss';
+import Box from '@mui/material/Box'
+import { Tabs, Tab, Switch, Typography } from '@mui/material'
+import BaseButton from 'components/base-button'
+import type { SyntheticEvent } from 'react'
+import { useState } from 'react'
+import { useAppDispatch, useAppSelector } from 'hooks/stateHooks'
+import { currentThemeSelector } from 'selectors/selectors'
+import { setAuthStatus, setCurrentTheme } from 'actions/actions'
+import { deleteAccount, saveColorMode } from 'actions/api-actions'
+import { AppRouteList } from 'router/enums'
+import { useNavigate } from 'react-router-dom'
+import './settings-page.scss'
 
 const SettingPage = () => {
-  const [value, setValue] = useState(0);
-  const currentTheme = useAppSelector(state => state.currentTheme);
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  const [value, setValue] = useState(0)
+  const currentTheme = useAppSelector(currentThemeSelector)
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
   const handleChange = (event: SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-  };
+    setValue(newValue)
+  }
 
   const handleChangeSwitch = () => {
-    const theme = currentTheme === 'light' ? 'dark' : 'light';
-    dispatch(setCurrentTheme(theme));
-    dispatch(saveColorMode(theme));
-    localStorage.setItem('theme', theme);
-  };
+    const theme = currentTheme === 'light' ? 'dark' : 'light'
+    dispatch(setCurrentTheme(theme))
+    dispatch(saveColorMode(theme))
+    localStorage.setItem('theme', theme)
+  }
 
   const deleteUserAccount = () => {
     dispatch(deleteAccount()).then(res => {
-      dispatch(setAuthStatus(false));
-      navigate(AppRouteList.Home);
-    });
-  };
+      dispatch(setAuthStatus(false))
+      navigate(AppRouteList.Home)
+    })
+  }
 
   const tabsContent = (value: number) => {
     if (value === 0) {
@@ -50,7 +51,7 @@ const SettingPage = () => {
           </Typography>
           <BaseButton buttonTitle="Удалить" buttonWidth="150px" action={deleteUserAccount} />
         </div>
-      );
+      )
     } else {
       return (
         <div className="setting__item">
@@ -66,15 +67,15 @@ const SettingPage = () => {
           </Typography>
           <Switch checked={currentTheme === 'dark'} onChange={handleChangeSwitch} />
         </div>
-      );
+      )
     }
-  };
+  }
   return (
     <Box
       component="div"
       className="setting"
       sx={{
-        '& .MuiTextField-root': {m: 1, width: '25ch'},
+        '& .MuiTextField-root': { m: 1, width: '25ch' },
         boxShadow: '0 1px 12px -4px #bababa',
         marginTop: '70px',
         borderRadius: '10px',
@@ -94,7 +95,7 @@ const SettingPage = () => {
       </Tabs>
       {tabsContent(value)}
     </Box>
-  );
-};
+  )
+}
 
-export default SettingPage;
+export default SettingPage

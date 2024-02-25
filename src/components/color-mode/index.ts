@@ -1,3 +1,3 @@
-import ColorMode from './color-mode';
+import ColorMode from './color-mode'
 
-export default ColorMode;
+export default ColorMode

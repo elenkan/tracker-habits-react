@@ -1,15 +1,15 @@
-import {Typography} from '@mui/material';
-import BaseButton from 'components/base-button';
-import {useNavigate} from 'react-router-dom';
-import {AppRouteList} from 'router/enums';
+import { Typography } from '@mui/material'
+import BaseButton from 'components/base-button'
+import { useNavigate } from 'react-router-dom'
+import { AppRouteList } from 'router/enums'
 
 const NotFoundPage = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const onClick = () => {
-    navigate(AppRouteList.Home);
-  };
+    navigate(AppRouteList.Home)
+  }
   return (
-    <div style={{marginTop: '90px'}}>
+    <div style={{ marginTop: '90px' }}>
       <Typography
         variant="h1"
         color="text.primary"
@@ -28,7 +28,7 @@ const NotFoundPage = () => {
       </Typography>
       <BaseButton buttonWidth="250px" buttonTitle="Перейти на главную страницу" action={onClick} />
     </div>
-  );
-};
+  )
+}
 
-export default NotFoundPage;
+export default NotFoundPage

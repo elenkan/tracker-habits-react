@@ -1,3 +1,3 @@
-import SettingPage from './setting-page';
+import SettingPage from './setting-page'
 
-export default SettingPage;
+export default SettingPage

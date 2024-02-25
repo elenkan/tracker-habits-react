@@ -1,3 +1,3 @@
-import DifficultyList from './difficulty-list';
+import DifficultyList from './difficulty-list'
 
-export default DifficultyList;
+export default DifficultyList

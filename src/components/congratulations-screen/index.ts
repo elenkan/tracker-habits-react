@@ -1,3 +1,3 @@
-import CongratulationsScreen from './congratulations-screen';
+import CongratulationsScreen from './congratulations-screen'
 
-export default CongratulationsScreen;
+export default CongratulationsScreen

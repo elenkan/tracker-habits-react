@@ -1,3 +1,3 @@
-import GoalBar from './goal-bar';
+import GoalBar from './goal-bar'
 
-export default GoalBar;
+export default GoalBar

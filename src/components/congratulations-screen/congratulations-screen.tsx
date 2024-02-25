@@ -1,14 +1,14 @@
-import {Typography} from '@mui/material';
-import Box from '@mui/material/Box';
-import {useAppDispatch} from 'hooks/stateHooks';
-import {setShowCongratulation} from 'actions/actions';
-import './congratulations-screen.scss';
+import { Typography } from '@mui/material'
+import Box from '@mui/material/Box'
+import { useAppDispatch } from 'hooks/stateHooks'
+import { setShowCongratulation } from 'actions/actions'
+import './congratulations-screen.scss'
 
 const CongratulationsScreen = () => {
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
   const handleClickOpen = () => {
-    dispatch(setShowCongratulation(false));
-  };
+    dispatch(setShowCongratulation(false))
+  }
   return (
     <div
       className="congratulations-screen"
@@ -23,7 +23,7 @@ const CongratulationsScreen = () => {
         </Typography>
       </Box>
     </div>
-  );
-};
+  )
+}
 
-export default CongratulationsScreen;
+export default CongratulationsScreen

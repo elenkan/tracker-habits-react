@@ -1,3 +1,3 @@
-import HabitItem from './habit-item';
+import HabitItem from './habit-item'
 
-export default HabitItem;
+export default HabitItem

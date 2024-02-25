@@ -1,32 +1,32 @@
-import {useController} from 'react-hook-form';
-import type {Control, RegisterOptions} from 'react-hook-form';
-import TextField from '@mui/material/TextField';
-import type {Field, FormData} from 'types';
-import fieldsData from 'fields.json';
-import {Fragment} from 'react';
+import { useController } from 'react-hook-form'
+import type { Control, RegisterOptions } from 'react-hook-form'
+import TextField from '@mui/material/TextField'
+import type { Field, FormData } from 'types'
+import fieldsData from 'fields.json'
+import { Fragment } from 'react'
 
 interface PropsType {
-  fieldName: 'userName' | 'email' | 'habitName' | 'habitDescription';
-  control: Control<FormData>;
+  fieldName: 'userName' | 'email' | 'habitName' | 'habitDescription'
+  control: Control<FormData>
 }
-const FormTextField = ({fieldName, control}: PropsType) => {
-  const data: Field = fieldsData;
-  const fieldRules = data[fieldName].rules;
+const FormTextField = ({ fieldName, control }: PropsType) => {
+  const data: Field = fieldsData
+  const fieldRules = data[fieldName].rules
 
   if (fieldRules?.pattern) {
-    fieldRules.pattern.value = new RegExp(fieldRules.pattern.value, 'g');
+    fieldRules.pattern.value = new RegExp(fieldRules.pattern.value, 'g')
   }
 
   const {
-    field: {onChange, value},
-    fieldState: {error},
+    field: { onChange, value },
+    fieldState: { error },
   } = useController({
     name: fieldName,
     control,
     rules: {
       ...(fieldRules as Exclude<RegisterOptions, 'valueAsNumber' | 'valueAsDate' | 'setValueAs'>),
     },
-  });
+  })
 
   return (
     <Fragment>
@@ -51,7 +51,7 @@ const FormTextField = ({fieldName, control}: PropsType) => {
         }}
       />
     </Fragment>
-  );
-};
+  )
+}
 
-export default FormTextField;
+export default FormTextField

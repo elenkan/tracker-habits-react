@@ -1,3 +1,3 @@
-import AuthorizationForm from './authorization-form';
+import AuthorizationForm from './authorization-form'
 
-export default AuthorizationForm;
+export default AuthorizationForm

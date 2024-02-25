@@ -1,58 +1,58 @@
 export interface ColorItem {
-  color: string;
-  difficulty?: string;
-  value: number;
-  checked?: boolean;
-  id: number;
+  color: string
+  difficulty?: string
+  value: number
+  checked?: boolean
+  id: number
 }
 
 export interface Habit {
-  id: number;
-  name: string;
-  description: string;
-  period: number;
-  colorsValue: number[];
-  completedDays: number;
-  value: number;
-  checkedDays: ColorItem[];
+  id: number
+  name: string
+  description: string
+  period: number
+  colorsValue: number[]
+  completedDays: number
+  value: number
+  checkedDays: ColorItem[]
 }
 
 export interface AuthData {
-  email: string;
-  password: string;
-  name?: string;
+  email: string
+  password: string
+  name?: string
 }
 
 export type Field = Record<
   string,
   {
-    placeholder: string;
+    placeholder: string
     rules?: {
       required?: {
-        value: boolean;
-        message: string;
-      };
+        value: boolean
+        message: string
+      }
       minLength?: {
-        value: number;
-        message: string;
-      };
+        value: number
+        message: string
+      }
       pattern?: {
-        value: string | RegExp;
-        message: string;
-      };
-    };
-    error?: string;
-    patternError?: string;
+        value: string | RegExp
+        message: string
+      }
+    }
+    error?: string
+    patternError?: string
   }
->;
+>
 
 export interface FormData {
-  userName?: string;
-  email: string;
-  password: string;
-  habitName?: string;
-  habitDescription?: string;
-  period?: number;
+  userName?: string
+  email: string
+  password: string
+  habitName?: string
+  habitDescription?: string
+  period?: number
 }
 
-export type ErrorsText = Record<string, string>;
+export type ErrorsText = Record<string, string>

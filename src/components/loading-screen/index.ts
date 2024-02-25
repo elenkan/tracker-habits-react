@@ -1,3 +1,3 @@
-import LoadingScreen from './loading-screen';
+import LoadingScreen from './loading-screen'
 
-export default LoadingScreen;
+export default LoadingScreen

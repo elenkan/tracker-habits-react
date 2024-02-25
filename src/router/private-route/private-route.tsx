@@ -1,12 +1,12 @@
-import {AppRouteList} from '../enums';
-import {Navigate} from 'react-router-dom';
+import { AppRouteList } from '../enums'
+import { Navigate } from 'react-router-dom'
 
 interface PropsType {
-  isAuth: string | null;
-  children: JSX.Element;
+  isAuth: string | null
+  children: JSX.Element
 }
 
-const PrivateRoute = ({isAuth, children}: PropsType) =>
-  isAuth === 'true' ? children : <Navigate to={AppRouteList.Home} />;
+const PrivateRoute = ({ isAuth, children }: PropsType) =>
+  isAuth === 'true' ? children : <Navigate to={AppRouteList.Home} />
 
-export default PrivateRoute;
+export default PrivateRoute

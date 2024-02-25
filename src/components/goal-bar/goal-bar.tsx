@@ -1,16 +1,16 @@
-import type {Habit} from 'types';
-import CircularProgress from '@mui/material/CircularProgress';
-import {Typography, Box} from '@mui/material';
-import './goal-bar.scss';
+import type { Habit } from 'types'
+import CircularProgress from '@mui/material/CircularProgress'
+import { Typography, Box } from '@mui/material'
+import './goal-bar.scss'
 
 interface PropsType {
-  progressValue: Habit;
+  progressValue: Habit
 }
 
-const GoalBar = ({progressValue}: PropsType) => {
+const GoalBar = ({ progressValue }: PropsType) => {
   const CircularProgressWithLabel = (value: number) => {
     return (
-      <Box sx={{position: 'relative', display: 'inline-flex'}}>
+      <Box sx={{ position: 'relative', display: 'inline-flex' }}>
         <CircularProgress variant="determinate" value={value} size={80} />
         <Box
           sx={{
@@ -39,16 +39,16 @@ const GoalBar = ({progressValue}: PropsType) => {
           </Typography>
         </Box>
       </Box>
-    );
-  };
+    )
+  }
 
   return (
     <div className="goal-bar">
-      <Box component="div" sx={{bgcolor: 'card.background'}} className="goal-bar__circle">
+      <Box component="div" sx={{ bgcolor: 'card.background' }} className="goal-bar__circle">
         <h4 className="goal-bar__title">Прогресс выполнения</h4>
         {CircularProgressWithLabel(progressValue.value)}
       </Box>
-      <Box component="div" sx={{bgcolor: 'card.background'}} className="goal-bar__days">
+      <Box component="div" sx={{ bgcolor: 'card.background' }} className="goal-bar__days">
         <h4 className="goal-bar__title">Завершено дней</h4>
         <div>
           <span>{progressValue.completedDays}</span>
@@ -56,7 +56,7 @@ const GoalBar = ({progressValue}: PropsType) => {
         </div>
       </Box>
     </div>
-  );
-};
+  )
+}
 
-export default GoalBar;
+export default GoalBar

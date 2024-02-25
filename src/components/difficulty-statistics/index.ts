@@ -1,3 +1,3 @@
-import DifficultyStatistics from './difficulty-statistics';
+import DifficultyStatistics from './difficulty-statistics'
 
-export default DifficultyStatistics;
+export default DifficultyStatistics

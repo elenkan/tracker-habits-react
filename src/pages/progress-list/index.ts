@@ -1,3 +1,3 @@
-import ProgressList from './progress-list';
+import ProgressList from './progress-list'
 
-export default ProgressList;
+export default ProgressList

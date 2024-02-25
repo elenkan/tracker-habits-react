@@ -1,16 +1,17 @@
-import HabitItem from 'components/habit-item';
-import {useAppSelector} from 'hooks/stateHooks';
-import DifficultyList from 'components/difficulty-list';
-import MessageScreen from 'components/message-screen';
-import './habits-list.scss';
+import HabitItem from 'components/habit-item'
+import { useAppSelector } from 'hooks/stateHooks'
+import { habitListSelector } from 'selectors/selectors'
+import DifficultyList from 'components/difficulty-list'
+import MessageScreen from 'components/message-screen'
+import './habits-list.scss'
 
 const HabitsList = () => {
-  const habitList = useAppSelector(state => state.challengeHabitsList);
+  const habitList = useAppSelector(habitListSelector)
   const list = habitList?.length
     ? habitList.map(item => {
-        return <HabitItem item={item} key={item.id} />;
+        return <HabitItem item={item} key={item.id} />
       })
-    : [];
+    : []
   return (
     <div className="habits-page">
       {list.length ? (
@@ -22,7 +23,7 @@ const HabitsList = () => {
         <MessageScreen />
       )}
     </div>
-  );
-};
+  )
+}
 
-export default HabitsList;
+export default HabitsList

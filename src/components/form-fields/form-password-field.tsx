@@ -1,19 +1,19 @@
-import {useController} from 'react-hook-form';
-import type {Control} from 'react-hook-form';
-import TextField from '@mui/material/TextField';
-import {IconButton, InputAdornment} from '@mui/material';
-import {Visibility, VisibilityOff} from '@mui/icons-material';
-import {useState} from 'react';
-import type {FormData} from 'types';
+import { useController } from 'react-hook-form'
+import type { Control } from 'react-hook-form'
+import TextField from '@mui/material/TextField'
+import { IconButton, InputAdornment } from '@mui/material'
+import { Visibility, VisibilityOff } from '@mui/icons-material'
+import { useState } from 'react'
+import type { FormData } from 'types'
 
 interface PropsType {
-  control: Control<FormData>;
-  keyDownAction: () => void;
+  control: Control<FormData>
+  keyDownAction: () => void
 }
-const FormPasswordField = ({control, keyDownAction}: PropsType) => {
+const FormPasswordField = ({ control, keyDownAction }: PropsType) => {
   const {
-    field: {onChange, value},
-    fieldState: {error},
+    field: { onChange, value },
+    fieldState: { error },
   } = useController({
     name: 'password',
     control,
@@ -27,12 +27,12 @@ const FormPasswordField = ({control, keyDownAction}: PropsType) => {
         message: 'Минимальная длина 6 символов',
       },
     },
-  });
+  })
 
-  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false)
   const handleClickShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
+    setShowPassword(!showPassword)
+  }
 
   return (
     <TextField
@@ -60,7 +60,7 @@ const FormPasswordField = ({control, keyDownAction}: PropsType) => {
       InputProps={{
         onKeyDown(event) {
           if (event.code === 'Enter') {
-            keyDownAction();
+            keyDownAction()
           }
         },
         endAdornment: (
@@ -88,7 +88,7 @@ const FormPasswordField = ({control, keyDownAction}: PropsType) => {
         ),
       }}
     />
-  );
-};
+  )
+}
 
-export default FormPasswordField;
+export default FormPasswordField

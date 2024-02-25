@@ -1,19 +1,20 @@
-import Box from '@mui/material/Box';
-import {useEffect, useRef} from 'react';
-import {useAppDispatch, useAppSelector} from 'hooks/stateHooks';
-import {addChangeableHabit} from 'actions/actions';
-import {useNavigate} from 'react-router-dom';
-import FormToggleButton from 'components/form-fields/form-toggle-button';
-import FormTextField from 'components/form-fields/form-text-field';
-import {useForm} from 'react-hook-form';
-import FormButton from 'components/form-fields/form-button';
-import type {FormData, Habit} from 'types';
-import {cloneDeep} from 'lodash';
-import {Typography} from '@mui/material';
-import {addHabit, updateHabit} from 'actions/api-actions';
-import BaseButton from 'components/base-button';
-import {AppRouteList} from 'router/enums';
-import './create-habbit-form.scss';
+import Box from '@mui/material/Box'
+import { useEffect, useRef } from 'react'
+import { useAppDispatch, useAppSelector } from 'hooks/stateHooks'
+import { changeableHabitSelector, habitListSelector } from 'selectors/selectors'
+import { addChangeableHabit } from 'actions/actions'
+import { useNavigate } from 'react-router-dom'
+import FormToggleButton from 'components/form-fields/form-toggle-button'
+import FormTextField from 'components/form-fields/form-text-field'
+import { useForm } from 'react-hook-form'
+import FormButton from 'components/form-fields/form-button'
+import type { FormData, Habit } from 'types'
+import { cloneDeep } from 'lodash'
+import { Typography } from '@mui/material'
+import { addHabit, updateHabit } from 'actions/api-actions'
+import BaseButton from 'components/base-button'
+import { AppRouteList } from 'router/enums'
+import './create-habbit-form.scss'
 
 const CreateHabitForm = () => {
   const buttonData = [
@@ -25,46 +26,46 @@ const CreateHabitForm = () => {
       label: '30 дней',
       toggleValue: 30,
     },
-  ];
+  ]
 
-  const changeableHabit = useAppSelector(state => state.changeableHabit);
-  const challengeHabitsList = useAppSelector(state => state.challengeHabitsList);
+  const changeableHabit = useAppSelector(changeableHabitSelector)
+  const challengeHabitsList = useAppSelector(habitListSelector)
 
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
-  const countDays = useRef(21);
+  const countDays = useRef(21)
   const setCountDays = (value: number) => {
-    countDays.current = value;
-  };
+    countDays.current = value
+  }
 
   const createDaysList = (period: number) => {
-    const list = new Array(period).fill({color: ''});
-    const daysArray = list.map(item => Object.assign({}, item));
+    const list = new Array(period).fill({ color: '' })
+    const daysArray = list.map(item => Object.assign({}, item))
     daysArray.forEach(item => {
-      item.id = Math.random() * list.length;
-    });
-    return daysArray;
-  };
+      item.id = Math.random() * list.length
+    })
+    return daysArray
+  }
 
   useEffect(() => {
     if (!changeableHabit) {
-      reset({habitName: '', habitDescription: ''});
-      countDays.current = 21;
+      reset({ habitName: '', habitDescription: '' })
+      countDays.current = 21
     }
-  }, []);
+  }, [])
 
   const defaultValues = {
     habitName: changeableHabit?.name || '',
     habitDescription: changeableHabit?.description || '',
     period: changeableHabit?.period || 21,
-  };
+  }
 
-  const methods = useForm<FormData>({defaultValues});
-  const {handleSubmit, control, reset} = methods;
+  const methods = useForm<FormData>({ defaultValues })
+  const { handleSubmit, control, reset } = methods
 
   const saveHabit = (data: FormData) => {
-    const {habitName: name, habitDescription: description} = data;
+    const { habitName: name, habitDescription: description } = data
 
     const habit = {
       name,
@@ -75,30 +76,30 @@ const CreateHabitForm = () => {
       completedDays: 0,
       value: 0,
       checkedDays: createDaysList(countDays.current),
-    };
+    }
 
-    const habitsList = cloneDeep(challengeHabitsList);
+    const habitsList = cloneDeep(challengeHabitsList)
 
     if (changeableHabit) {
-      const changeElement = habitsList.find(item => item.id === changeableHabit.id);
+      const changeElement = habitsList.find(item => item.id === changeableHabit.id)
       if (changeElement) {
-        changeElement.name = habit.name as string;
-        changeElement.description = habit.description as string;
-        dispatch(addChangeableHabit(null));
-        dispatch(updateHabit(changeElement));
-        dispatch(addChangeableHabit(null));
-        navigate('/habits-list');
+        changeElement.name = habit.name as string
+        changeElement.description = habit.description as string
+        dispatch(addChangeableHabit(null))
+        dispatch(updateHabit(changeElement))
+        dispatch(addChangeableHabit(null))
+        navigate('/habits-list')
       }
     } else {
-      dispatch(addHabit(habit as Habit));
-      reset({habitName: '', habitDescription: ''});
+      dispatch(addHabit(habit as Habit))
+      reset({ habitName: '', habitDescription: '' })
     }
-  };
+  }
 
   const handleCancel = () => {
-    dispatch(addChangeableHabit(null));
-    navigate(AppRouteList.HabitsPage);
-  };
+    dispatch(addChangeableHabit(null))
+    navigate(AppRouteList.HabitsPage)
+  }
 
   return (
     <Box
@@ -153,12 +154,12 @@ const CreateHabitForm = () => {
             buttonWidth="200px"
             buttonTitle="Отменить"
             action={handleCancel}
-            style={{marginTop: '15px'}}
+            style={{ marginTop: '15px' }}
           />
         )}
       </div>
     </Box>
-  );
-};
+  )
+}
 
-export default CreateHabitForm;
+export default CreateHabitForm

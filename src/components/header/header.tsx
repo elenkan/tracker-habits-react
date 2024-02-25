@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useState } from 'react'
 import {
   AppBar,
   Toolbar,
@@ -8,59 +8,60 @@ import {
   ListItem,
   Drawer,
   Button,
-} from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import {Link as RouterLink, useNavigate} from 'react-router-dom';
-import AuthorizationForm from 'components/authorization-form';
-import {useAppSelector, useAppDispatch} from 'hooks/stateHooks';
-import {logout} from 'actions/api-actions';
-import {setAuthStatus, setIsGuestAuth} from 'actions/actions';
-import {AppRouteList} from 'router/enums';
-import ColorMode from 'components/color-mode';
+} from '@mui/material'
+import MenuIcon from '@mui/icons-material/Menu'
+import { Link as RouterLink, useNavigate } from 'react-router-dom'
+import AuthorizationForm from 'components/authorization-form'
+import { useAppSelector, useAppDispatch } from 'hooks/stateHooks'
+import { logout } from 'actions/api-actions'
+import { setAuthStatus, setIsGuestAuth } from 'actions/actions'
+import { AppRouteList } from 'router/enums'
+import ColorMode from 'components/color-mode'
+import { isAuthSelector, isGuestAuthSelector } from 'selectors/selectors'
 
 const Header = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const isAuth = useAppSelector(state => state.isAuth);
-  const isGuestAuth = useAppSelector(state => state.isGuestAuth);
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const isAuth = useAppSelector(isAuthSelector)
+  const isGuestAuth = useAppSelector(isGuestAuthSelector)
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
   const menuItems = [
-    {path: '/progress', label: 'Прогресс'},
-    {path: '/create-habit', label: 'Создать привычку'},
-    {path: '/habits-list', label: 'Зачекать привычку'},
-    {path: '/archive-habits', label: 'Архив привычек'},
-    {path: '/settings', label: 'Настройки'},
-    {path: '', label: 'Выйти'},
-  ];
+    { path: '/progress', label: 'Прогресс' },
+    { path: '/create-habit', label: 'Создать привычку' },
+    { path: '/habits-list', label: 'Зачекать привычку' },
+    { path: '/archive-habits', label: 'Архив привычек' },
+    { path: '/settings', label: 'Настройки' },
+    { path: '', label: 'Выйти' },
+  ]
 
   const toggleDrawer = () => {
     // if (event.type === 'keydown' && ((event as KeyboardEvent).key === 'Tab'
     // || (event as KeyboardEvent).key === 'Shift')) {
     //     return;
     // }
-    setIsOpen(!isOpen);
-  };
+    setIsOpen(!isOpen)
+  }
 
   const logOut = (label: string) => {
     if (label === 'Выйти') {
       dispatch(logout()).then(res => {
-        dispatch(setAuthStatus(false));
+        dispatch(setAuthStatus(false))
         if (isGuestAuth) {
-          dispatch(setIsGuestAuth(false));
+          dispatch(setIsGuestAuth(false))
         }
-        localStorage.clear();
-        navigate(AppRouteList.Home);
-      });
+        localStorage.clear()
+        navigate(AppRouteList.Home)
+      })
     }
-  };
+  }
   const listItems = menuItems.map(item => (
-    <ListItem key={item.label} onClick={toggleDrawer} sx={{color: 'text.primary'}}>
+    <ListItem key={item.label} onClick={toggleDrawer} sx={{ color: 'text.primary' }}>
       <Button
         component={RouterLink}
         to={item.path}
         onClick={() => {
-          logOut(item.label);
+          logOut(item.label)
         }}
         sx={{
           fontSize: '14px',
@@ -75,7 +76,7 @@ const Header = () => {
         {item.label}
       </Button>
     </ListItem>
-  ));
+  ))
 
   return (
     <AppBar
@@ -91,7 +92,7 @@ const Header = () => {
               edge="start"
               color="inherit"
               aria-label="menu"
-              sx={{mr: 2}}>
+              sx={{ mr: 2 }}>
               <MenuIcon />
             </IconButton>
             <Drawer
@@ -130,7 +131,7 @@ const Header = () => {
         )}
       </Toolbar>
     </AppBar>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

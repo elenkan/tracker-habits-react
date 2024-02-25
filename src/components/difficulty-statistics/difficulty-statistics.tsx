@@ -6,24 +6,24 @@ import {
   LineElement,
   Title,
   Tooltip,
-} from 'chart.js';
-import type {ChartArea, ChartData} from 'chart.js';
-import {Line} from 'react-chartjs-2';
-import {useEffect, useRef, useState} from 'react';
-import './difficulty-statistics.scss';
+} from 'chart.js'
+import type { ChartArea, ChartData } from 'chart.js'
+import { Line } from 'react-chartjs-2'
+import { useEffect, useRef, useState } from 'react'
+import './difficulty-statistics.scss'
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip);
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip)
 
 interface PropsType {
-  colorsValue: number[];
+  colorsValue: number[]
 }
 
-const DifficultyStatistics = ({colorsValue}: PropsType) => {
-  const chartRef = useRef<ChartJS<'line', number[], string>>(null);
+const DifficultyStatistics = ({ colorsValue }: PropsType) => {
+  const chartRef = useRef<ChartJS<'line', number[], string>>(null)
   const [chartData, setChartData] = useState<ChartData<'line'>>({
     datasets: [],
-  });
-  const labels = ['Сложно', 'Средне', 'Легко'];
+  })
+  const labels = ['Сложно', 'Средне', 'Легко']
   const options = {
     maintainAspectRatio: false,
     plugins: {
@@ -46,20 +46,20 @@ const DifficultyStatistics = ({colorsValue}: PropsType) => {
         },
       },
     },
-  };
+  }
 
   function createGradient(ctx: CanvasRenderingContext2D, area: ChartArea) {
-    const colorStart = '#cc6699';
-    const colorMid = '#08d9d6';
-    const colorEnd = '#66ff66';
+    const colorStart = '#cc6699'
+    const colorMid = '#08d9d6'
+    const colorEnd = '#66ff66'
 
-    const gradient = ctx.createLinearGradient(0, area.bottom, 0, area.top);
+    const gradient = ctx.createLinearGradient(0, area.bottom, 0, area.top)
 
-    gradient.addColorStop(0.2, colorStart);
-    gradient.addColorStop(0.4, colorMid);
-    gradient.addColorStop(1, colorEnd);
+    gradient.addColorStop(0.2, colorStart)
+    gradient.addColorStop(0.4, colorMid)
+    gradient.addColorStop(1, colorEnd)
 
-    return gradient;
+    return gradient
   }
 
   const lineChartData = {
@@ -70,13 +70,13 @@ const DifficultyStatistics = ({colorsValue}: PropsType) => {
         lineTension: 0.5,
       },
     ],
-  };
+  }
 
   useEffect(() => {
-    const chart = chartRef.current;
+    const chart = chartRef.current
 
     if (!chart) {
-      return;
+      return
     }
 
     const chartData = {
@@ -85,16 +85,16 @@ const DifficultyStatistics = ({colorsValue}: PropsType) => {
         ...dataset,
         borderColor: createGradient(chart.ctx, chart.chartArea),
       })),
-    };
+    }
 
-    setChartData(chartData);
-  }, []);
+    setChartData(chartData)
+  }, [])
 
   return (
     <div className="difficulty-chart-container">
       <Line ref={chartRef} data={chartData} options={options} />
     </div>
-  );
-};
+  )
+}
 
-export default DifficultyStatistics;
+export default DifficultyStatistics

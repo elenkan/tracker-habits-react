@@ -1,163 +1,163 @@
-import {auth, database} from 'index';
-import {createAsyncThunk} from '@reduxjs/toolkit';
-import type {AuthData, Habit} from 'types';
+import { auth, database } from 'index'
+import { createAsyncThunk } from '@reduxjs/toolkit'
+import type { AuthData, Habit } from 'types'
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   deleteUser,
   signInAnonymously,
-} from 'firebase/auth';
-import type {AppDispatch} from 'types/state';
-import Notification from 'utils/notification/notification';
-import {ref, set, push, onValue, update, remove} from 'firebase/database';
-import {changeArchiveHabitList, changeHabitList, setUserColorTheme, setIsLoading} from './actions';
+} from 'firebase/auth'
+import type { AppDispatch } from 'types/state'
+import Notification from 'utils/notification/notification'
+import { ref, set, push, onValue, update, remove } from 'firebase/database'
+import { changeArchiveHabitList, changeHabitList, setUserColorTheme, setIsLoading } from './actions'
 
-export const login = createAsyncThunk<void, AuthData, {dispatch: AppDispatch}>(
+export const login = createAsyncThunk<void, AuthData, { dispatch: AppDispatch }>(
   'login',
-  async ({email, password}, {dispatch}) => {
+  async ({ email, password }, { dispatch }) => {
     try {
-      dispatch(setIsLoading(true));
-      await signInWithEmailAndPassword(auth, email, password);
-      dispatch(setIsLoading(false));
+      dispatch(setIsLoading(true))
+      await signInWithEmailAndPassword(auth, email, password)
+      dispatch(setIsLoading(false))
     } catch (e) {
-      Notification.showErrorNotification(e);
+      Notification.showErrorNotification(e)
     }
-  },
-);
+  }
+)
 
 export const logout = createAsyncThunk<void, undefined>('logout', async () => {
-  await auth.signOut();
-});
+  await auth.signOut()
+})
 
-export const createLogin = createAsyncThunk<void, AuthData, {dispatch: AppDispatch}>(
+export const createLogin = createAsyncThunk<void, AuthData, { dispatch: AppDispatch }>(
   'createLogin',
-  async ({email, password, name}, {dispatch}) => {
+  async ({ email, password, name }, { dispatch }) => {
     try {
-      dispatch(setIsLoading(true));
-      await createUserWithEmailAndPassword(auth, email, password);
-      dispatch(setIsLoading(false));
+      dispatch(setIsLoading(true))
+      await createUserWithEmailAndPassword(auth, email, password)
+      dispatch(setIsLoading(false))
     } catch (e) {
-      Notification.showErrorNotification(e);
+      Notification.showErrorNotification(e)
     }
-  },
-);
+  }
+)
 
 export const deleteAccount = createAsyncThunk<void>('deleteAccount', async () => {
   try {
-    const user = auth.currentUser;
-    user && (await deleteUser(user));
+    const user = auth.currentUser
+    user && (await deleteUser(user))
   } catch (e) {
-    Notification.showErrorNotification(e);
+    Notification.showErrorNotification(e)
   }
-});
+})
 
-export const signInAsGuest = createAsyncThunk<void, undefined, {dispatch: AppDispatch}>(
+export const signInAsGuest = createAsyncThunk<void, undefined, { dispatch: AppDispatch }>(
   'signInAsGuest',
-  async (_args, {dispatch}) => {
+  async (_args, { dispatch }) => {
     try {
-      dispatch(setIsLoading(true));
-      await signInAnonymously(auth);
-      dispatch(setIsLoading(false));
+      dispatch(setIsLoading(true))
+      await signInAnonymously(auth)
+      dispatch(setIsLoading(false))
     } catch (e) {
-      Notification.showErrorNotification(e);
+      Notification.showErrorNotification(e)
     }
-  },
-);
+  }
+)
 
-export const fetchHabitList = createAsyncThunk<void, undefined, {dispatch: AppDispatch}>(
+export const fetchHabitList = createAsyncThunk<void, undefined, { dispatch: AppDispatch }>(
   'fetchHabitList',
-  async (_args, {dispatch}) => {
+  async (_args, { dispatch }) => {
     try {
-      const user = auth?.currentUser?.uid;
+      const user = auth?.currentUser?.uid
       onValue(
         ref(database, `users/${user}/challengeHabitsList`),
         snapshot => {
-          const habitsList: Habit[] = [];
+          const habitsList: Habit[] = []
           if (snapshot) {
             snapshot.forEach(item => {
-              habitsList?.push(item.val());
-            });
-            dispatch(changeHabitList(habitsList));
+              habitsList?.push(item.val())
+            })
+            dispatch(changeHabitList(habitsList))
           }
         },
-        {onlyOnce: true},
-      );
+        { onlyOnce: true }
+      )
     } catch (e) {
-      Notification.showErrorNotification(e);
+      Notification.showErrorNotification(e)
     }
-  },
-);
+  }
+)
 
-export const fetchArchiveHabitList = createAsyncThunk<void, undefined, {dispatch: AppDispatch}>(
+export const fetchArchiveHabitList = createAsyncThunk<void, undefined, { dispatch: AppDispatch }>(
   'fetchArchiveHabitList',
-  async (_args, {dispatch}) => {
+  async (_args, { dispatch }) => {
     try {
-      const user = auth?.currentUser?.uid;
+      const user = auth?.currentUser?.uid
       onValue(
         ref(database, `users/${user}/archiveHabitsList`),
         snapshot => {
-          const habitsList: Habit[] = [];
+          const habitsList: Habit[] = []
           if (snapshot) {
             snapshot.forEach(item => {
-              habitsList?.push(item.val());
-            });
-            dispatch(changeArchiveHabitList(habitsList));
+              habitsList?.push(item.val())
+            })
+            dispatch(changeArchiveHabitList(habitsList))
           }
         },
-        {onlyOnce: true},
-      );
+        { onlyOnce: true }
+      )
     } catch (e) {
-      Notification.showErrorNotification(e);
+      Notification.showErrorNotification(e)
     }
-  },
-);
+  }
+)
 
-export const addHabit = createAsyncThunk<void, Habit, {dispatch: AppDispatch}>(
+export const addHabit = createAsyncThunk<void, Habit, { dispatch: AppDispatch }>(
   'habitAction',
-  async (habit, {dispatch}) => {
+  async (habit, { dispatch }) => {
     try {
-      const user = auth?.currentUser?.uid;
+      const user = auth?.currentUser?.uid
       await push(ref(database, `users/${user}/challengeHabitsList`), habit).then(res => {
-        dispatch(fetchHabitList());
-      });
+        dispatch(fetchHabitList())
+      })
     } catch (e) {
-      Notification.showErrorNotification(e);
+      Notification.showErrorNotification(e)
     }
-  },
-);
+  }
+)
 
-export const addGuestHabits = createAsyncThunk<void, Habit[], {dispatch: AppDispatch}>(
+export const addGuestHabits = createAsyncThunk<void, Habit[], { dispatch: AppDispatch }>(
   'habitsAction',
-  async (habits, {dispatch}) => {
+  async (habits, { dispatch }) => {
     try {
       for (const habit of habits) {
-        await dispatch(addHabit(habit));
+        await dispatch(addHabit(habit))
       }
     } catch (e) {
-      Notification.showErrorNotification(e);
+      Notification.showErrorNotification(e)
     }
-  },
-);
+  }
+)
 
-export const addArchiveHabit = createAsyncThunk<void, Habit, {dispatch: AppDispatch}>(
+export const addArchiveHabit = createAsyncThunk<void, Habit, { dispatch: AppDispatch }>(
   'archiveHabitAction',
-  async (habit, {dispatch}) => {
+  async (habit, { dispatch }) => {
     try {
-      const user = auth?.currentUser?.uid;
+      const user = auth?.currentUser?.uid
       await push(ref(database, `users/${user}/archiveHabitsList`), habit).then(res => {
-        dispatch(fetchArchiveHabitList());
-      });
+        dispatch(fetchArchiveHabitList())
+      })
     } catch (e) {
-      Notification.showErrorNotification(e);
+      Notification.showErrorNotification(e)
     }
-  },
-);
+  }
+)
 // TODO: сделать общую функцию snapshot.forEach
-export const updateHabit = createAsyncThunk<void, Habit, {dispatch: AppDispatch}>(
+export const updateHabit = createAsyncThunk<void, Habit, { dispatch: AppDispatch }>(
   'updateHabitAction',
-  async (habit, {dispatch}) => {
+  async (habit, { dispatch }) => {
     try {
-      const user = auth?.currentUser?.uid;
+      const user = auth?.currentUser?.uid
       // eslint-disable-next-line @typescript-eslint/await-thenable
       await onValue(
         ref(database, `users/${user}/challengeHabitsList`),
@@ -167,26 +167,26 @@ export const updateHabit = createAsyncThunk<void, Habit, {dispatch: AppDispatch}
               if (item.val().id === habit.id) {
                 update(ref(database, `users/${user}/challengeHabitsList/${item.key}`), habit).then(
                   _ => {
-                    dispatch(fetchHabitList());
-                  },
-                );
+                    dispatch(fetchHabitList())
+                  }
+                )
               }
-            });
+            })
           }
         },
-        {onlyOnce: true},
-      );
+        { onlyOnce: true }
+      )
     } catch (e) {
-      Notification.showErrorNotification(e);
+      Notification.showErrorNotification(e)
     }
-  },
-);
+  }
+)
 
-export const deleteHabit = createAsyncThunk<void, number, {dispatch: AppDispatch}>(
+export const deleteHabit = createAsyncThunk<void, number, { dispatch: AppDispatch }>(
   'deleteHabitAction',
-  async (habitId, {dispatch}) => {
+  async (habitId, { dispatch }) => {
     try {
-      const user = auth?.currentUser?.uid;
+      const user = auth?.currentUser?.uid
       // eslint-disable-next-line @typescript-eslint/await-thenable
       await onValue(
         ref(database, `users/${user}/challengeHabitsList`),
@@ -195,49 +195,49 @@ export const deleteHabit = createAsyncThunk<void, number, {dispatch: AppDispatch
             snapshot.forEach(item => {
               if (item.val().id === habitId) {
                 remove(ref(database, `users/${user}/challengeHabitsList/${item.key}`)).then(_ => {
-                  dispatch(fetchHabitList());
-                });
+                  dispatch(fetchHabitList())
+                })
               }
-            });
+            })
           }
         },
-        {onlyOnce: true},
-      );
+        { onlyOnce: true }
+      )
     } catch (e) {
-      Notification.showErrorNotification(e);
+      Notification.showErrorNotification(e)
     }
-  },
-);
+  }
+)
 
-export const getColorMode = createAsyncThunk<void, undefined, {dispatch: AppDispatch}>(
+export const getColorMode = createAsyncThunk<void, undefined, { dispatch: AppDispatch }>(
   'getColorMode',
-  async (_args, {dispatch}) => {
+  async (_args, { dispatch }) => {
     try {
-      const user = auth?.currentUser?.uid;
+      const user = auth?.currentUser?.uid
       // eslint-disable-next-line @typescript-eslint/await-thenable
       await onValue(
         ref(database, `users/${user}/colorMode`),
         snapshot => {
           snapshot.exists()
             ? dispatch(setUserColorTheme(snapshot.val()))
-            : dispatch(setUserColorTheme('light'));
+            : dispatch(setUserColorTheme('light'))
         },
-        {onlyOnce: true},
-      );
+        { onlyOnce: true }
+      )
     } catch (e) {
-      Notification.showErrorNotification(e);
+      Notification.showErrorNotification(e)
     }
-  },
-);
+  }
+)
 
-export const saveColorMode = createAsyncThunk<void, 'light' | 'dark', {dispatch: AppDispatch}>(
+export const saveColorMode = createAsyncThunk<void, 'light' | 'dark', { dispatch: AppDispatch }>(
   'saveColorMode',
-  async (colorMode, {dispatch}) => {
+  async (colorMode, { dispatch }) => {
     try {
-      const user = auth?.currentUser?.uid;
-      await set(ref(database, `users/${user}/colorMode`), colorMode);
+      const user = auth?.currentUser?.uid
+      await set(ref(database, `users/${user}/colorMode`), colorMode)
     } catch (e) {
-      Notification.showErrorNotification(e);
+      Notification.showErrorNotification(e)
     }
-  },
-);
+  }
+)
