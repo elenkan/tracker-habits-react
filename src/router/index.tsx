@@ -1,4 +1,4 @@
-import { HashRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { AppRouteList } from './enums'
 import PrivateRoute from './private-route'
 import HomePage from 'pages/home-page'
@@ -14,7 +14,7 @@ const AppRouter = () => {
   const isAuth = localStorage.getItem('checkAuth')
 
   return (
-    <HashRouter>
+    <BrowserRouter>
       <Header />
       <Routes>
         <Route path={AppRouteList.Home} element={<HomePage />} />
@@ -60,7 +60,7 @@ const AppRouter = () => {
         />
         <Route path={AppRouteList.NotFoundPage} element={<NotFoundPage />} />
       </Routes>
-    </HashRouter>
+    </BrowserRouter>
   )
 }
 

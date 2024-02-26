@@ -63,7 +63,7 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <div className="content">
+      <div className="content" data-testid="content">
         <AppRouter />
         {isLoading && <LoadingScreen />}
         {showCongratulation && <CongratulationsScreen />}

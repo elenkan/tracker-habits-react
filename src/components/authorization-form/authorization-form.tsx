@@ -10,7 +10,7 @@ import {
   getColorMode,
   fetchArchiveHabitList,
   addGuestHabits,
-} from '../../actions/api-actions'
+} from 'actions/api-actions'
 import { useAppDispatch, useAppSelector } from 'hooks/stateHooks'
 import { userColorThemeSelector, currentThemeSelector } from 'selectors/selectors'
 
