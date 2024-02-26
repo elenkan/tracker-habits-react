@@ -24,6 +24,7 @@ const MessageScreen = ({ title, buttonTitle, buttonLink }: PropsType) => {
     const link = buttonLink || AppRouteList.CreateHabitPage
     navigate(link)
   }
+
   return (
     <div className="message-screen">
       <Box component="div" className={contentClass} sx={{ color: '#fff' }}>

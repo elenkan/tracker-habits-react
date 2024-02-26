@@ -16,7 +16,7 @@ import { useAppSelector, useAppDispatch } from 'hooks/stateHooks'
 import { logout } from 'actions/api-actions'
 import { setAuthStatus, setIsGuestAuth } from 'actions/actions'
 import { AppRouteList } from 'router/enums'
-import ColorMode from 'components/color-mode'
+import ColorModeSwitcher from 'components/color-mode-switcher'
 import { isAuthSelector, isGuestAuthSelector } from 'selectors/selectors'
 
 const Header = () => {
@@ -126,7 +126,7 @@ const Header = () => {
         {!isAuth && (
           <>
             <AuthorizationForm />
-            <ColorMode />
+            <ColorModeSwitcher />
           </>
         )}
       </Toolbar>

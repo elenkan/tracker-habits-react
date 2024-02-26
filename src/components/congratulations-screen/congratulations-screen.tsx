@@ -9,18 +9,18 @@ const CongratulationsScreen = () => {
   const handleClickOpen = () => {
     dispatch(setShowCongratulation(false))
   }
+
   return (
     <div
       className="congratulations-screen"
       onClick={handleClickOpen}
       data-testid="congratulations-screen">
       <Box component="div" className="congratulations-screen__content">
-        <Typography component="span" color="text.primary">
-          Поздравляем!
-        </Typography>
-        <Typography component="span" color="text.primary">
-          Челлендж завершен :)
-        </Typography>
+        {['Поздравляем!', 'Челлендж завершен :)'].map(text => (
+          <Typography key={text} component="span" color="text.primary">
+            {text}
+          </Typography>
+        ))}
       </Box>
     </div>
   )

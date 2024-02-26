@@ -12,6 +12,7 @@ const HabitsList = () => {
         return <HabitItem item={item} key={item.id} />
       })
     : []
+
   return (
     <div className="habits-page">
       {list.length ? (

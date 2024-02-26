@@ -8,6 +8,7 @@ const NotFoundPage = () => {
   const onClick = () => {
     navigate(AppRouteList.Home)
   }
+
   return (
     <div style={{ marginTop: '90px' }}>
       <Typography

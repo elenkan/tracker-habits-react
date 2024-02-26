@@ -1,8 +1,8 @@
 import { useAppDispatch, useAppSelector } from 'hooks/stateHooks'
 import { Provider } from 'react-redux'
-import { store } from '../../store'
+import { store } from 'store'
 import { render, fireEvent, screen } from '@testing-library/react'
-import ColorMode from './color-mode'
+import ColorModeSwitcher from 'components/color-mode-switcher/color-mode-switcher'
 
 jest.mock('../../hooks/stateHooks')
 
@@ -13,7 +13,7 @@ test('тест компонента ColorMode', () => {
 
   render(
     <Provider store={store}>
-      <ColorMode />
+      <ColorModeSwitcher />
     </Provider>
   )
   const wrapperIcon = screen.getByTestId(/wrapper/i)

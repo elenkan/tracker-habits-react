@@ -25,17 +25,19 @@ const DifficultyList = () => {
 
   useEffect(() => {
     difficultyList.forEach(item => {
-      if (item.checked) {
-        dispatch(addColorDifficulty(item.color))
+      const { checked, color } = item
+      if (checked) {
+        dispatch(addColorDifficulty(color))
       }
     })
   }, [])
-  const setColorDifficulty = (e: ChangeEvent<HTMLInputElement>) => {
-    dispatch(addColorDifficulty(e.target.value))
+  const setColorDifficulty = (event: ChangeEvent<HTMLInputElement>) => {
+    const target = event.target
+    dispatch(addColorDifficulty(target.value))
     difficultyList.forEach(item => {
       item.checked = false
-      if (item.color === e.target.value) {
-        item.checked = e.target.checked
+      if (item.color === target.value) {
+        item.checked = target.checked
       }
     })
     setList([...difficultyList])
@@ -72,6 +74,7 @@ const DifficultyList = () => {
       </label>
     )
   })
+
   return (
     <Box component="div" sx={{ bgcolor: 'background.default' }} className="difficulty">
       <h3 className="difficulty__title">Как справился (-ась):</h3>

@@ -21,6 +21,7 @@
     border-radius: 10px;
     background-color: rgb(137,204,197);
     animation: animateBackground 10s linear infinite;
+
     @media (max-width: 600px) {
       width: 100%;
       margin: 0 20px;

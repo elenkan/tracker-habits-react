@@ -10,6 +10,7 @@ const HomePage = () => {
   const nameAppClass = classNames('main-content__name-app', {
     'main-content__name-app_dark': currentTheme === 'dark',
   })
+
   return (
     <div className={contentClass}>
       <Box component="span" className={nameAppClass} sx={{ color: '#fff' }}>
