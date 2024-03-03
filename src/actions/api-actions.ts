@@ -1,4 +1,4 @@
-import { auth, database } from 'index'
+import { auth, database } from 'components/app/app'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import type { AuthData, Habit } from 'types'
 import {

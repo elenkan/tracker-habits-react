@@ -21,10 +21,10 @@ import { AppRouteList } from 'router/enums'
 import FormTextField from '../form-fields/form-text-field'
 import FormPasswordField from '../form-fields/form-password-field'
 import FormButton from '../form-fields/form-button'
-import type { FormData, Habit } from 'types'
+import type { FormData } from 'types'
 import { guestHabitsList } from 'guestData'
 import classNames from 'classnames'
-import { auth } from 'index'
+import { auth } from 'components/app/app'
 import './authorization-form.scss'
 
 const AuthorizationForm = () => {
@@ -79,7 +79,7 @@ const AuthorizationForm = () => {
     dispatch(signInAsGuest()).then(_ => {
       setAuthValues()
       dispatch(setIsGuestAuth(true))
-      dispatch(addGuestHabits(guestHabitsList as Habit[]))
+      dispatch(addGuestHabits(guestHabitsList))
       navigate(AppRouteList.ProgressPage)
     })
   }
