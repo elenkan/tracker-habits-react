@@ -2,7 +2,7 @@ import HabitItem from 'components/habit-item'
 import { useAppSelector } from 'hooks/stateHooks'
 import { habitListSelector } from 'selectors/selectors'
 import DifficultyList from 'components/difficulty-list'
-import MessageScreen from 'components/message-screen'
+import MessageScreen from 'shared/ui/message-screen'
 import './habits-list.scss'
 
 const HabitsList = () => {

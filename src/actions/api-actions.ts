@@ -1,4 +1,4 @@
-import { auth, database } from 'components/app/app'
+import { auth, database } from 'app/firebase'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import type { AuthData, Habit } from 'types'
 import {

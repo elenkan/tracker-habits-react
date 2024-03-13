@@ -1,8 +1,5 @@
-import { initializeApp } from 'firebase/app'
-import { getAuth } from 'firebase/auth'
-import { getDatabase } from 'firebase/database'
 import AppRouter from 'router'
-import LoadingScreen from '../loading-screen'
+import LoadingScreen from 'components/loading-screen'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import React, { useEffect, useMemo } from 'react'
 import type { PaletteMode } from '@mui/material'
@@ -16,14 +13,10 @@ import {
 import CssBaseline from '@mui/material/CssBaseline'
 import { setAuthStatus, setCurrentTheme, setIsGuestAuth } from 'actions/actions'
 import { fetchArchiveHabitList, fetchHabitList, getColorMode } from 'actions/api-actions'
-import CongratulationsScreen from '../congratulations-screen'
+import CongratulationsScreen from 'components/congratulations-screen'
 import { paletteDark, paletteLight } from 'paletteData'
-import { ThemeModes } from 'components/app/enums'
-import { firebaseConfig } from 'firebaseConfig'
-
-const app = initializeApp(firebaseConfig)
-export const database = getDatabase(app)
-export const auth = getAuth(app)
+import { ThemeModes } from 'app/enums'
+import { auth } from 'app/firebase'
 
 const App = () => {
   const currentTheme = useAppSelector(currentThemeSelector)

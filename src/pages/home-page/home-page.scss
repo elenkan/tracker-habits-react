@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url("../../images/bg-image.jpg");
+  background-image: url("../../assets/images/bg-image.jpg");
   width: 100vw;
   height: 100vh;
   background-position: center;
@@ -10,7 +10,7 @@
   background-size: cover;
 
   &_dark {
-    background-image: url("../../images/bg-dark-image.jpg");
+    background-image: url("../../assets/images/bg-dark-image.jpg");
     background-color: #000;
   }
   &__name-app {

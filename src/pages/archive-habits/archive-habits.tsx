@@ -1,4 +1,4 @@
-import MessageScreen from 'components/message-screen'
+import MessageScreen from 'shared/ui/message-screen'
 import { useAppSelector } from 'hooks/stateHooks'
 import { currentThemeSelector, archiveHabitsListSelector } from 'selectors/selectors'
 import { AppRouteList } from 'router/enums'

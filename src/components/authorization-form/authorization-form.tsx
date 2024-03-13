@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Box, Button, Dialog, DialogContent } from '@mui/material'
-import BaseButton from 'components/base-button'
+import BaseButton from 'shared/ui/base-button'
 import {
   login,
   createLogin,
@@ -24,7 +24,7 @@ import FormButton from '../form-fields/form-button'
 import type { FormData } from 'types'
 import { guestHabitsList } from 'guestData'
 import classNames from 'classnames'
-import { auth } from 'components/app/app'
+import { auth } from 'app/firebase'
 import './authorization-form.scss'
 
 const AuthorizationForm = () => {

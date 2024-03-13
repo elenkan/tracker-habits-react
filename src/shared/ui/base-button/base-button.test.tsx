@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react'
-import BaseButton from './base-button'
+import BaseButton from 'shared/ui/base-button/base-button'
 
 describe('тест компонента BaseButton', () => {
   let testFunction: jest.Mock<any, any>

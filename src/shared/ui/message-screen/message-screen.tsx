@@ -1,5 +1,5 @@
 import { Box, Typography } from '@mui/material'
-import BaseButton from '../base-button'
+import BaseButton from 'shared/ui/base-button'
 import { useNavigate } from 'react-router-dom'
 import { AppRouteList } from 'router/enums'
 import { useAppSelector } from 'hooks/stateHooks'

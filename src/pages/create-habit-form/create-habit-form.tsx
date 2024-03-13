@@ -12,7 +12,7 @@ import type { FormData, Habit } from 'types'
 import { cloneDeep } from 'lodash'
 import { Typography } from '@mui/material'
 import { addHabit, updateHabit } from 'actions/api-actions'
-import BaseButton from 'components/base-button'
+import BaseButton from 'shared/ui/base-button'
 import { AppRouteList } from 'router/enums'
 import './create-habbit-form.scss'
 

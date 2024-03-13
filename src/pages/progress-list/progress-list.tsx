@@ -3,7 +3,7 @@ import { habitListSelector } from 'selectors/selectors'
 import { Box } from '@mui/material'
 import GoalBar from 'components/goal-bar'
 import DifficultyStatistics from 'components/difficulty-statistics'
-import MessageScreen from 'components/message-screen'
+import MessageScreen from 'shared/ui/message-screen'
 import './progress-list.scss'
 
 const ProgressList = () => {
