@@ -2,13 +2,13 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { AppRouteList } from './enums'
 import PrivateRoute from './private-route'
 import HomePage from 'pages/home-page'
-import CreateHabitForm from 'pages/create-habit-form'
+import CreateHabitPage from 'pages/create-habit'
 import HabitsList from 'pages/habits-list'
-import ArchiveHabitsList from 'pages/archive-habits'
+import ArchiveHabitsPage from 'pages/archive-habits'
 import ProgressList from 'pages/progress-list'
 import SettingPage from 'pages/settings-page/setting-page'
 import NotFoundPage from 'pages/not-found-page'
-import Header from 'components/header'
+import Header from 'widgets/header'
 
 const AppRouter = () => {
   const isAuth = localStorage.getItem('checkAuth')
@@ -22,7 +22,7 @@ const AppRouter = () => {
           path={AppRouteList.CreateHabitPage}
           element={
             <PrivateRoute isAuth={isAuth}>
-              <CreateHabitForm />
+              <CreateHabitPage />
             </PrivateRoute>
           }
         />
@@ -38,7 +38,7 @@ const AppRouter = () => {
           path={AppRouteList.ArchiveHabits}
           element={
             <PrivateRoute isAuth={isAuth}>
-              <ArchiveHabitsList />
+              <ArchiveHabitsPage />
             </PrivateRoute>
           }
         />

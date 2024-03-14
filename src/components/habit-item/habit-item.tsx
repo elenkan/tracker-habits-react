@@ -98,7 +98,7 @@ const HabitItem = ({ item }: PropsType) => {
     dispatch(addChangeableHabit(habit))
     navigate('/create-habit')
   }
-  const deleteHabitAction = (habitId: number) => {
+  const deleteHabitAction = (habitId: number | string) => {
     dispatch(deleteHabit(habitId))
   }
 

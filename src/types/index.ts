@@ -7,7 +7,7 @@ export interface ColorItem {
 }
 
 export interface Habit {
-  id: number
+  id: number | string
   name: string
   description: string
   period: number

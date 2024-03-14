@@ -1,76 +1,48 @@
-import Box from '@mui/material/Box'
-import { useEffect, useRef } from 'react'
 import { useAppDispatch, useAppSelector } from 'hooks/stateHooks'
-import { changeableHabitSelector, habitListSelector } from 'selectors/selectors'
+import { changeableHabitSelector } from 'selectors/selectors'
+import { useRef } from 'react'
 import { addChangeableHabit } from 'actions/actions'
-import { useNavigate } from 'react-router-dom'
-import FormToggleButton from 'components/form-fields/form-toggle-button'
-import FormTextField from 'components/form-fields/form-text-field'
-import { useForm } from 'react-hook-form'
-import FormButton from 'components/form-fields/form-button'
-import type { FormData, Habit } from 'types'
-import { cloneDeep } from 'lodash'
-import { Typography } from '@mui/material'
 import { addHabit, updateHabit } from 'actions/api-actions'
+import { useNavigate } from 'react-router-dom'
+import { Box, Typography } from '@mui/material'
+import FormToggleButton from 'shared/ui/form-fields/form-toggle-button'
+import FormTextField from 'shared/ui/form-fields/form-text-field'
+import FormButton from 'shared/ui/form-fields/form-button'
 import BaseButton from 'shared/ui/base-button'
+import { useForm } from 'react-hook-form'
+import type { FormData, Habit } from 'types'
 import { AppRouteList } from 'router/enums'
+import { toggleButtonData } from './model/toggleButtonData'
+import { createDaysList } from './lib/createDaysList'
 import './create-habbit-form.scss'
 
 const CreateHabitForm = () => {
-  const buttonData = [
-    {
-      label: '21 день',
-      toggleValue: 21,
-    },
-    {
-      label: '30 дней',
-      toggleValue: 30,
-    },
-  ]
-
+  const DEFAULT_COUNT_DAYS = 21
   const changeableHabit = useAppSelector(changeableHabitSelector)
-  const challengeHabitsList = useAppSelector(habitListSelector)
 
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const countDays = useRef(21)
+  const countDays = useRef(DEFAULT_COUNT_DAYS)
   const setCountDays = (value: number) => {
     countDays.current = value
   }
 
-  const createDaysList = (period: number) => {
-    const list = new Array(period).fill({ color: '' })
-    const daysArray = list.map(item => Object.assign({}, item))
-    daysArray.forEach(item => {
-      item.id = Math.random() * list.length
-    })
-    return daysArray
-  }
-
-  useEffect(() => {
-    if (!changeableHabit) {
-      reset({ habitName: '', habitDescription: '' })
-      countDays.current = 21
-    }
-  }, [])
-
   const defaultValues = {
     habitName: changeableHabit?.name || '',
     habitDescription: changeableHabit?.description || '',
-    period: changeableHabit?.period || 21,
+    period: changeableHabit?.period || DEFAULT_COUNT_DAYS,
   }
 
-  const methods = useForm<FormData>({ defaultValues })
-  const { handleSubmit, control, reset } = methods
+  const { handleSubmit, control, reset } = useForm<FormData>({ defaultValues })
 
   const saveHabit = (data: FormData) => {
-    const { habitName: name, habitDescription: description } = data
+    const { habitName: name = '', habitDescription: description = '' } = data
 
-    const habit = {
+    const habit: Habit = {
       name,
       description,
-      id: changeableHabit ? changeableHabit.id : `k${(~~(Math.random() * 1e8)).toString(16)}`,
+      id: `k${(~~(Math.random() * 1e8)).toString(16)}`,
       period: countDays.current,
       colorsValue: [],
       completedDays: 0,
@@ -78,20 +50,12 @@ const CreateHabitForm = () => {
       checkedDays: createDaysList(countDays.current),
     }
 
-    const habitsList = cloneDeep(challengeHabitsList)
-
     if (changeableHabit) {
-      const changeElement = habitsList.find(item => item.id === changeableHabit.id)
-      if (changeElement) {
-        changeElement.name = habit.name as string
-        changeElement.description = habit.description as string
-        dispatch(addChangeableHabit(null))
-        dispatch(updateHabit(changeElement))
-        dispatch(addChangeableHabit(null))
-        navigate('/habits-list')
-      }
+      dispatch(updateHabit({ ...changeableHabit, ...{ name, description } }))
+      dispatch(addChangeableHabit(null))
+      navigate('/habits-list')
     } else {
-      dispatch(addHabit(habit as Habit))
+      dispatch(addHabit(habit))
       reset({ habitName: '', habitDescription: '' })
     }
   }
@@ -139,7 +103,7 @@ const CreateHabitForm = () => {
               Выбрать период:
             </Typography>
             <FormToggleButton
-              groupData={buttonData}
+              groupData={toggleButtonData}
               action={setCountDays}
               defaultValue={defaultValues.period}
               styleData={{

@@ -182,7 +182,7 @@ export const updateHabit = createAsyncThunk<void, Habit, { dispatch: AppDispatch
   }
 )
 
-export const deleteHabit = createAsyncThunk<void, number, { dispatch: AppDispatch }>(
+export const deleteHabit = createAsyncThunk<void, number | string, { dispatch: AppDispatch }>(
   'deleteHabitAction',
   async (habitId, { dispatch }) => {
     try {

@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react'
-import FormButton from './form-button'
+import FormButton from 'shared/ui/form-fields/form-button'
 
 describe('тест компонента FormButton', () => {
   const onClick = jest.fn()

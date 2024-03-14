@@ -1,3 +1,3 @@
-import ArchiveHabitsList from './archive-habits'
+import ArchiveHabitsPage from './archive-habits'
 
-export default ArchiveHabitsList
+export default ArchiveHabitsPage
