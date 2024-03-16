@@ -123,7 +123,7 @@ const Header = () => {
             </Typography>
           </>
         )}
-        {true && (
+        {!isAuth && (
           <>
             <AuthorizationForm />
             <ColorModeSwitcher />
