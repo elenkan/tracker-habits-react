@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material'
 import BaseButton from 'shared/ui/base-button'
 import { useNavigate } from 'react-router-dom'
-import { AppRouteList } from 'router/enums'
+import { AppRouteList } from 'app/router/enums'
 
 const NotFoundPage = () => {
   const navigate = useNavigate()

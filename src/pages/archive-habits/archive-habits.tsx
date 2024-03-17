@@ -1,6 +1,6 @@
 import { useAppSelector } from 'hooks/stateHooks'
 import { archiveHabitsListSelector } from 'selectors/selectors'
-import { AppRouteList } from 'router/enums'
+import { AppRouteList } from 'app/router/enums'
 import PageLayout from 'shared/ui/page-layout/page-layout'
 import ArchiveHabitsList from 'widgets/archive-habits-list/archive-habits-list'
 import MessageScreen from 'shared/ui/message-screen'

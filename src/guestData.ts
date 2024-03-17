@@ -7,7 +7,7 @@ export const guestHabitsList: Habit[] = [
     description: 'каждый день',
     period: 30,
     colorsValue: [50, 29, 21],
-    value: 47,
+    completionPercent: 47,
     completedDays: 14,
     checkedDays: [
       {
@@ -168,7 +168,7 @@ export const guestHabitsList: Habit[] = [
     description: '1 страницу в день',
     period: 21,
     colorsValue: [6, 6, 89],
-    value: 86,
+    completionPercent: 86,
     completedDays: 18,
     checkedDays: [
       {
@@ -284,7 +284,7 @@ export const guestHabitsList: Habit[] = [
     description: '10 минут в день',
     period: 21,
     colorsValue: [50, 50, 0],
-    value: 48,
+    completionPercent: 48,
     completedDays: 10,
     checkedDays: [
       {

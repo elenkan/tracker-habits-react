@@ -17,7 +17,7 @@ import { userColorThemeSelector, currentThemeSelector } from 'selectors/selector
 import { setAuthStatus, setCurrentTheme, setIsGuestAuth } from 'actions/actions'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import { AppRouteList } from 'router/enums'
+import { AppRouteList } from 'app/router/enums'
 import FormTextField from '../../shared/ui/form-fields/form-text-field'
 import FormPasswordField from '../../shared/ui/form-fields/form-password-field'
 import FormButton from '../../shared/ui/form-fields/form-button'

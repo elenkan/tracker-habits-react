@@ -11,7 +11,7 @@ import FormButton from 'shared/ui/form-fields/form-button'
 import BaseButton from 'shared/ui/base-button'
 import { useForm } from 'react-hook-form'
 import type { FormData, Habit } from 'types'
-import { AppRouteList } from 'router/enums'
+import { AppRouteList } from 'app/router/enums'
 import { toggleButtonData } from './model/toggleButtonData'
 import { createDaysList } from './lib/createDaysList'
 import './create-habbit-form.scss'
@@ -46,7 +46,7 @@ const CreateHabitForm = () => {
       period: countDays.current,
       colorsValue: [],
       completedDays: 0,
-      value: 0,
+      completionPercent: 0,
       checkedDays: createDaysList(countDays.current),
     }
 

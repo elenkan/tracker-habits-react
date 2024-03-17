@@ -15,7 +15,7 @@ import AuthorizationForm from 'components/authorization-form'
 import { useAppSelector, useAppDispatch } from 'hooks/stateHooks'
 import { logout } from 'actions/api-actions'
 import { setAuthStatus, setIsGuestAuth } from 'actions/actions'
-import { AppRouteList } from 'router/enums'
+import { AppRouteList } from 'app/router/enums'
 import ColorModeSwitcher from 'components/color-mode-switcher'
 import { isAuthSelector, isGuestAuthSelector } from 'selectors/selectors'
 

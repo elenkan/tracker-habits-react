@@ -1,12 +1,15 @@
 import type { ReactNode } from 'react'
+import classNames from 'classnames'
 import './page-layout.scss'
 
 interface PropsType {
   children: ReactNode
+  topMobileIndent?: boolean
 }
 
-const PageLayout = ({ children }: PropsType) => {
-  return <div className="container">{children}</div>
+const PageLayout = ({ children, topMobileIndent }: PropsType) => {
+  const containerClass = classNames('container', { container_mobile: topMobileIndent })
+  return <div className={containerClass}>{children}</div>
 }
 
 export default PageLayout

@@ -3,7 +3,7 @@ import { AppRouteList } from './enums'
 import PrivateRoute from './private-route'
 import HomePage from 'pages/home-page'
 import CreateHabitPage from 'pages/create-habit'
-import HabitsList from 'pages/habits-list'
+import CheckHabit from 'pages/check-habit'
 import ArchiveHabitsPage from 'pages/archive-habits'
 import ProgressList from 'pages/progress-list'
 import SettingPage from 'pages/settings-page/setting-page'
@@ -30,7 +30,7 @@ const AppRouter = () => {
           path={AppRouteList.HabitsPage}
           element={
             <PrivateRoute isAuth={isAuth}>
-              <HabitsList />
+              <CheckHabit />
             </PrivateRoute>
           }
         />

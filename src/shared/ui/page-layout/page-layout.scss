@@ -3,4 +3,10 @@
   justify-content: center;
   width: 100%;
   padding-top: 70px;
+
+  &_mobile {
+    @media(max-width: 795px) {
+      padding-top: 48px;
+    }
+  }
 }

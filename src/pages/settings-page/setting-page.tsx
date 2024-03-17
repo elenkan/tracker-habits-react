@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from 'hooks/stateHooks'
 import { currentThemeSelector } from 'selectors/selectors'
 import { setAuthStatus, setCurrentTheme } from 'actions/actions'
 import { deleteAccount, saveColorMode } from 'actions/api-actions'
-import { AppRouteList } from 'router/enums'
+import { AppRouteList } from 'app/router/enums'
 import { useNavigate } from 'react-router-dom'
 import './settings-page.scss'
 

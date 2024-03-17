@@ -13,7 +13,7 @@ export interface Habit {
   period: number
   colorsValue: number[]
   completedDays: number
-  value: number
+  completionPercent: number
   checkedDays: ColorItem[]
 }
 

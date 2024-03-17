@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material'
 import BaseButton from 'shared/ui/base-button'
 import { useNavigate } from 'react-router-dom'
-import { AppRouteList } from 'router/enums'
+import { AppRouteList } from 'app/router/enums'
 import { useAppSelector } from 'hooks/stateHooks'
 import { currentThemeSelector } from 'selectors/selectors'
 import classNames from 'classnames'

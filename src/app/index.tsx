@@ -1,4 +1,4 @@
-import AppRouter from 'router'
+import AppRouter from './router'
 import LoadingScreen from 'components/loading-screen'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import React, { useEffect, useMemo } from 'react'
