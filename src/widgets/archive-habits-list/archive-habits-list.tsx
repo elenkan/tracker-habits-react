@@ -1,6 +1,6 @@
 import type { Habit } from 'types'
-import { useAppSelector } from 'hooks/stateHooks'
-import { currentThemeSelector } from 'selectors/selectors'
+import { useAppSelector } from 'app/redux/hooks/stateHooks'
+import { currentThemeSelector } from 'app/redux/selectors/selectors'
 import { Box, Typography } from '@mui/material'
 import CheckCircleSharpIcon from '@mui/icons-material/CheckCircleSharp'
 import classNames from 'classnames'

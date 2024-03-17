@@ -1,8 +1,8 @@
 import type { Habit, ColorItem } from 'types'
-import { useAppDispatch, useAppSelector } from 'hooks/stateHooks'
-import { colorDifficultySelector } from 'selectors/selectors'
+import { useAppDispatch, useAppSelector } from 'app/redux/hooks/stateHooks'
+import { colorDifficultySelector } from 'app/redux/selectors/selectors'
 import { useState } from 'react'
-import lists from 'lists.json'
+import lists from 'shared/model/lists.json'
 import { cloneDeep } from 'lodash'
 import { getColorValueArray } from './lib/getColorValueArray'
 import { getUpdatedColorsList } from './lib/getUpdatedColorsList'
@@ -12,8 +12,8 @@ import {
   deleteHabit,
   fetchArchiveHabitList,
   updateHabit,
-} from 'actions/api-actions'
-import { setShowCongratulation } from 'actions/actions'
+} from 'app/redux/actions/api-actions'
+import { setShowCongratulation } from 'app/redux/actions/actions'
 import './habit-days-list.scss'
 
 interface PropsType {

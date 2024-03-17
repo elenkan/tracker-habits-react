@@ -1,5 +1,5 @@
-import { useAppSelector } from 'hooks/stateHooks'
-import { habitListSelector } from 'selectors/selectors'
+import { useAppSelector } from 'app/redux/hooks/stateHooks'
+import { habitListSelector } from 'app/redux/selectors/selectors'
 import PageLayout from 'shared/ui/page-layout/page-layout'
 import DifficultyList from 'widgets/difficulty-list'
 import HabitsList from 'widgets/habits-list/habits-list'

@@ -1,20 +1,20 @@
 import AppRouter from './router'
-import LoadingScreen from 'components/loading-screen'
+import LoadingScreen from 'features/loading-screen'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import React, { useEffect, useMemo } from 'react'
 import type { PaletteMode } from '@mui/material'
-import { useAppSelector, useAppDispatch } from 'hooks/stateHooks'
+import { useAppSelector, useAppDispatch } from 'app/redux/hooks/stateHooks'
 import {
   currentThemeSelector,
   isLoadingSelector,
   showCongratulationSelector,
   habitListSelector,
-} from 'selectors/selectors'
+} from 'app/redux/selectors/selectors'
 import CssBaseline from '@mui/material/CssBaseline'
-import { setAuthStatus, setCurrentTheme, setIsGuestAuth } from 'actions/actions'
-import { fetchArchiveHabitList, fetchHabitList, getColorMode } from 'actions/api-actions'
-import CongratulationsScreen from 'components/congratulations-screen'
-import { paletteDark, paletteLight } from 'paletteData'
+import { setAuthStatus, setCurrentTheme, setIsGuestAuth } from 'app/redux/actions/actions'
+import { fetchArchiveHabitList, fetchHabitList, getColorMode } from 'app/redux/actions/api-actions'
+import CongratulationsScreen from 'features/congratulations-screen'
+import { paletteDark, paletteLight } from 'app/model/paletteData'
 import { ThemeModes } from 'app/enums'
 import { auth } from 'app/firebase'
 

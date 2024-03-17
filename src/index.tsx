@@ -1,7 +1,7 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 import { Provider } from 'react-redux'
-import { store } from 'store'
+import { store } from 'app/redux/store'
 import App from 'app'
 import { ToastContainer } from 'react-toastify'
 import 'index.scss'

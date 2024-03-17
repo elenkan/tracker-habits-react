@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
-import { useAppSelector } from 'hooks/stateHooks'
-import { currentThemeSelector } from 'selectors/selectors'
+import { useAppSelector } from 'app/redux/hooks/stateHooks'
+import { currentThemeSelector } from 'app/redux/selectors/selectors'
 import classNames from 'classnames'
 import './home-page.scss'
 

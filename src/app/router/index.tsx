@@ -5,7 +5,7 @@ import HomePage from 'pages/home-page'
 import CreateHabitPage from 'pages/create-habit'
 import CheckHabit from 'pages/check-habit'
 import ArchiveHabitsPage from 'pages/archive-habits'
-import ProgressList from 'pages/progress-list'
+import ProgressPage from 'pages/progress-page'
 import SettingPage from 'pages/settings-page/setting-page'
 import NotFoundPage from 'pages/not-found-page'
 import Header from 'widgets/header'
@@ -46,7 +46,7 @@ const AppRouter = () => {
           path={AppRouteList.ProgressPage}
           element={
             <PrivateRoute isAuth={isAuth}>
-              <ProgressList />
+              <ProgressPage />
             </PrivateRoute>
           }
         />

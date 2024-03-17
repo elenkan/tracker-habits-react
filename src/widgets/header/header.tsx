@@ -11,13 +11,13 @@ import {
 } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import { Link as RouterLink, useNavigate } from 'react-router-dom'
-import AuthorizationForm from 'components/authorization-form'
-import { useAppSelector, useAppDispatch } from 'hooks/stateHooks'
-import { logout } from 'actions/api-actions'
-import { setAuthStatus, setIsGuestAuth } from 'actions/actions'
+import AuthorizationForm from 'features/authorization-form'
+import { useAppSelector, useAppDispatch } from 'app/redux/hooks/stateHooks'
+import { logout } from 'app/redux/actions/api-actions'
+import { setAuthStatus, setIsGuestAuth } from 'app/redux/actions/actions'
 import { AppRouteList } from 'app/router/enums'
-import ColorModeSwitcher from 'components/color-mode-switcher'
-import { isAuthSelector, isGuestAuthSelector } from 'selectors/selectors'
+import ColorModeSwitcher from 'features/color-mode-switcher'
+import { isAuthSelector, isGuestAuthSelector } from 'app/redux/selectors/selectors'
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
