@@ -1,0 +1,19 @@
+.setting {
+  &__item {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-family: "Montserrat-Regular", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 16px;
+    padding: 10px 0;
+  }
+
+  &__tabs {
+    button {
+      @media (max-width: 600px) {
+        font-size: 13px;
+      }
+    }
+  }
+}
