@@ -1,7 +1,7 @@
-import type { Habit } from 'types'
+import type { Habit } from 'shared/types'
 import { Box } from '@mui/material'
 import GoalBar from 'features/goal-bar'
-import DifficultyStatistics from 'features/difficulty-statistics'
+import DifficultyChart from 'features/difficulty-chart/difficulty-chart'
 import './progress-list.scss'
 
 interface PropsType {
@@ -21,7 +21,7 @@ const ProgressList = ({ progressData }: PropsType) => {
             <h2 className="progress-list__title">{item.name}</h2>
             <div className="progress-list__content">
               <GoalBar progressValue={item} />
-              <DifficultyStatistics colorsValue={item.colorsValue} />
+              <DifficultyChart colorsValue={item.colorsValue} />
             </div>
           </Box>
         )

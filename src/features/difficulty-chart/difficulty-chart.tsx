@@ -11,7 +11,7 @@ import type { ChartData } from 'chart.js'
 import { Line } from 'react-chartjs-2'
 import { useEffect, useRef, useState } from 'react'
 import { createGradient } from './lib/createGradient'
-import 'features/difficulty-statistics/difficulty-statistics.scss'
+import './difficulty-chart.scss'
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip)
 
@@ -19,7 +19,7 @@ interface PropsType {
   colorsValue: number[]
 }
 
-const DifficultyStatistics = ({ colorsValue }: PropsType) => {
+const DifficultyChart = ({ colorsValue }: PropsType) => {
   const chartRef = useRef<ChartJS<'line', number[], string>>(null)
   const [chartData, setChartData] = useState<ChartData<'line'>>({
     datasets: [],
@@ -84,4 +84,4 @@ const DifficultyStatistics = ({ colorsValue }: PropsType) => {
   )
 }
 
-export default DifficultyStatistics
+export default DifficultyChart

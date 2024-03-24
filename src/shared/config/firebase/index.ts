@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app'
 import { getAuth } from 'firebase/auth'
 import { getDatabase } from 'firebase/database'
-import { firebaseConfig } from './firebaseConfig'
+import { firebaseConfig } from 'shared/config/firebase/firebaseConfig'
 
 const app = initializeApp(firebaseConfig)
 const database = getDatabase(app)

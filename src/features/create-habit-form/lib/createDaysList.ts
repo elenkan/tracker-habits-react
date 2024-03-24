@@ -1,4 +1,4 @@
-import type { ColorItem } from 'types'
+import type { ColorItem } from 'shared/types'
 
 export const createDaysList = (period: number): ColorItem[] => {
   const list = new Array(period).fill({ color: '' })

@@ -1,14 +1,14 @@
 import lists from 'shared/model/lists.json'
 import { Box, Typography, IconButton, Tooltip } from '@mui/material'
 import HelpIcon from '@mui/icons-material/Help'
-import { useAppDispatch, useAppSelector } from 'app/redux/hooks/stateHooks'
-import { currentThemeSelector } from 'app/redux/selectors/selectors'
-import { addColorDifficulty } from 'app/redux/actions/actions'
+import { useAppDispatch, useAppSelector } from 'shared/hooks/stateHooks'
+import { currentThemeSelector } from 'shared/store/selectors'
+import { addColorDifficulty } from 'shared/store/actions'
 import type { ChangeEvent } from 'react'
 import { useEffect, useState } from 'react'
 import classNames from 'classnames'
 import { cloneDeep } from 'lodash'
-import type { ColorItem } from 'types'
+import type { ColorItem } from 'shared/types'
 import './difficulty-list.scss'
 
 const DifficultyList = () => {

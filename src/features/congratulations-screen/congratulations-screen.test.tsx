@@ -1,5 +1,5 @@
 import { wrapperTestingComponent } from 'shared/helpers/tests/wrapperTestingComponent'
-import { useAppDispatch } from 'app/redux/hooks/stateHooks'
+import { useAppDispatch } from 'shared/hooks/stateHooks'
 import { fireEvent, screen } from '@testing-library/react'
 import CongratulationsScreen from 'features/congratulations-screen/index'
 

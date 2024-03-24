@@ -10,9 +10,9 @@ import {
   setUserColorTheme,
   setIsLoading,
   setShowCongratulation,
-} from 'app/redux/actions/actions'
+} from 'shared/store/actions'
 
-import type { Habit } from 'types'
+import type { Habit } from 'shared/types'
 
 interface StateType {
   challengeHabitsList: Habit[]

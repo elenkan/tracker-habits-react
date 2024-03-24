@@ -1,30 +1,23 @@
 import { useState, useEffect } from 'react'
 import { Box, Button, Dialog, DialogContent } from '@mui/material'
 import BaseButton from 'shared/ui/base-button'
-import {
-  login,
-  createLogin,
-  signInAsGuest,
-  saveColorMode,
-  fetchHabitList,
-  getColorMode,
-  fetchArchiveHabitList,
-  addGuestHabits,
-} from 'app/redux/actions/api-actions'
-import { useAppDispatch, useAppSelector } from 'app/redux/hooks/stateHooks'
-import { userColorThemeSelector, currentThemeSelector } from 'app/redux/selectors/selectors'
-
-import { setAuthStatus, setCurrentTheme, setIsGuestAuth } from 'app/redux/actions/actions'
+import { login, createLogin, signInAsGuest, addGuestHabits } from './store/thunks'
+import { fetchHabitList, fetchArchiveHabitList } from 'shared/store/thunks/habit-list'
+import { saveColorMode, getColorMode } from 'shared/store/thunks/color-mode'
+import { useAppDispatch, useAppSelector } from 'shared/hooks/stateHooks'
+import { userColorThemeSelector } from './store/selectors'
+import { currentThemeSelector } from 'shared/store/selectors'
+import { setAuthStatus, setCurrentTheme, setIsGuestAuth } from 'shared/store/actions'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { AppRouteList } from 'app/router/enums'
 import FormTextField from 'shared/ui/form-fields/form-text-field/form-text-field'
 import FormPasswordField from 'shared/ui/form-fields/form-password-field'
 import FormButton from 'shared/ui/form-fields/form-button'
-import type { FormData } from 'types'
+import type { FormData } from 'shared/types'
 import { guestHabitsList } from 'features/authorization-form/model/guestData'
 import classNames from 'classnames'
-import { auth } from 'app/firebase'
+import { auth } from 'shared/config/firebase'
 import 'features/authorization-form/authorization-form.scss'
 
 const AuthorizationForm = () => {
@@ -133,10 +126,10 @@ const AuthorizationForm = () => {
       </Button>
       <Dialog
         open={open}
-        onClose={handleClose}
         sx={{
           borderRadius: '10px',
-        }}>
+        }}
+        onClose={handleClose}>
         <DialogContent
           sx={{
             '@media (max-width: 600px)': {

@@ -1,5 +1,5 @@
 import { cloneDeep } from 'lodash'
-import type { ColorItem } from 'types'
+import type { ColorItem } from 'shared/types'
 
 export const getUpdatedColorsList = (difficultyList: ColorItem[], list: ColorItem[]) => {
   const colorsList = cloneDeep(difficultyList)

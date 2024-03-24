@@ -12,12 +12,12 @@ import {
 import MenuIcon from '@mui/icons-material/Menu'
 import { Link as RouterLink, useNavigate } from 'react-router-dom'
 import AuthorizationForm from 'features/authorization-form'
-import { useAppSelector, useAppDispatch } from 'app/redux/hooks/stateHooks'
-import { logout } from 'app/redux/actions/api-actions'
-import { setAuthStatus, setIsGuestAuth } from 'app/redux/actions/actions'
+import { useAppSelector, useAppDispatch } from 'shared/hooks/stateHooks'
+import { logout } from './store/thunks'
+import { setAuthStatus, setIsGuestAuth } from 'shared/store/actions'
 import { AppRouteList } from 'app/router/enums'
 import ColorModeSwitcher from 'features/color-mode-switcher'
-import { isAuthSelector, isGuestAuthSelector } from 'app/redux/selectors/selectors'
+import { isAuthSelector, isGuestAuthSelector } from './store/selectors'
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -36,10 +36,6 @@ const Header = () => {
   ]
 
   const toggleDrawer = () => {
-    // if (event.type === 'keydown' && ((event as KeyboardEvent).key === 'Tab'
-    // || (event as KeyboardEvent).key === 'Shift')) {
-    //     return;
-    // }
     setIsOpen(!isOpen)
   }
 

@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material'
 import Box from '@mui/material/Box'
-import { useAppDispatch } from 'app/redux/hooks/stateHooks'
-import { setShowCongratulation } from 'app/redux/actions/actions'
+import { useAppDispatch } from 'shared/hooks/stateHooks'
+import { setShowCongratulation } from 'shared/store/actions'
 import 'features/congratulations-screen/congratulations-screen.scss'
 
 const CongratulationsScreen = () => {

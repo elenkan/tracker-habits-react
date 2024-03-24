@@ -1,9 +1,9 @@
 import IconButton from '@mui/material/IconButton'
 import Brightness4Icon from '@mui/icons-material/Brightness4'
 import Brightness7Icon from '@mui/icons-material/Brightness7'
-import { useAppDispatch, useAppSelector } from 'app/redux/hooks/stateHooks'
-import { currentThemeSelector } from 'app/redux/selectors/selectors'
-import { setCurrentTheme } from 'app/redux/actions/actions'
+import { useAppDispatch, useAppSelector } from 'shared/hooks/stateHooks'
+import { currentThemeSelector } from 'shared/store/selectors'
+import { setCurrentTheme } from 'shared/store/actions'
 
 const ColorModeSwitcher = () => {
   const currentTheme = useAppSelector(currentThemeSelector)

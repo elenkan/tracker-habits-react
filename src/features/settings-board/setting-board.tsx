@@ -3,10 +3,11 @@ import { Tabs, Tab, Switch, Typography } from '@mui/material'
 import BaseButton from 'shared/ui/base-button'
 import type { SyntheticEvent } from 'react'
 import { useState } from 'react'
-import { useAppDispatch, useAppSelector } from 'app/redux/hooks/stateHooks'
-import { currentThemeSelector } from 'app/redux/selectors/selectors'
-import { setAuthStatus, setCurrentTheme } from 'app/redux/actions/actions'
-import { deleteAccount, saveColorMode } from 'app/redux/actions/api-actions'
+import { useAppDispatch, useAppSelector } from 'shared/hooks/stateHooks'
+import { currentThemeSelector } from 'shared/store/selectors'
+import { setAuthStatus, setCurrentTheme } from 'shared/store/actions'
+import { deleteAccount } from './store/thunks'
+import { saveColorMode } from 'shared/store/thunks/color-mode'
 import { AppRouteList } from 'app/router/enums'
 import { useNavigate } from 'react-router-dom'
 import './settings-board.scss'
@@ -21,15 +22,15 @@ const SettingBoard = () => {
     setActiveTab(newValue)
   }
 
-  const handleChangeSwitch = () => {
+  const handleChangeSwitch = async () => {
     const theme = currentTheme === 'light' ? 'dark' : 'light'
     dispatch(setCurrentTheme(theme))
-    dispatch(saveColorMode(theme))
+    await dispatch(saveColorMode(theme))
     localStorage.setItem('theme', theme)
   }
 
-  const deleteUserAccount = () => {
-    dispatch(deleteAccount()).then(_ => {
+  const deleteUserAccount = async () => {
+    await dispatch(deleteAccount()).then(_ => {
       dispatch(setAuthStatus(false))
       navigate(AppRouteList.Home)
     })

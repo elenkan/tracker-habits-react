@@ -1,4 +1,4 @@
-import type { Habit } from 'types'
+import type { Habit } from 'shared/types'
 import CircularProgress from '@mui/material/CircularProgress'
 import { Typography, Box } from '@mui/material'
 import './goal-bar.scss'

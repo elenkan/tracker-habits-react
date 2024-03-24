@@ -1,4 +1,4 @@
-import type { ColorItem } from 'types'
+import type { ColorItem } from 'shared/types'
 
 export const getColorValueArray = (array: ColorItem[]) => {
   const checkedColorAmount = array.reduce((acc, curr) => acc + curr.value, 0)

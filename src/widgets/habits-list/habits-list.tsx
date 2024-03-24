@@ -1,4 +1,4 @@
-import type { Habit } from 'types'
+import type { Habit } from 'shared/types'
 import HabitItem from './ui/habit-item'
 import './habits-list.scss'
 

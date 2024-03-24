@@ -1,5 +1,5 @@
-import errors from './errors.json'
-import type { ErrorsText } from 'types'
+import errors from 'shared/ui/notification/errors.json'
+import type { ErrorsText } from 'shared/types'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
