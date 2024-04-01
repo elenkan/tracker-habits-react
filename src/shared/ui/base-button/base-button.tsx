@@ -8,7 +8,7 @@ interface PropsType {
   style?: CSSProperties
 }
 
-const BaseButton = ({ buttonWidth, buttonTitle, action, style }: PropsType) => {
+export const BaseButton = ({ buttonWidth, buttonTitle, action, style }: PropsType) => {
   return (
     <Button
       variant="outlined"
@@ -25,5 +25,3 @@ const BaseButton = ({ buttonWidth, buttonTitle, action, style }: PropsType) => {
     </Button>
   )
 }
-
-export default BaseButton

@@ -7,9 +7,7 @@ interface PropsType {
   topMobileIndent?: boolean
 }
 
-const PageLayout = ({ children, topMobileIndent }: PropsType) => {
+export const PageLayout = ({ children, topMobileIndent }: PropsType) => {
   const containerClass = classNames('container', { container_mobile: topMobileIndent })
   return <div className={containerClass}>{children}</div>
 }
-
-export default PageLayout

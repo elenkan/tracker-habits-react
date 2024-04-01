@@ -1,9 +1,9 @@
 import { useAppSelector } from 'shared/hooks/stateHooks'
 import { archiveHabitsListSelector } from 'shared/store/selectors'
 import { AppRouteList } from 'app/router/enums'
-import PageLayout from 'shared/ui/page-layout/page-layout'
-import ArchiveHabitsList from 'widgets/archive-habits-list/archive-habits-list'
-import MessageScreen from 'shared/ui/message-screen'
+import { PageLayout } from 'shared/ui'
+import ArchiveHabitsList from 'widgets/archive-habits-list'
+import MessageScreen from 'widgets/message-screen'
 
 const ArchiveHabitsPage = () => {
   const archiveHabitsList = useAppSelector(archiveHabitsListSelector)

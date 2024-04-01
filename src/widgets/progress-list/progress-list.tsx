@@ -1,7 +1,7 @@
 import type { Habit } from 'shared/types'
 import { Box } from '@mui/material'
-import GoalBar from 'features/goal-bar'
-import DifficultyChart from 'features/difficulty-chart/difficulty-chart'
+import GoalBar from './ui/goal-bar'
+import DifficultyChart from './ui/difficulty-chart'
 import './progress-list.scss'
 
 interface PropsType {

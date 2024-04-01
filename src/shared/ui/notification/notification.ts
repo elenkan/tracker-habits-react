@@ -3,7 +3,7 @@ import type { ErrorsText } from 'shared/types'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-export default class Notification {
+export class Notification {
   static showErrorNotification(errorData: any) {
     let errorText: string = errorData.message
     const errorDataText: ErrorsText = errors

@@ -1,5 +1,5 @@
 import { within, render, screen } from '@testing-library/react'
-import LoadingScreen from 'features/loading-screen/loading-screen'
+import LoadingScreen from './loading-screen'
 
 test('тест компонента LoadingScreen', async () => {
   render(<LoadingScreen />)

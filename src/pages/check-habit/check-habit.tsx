@@ -1,9 +1,9 @@
 import { useAppSelector } from 'shared/hooks/stateHooks'
 import { habitListSelector } from 'shared/store/selectors'
-import PageLayout from 'shared/ui/page-layout/page-layout'
+import { PageLayout } from 'shared/ui'
 import DifficultyList from 'widgets/difficulty-list'
-import HabitsList from 'widgets/habits-list/habits-list'
-import MessageScreen from 'shared/ui/message-screen'
+import HabitsList from 'widgets/habits-list'
+import MessageScreen from 'widgets/message-screen'
 
 const CheckHabit = () => {
   const habitList = useAppSelector(habitListSelector)

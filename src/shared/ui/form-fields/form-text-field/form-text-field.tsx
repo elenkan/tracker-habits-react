@@ -9,7 +9,7 @@ interface PropsType {
   fieldName: 'userName' | 'email' | 'habitName' | 'habitDescription'
   control: Control<FormData>
 }
-const FormTextField = ({ fieldName, control }: PropsType) => {
+export const FormTextField = ({ fieldName, control }: PropsType) => {
   const data: Field = fieldsData
   const fieldRules = data[fieldName].rules
 
@@ -53,5 +53,3 @@ const FormTextField = ({ fieldName, control }: PropsType) => {
     </Fragment>
   )
 }
-
-export default FormTextField

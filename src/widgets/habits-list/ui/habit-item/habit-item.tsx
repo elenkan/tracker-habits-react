@@ -6,7 +6,7 @@ import { useAppDispatch } from 'shared/hooks/stateHooks'
 import { addChangeableHabit } from 'shared/store/actions'
 import { useNavigate } from 'react-router-dom'
 import { deleteHabit } from 'shared/store/thunks/habit'
-import HabitDaysList from 'features/habit-days-list/habit-days-list'
+import HabitDaysList from 'features/habit-days-list'
 import 'widgets/habits-list/ui/habit-item/habit-item.scss'
 
 interface PropsType {

@@ -2,7 +2,7 @@ import { Typography } from '@mui/material'
 import Box from '@mui/material/Box'
 import { useAppDispatch } from 'shared/hooks/stateHooks'
 import { setShowCongratulation } from 'shared/store/actions'
-import 'features/congratulations-screen/congratulations-screen.scss'
+import './congratulations-screen.scss'
 
 const CongratulationsScreen = () => {
   const dispatch = useAppDispatch()

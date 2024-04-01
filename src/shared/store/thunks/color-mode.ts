@@ -3,7 +3,7 @@ import type { AppDispatch } from 'shared/types/state'
 import { auth, database } from 'shared/config/firebase'
 import { onValue, ref, set } from 'firebase/database'
 import { setUserColorTheme } from 'shared/store/actions'
-import Notification from 'shared/ui/notification/notification'
+import { Notification } from 'shared/ui/notification/notification'
 
 export const getColorMode = createAsyncThunk<void, undefined, { dispatch: AppDispatch }>(
   'getColorMode',

@@ -8,7 +8,7 @@ import {
   signInWithEmailAndPassword,
 } from 'firebase/auth'
 import { auth } from 'shared/config/firebase'
-import Notification from 'shared/ui/notification/notification'
+import { Notification } from 'shared/ui'
 import { addHabit } from 'shared/store/thunks/habit'
 
 export const login = createAsyncThunk<void, AuthData, { dispatch: AppDispatch }>(

@@ -4,7 +4,7 @@ import type { AppDispatch } from 'shared/types/state'
 import { auth, database } from 'shared/config/firebase'
 import { push, ref } from 'firebase/database'
 import { fetchArchiveHabitList } from 'shared/store/thunks/habit-list'
-import Notification from 'shared/ui/notification/notification'
+import { Notification } from 'shared/ui'
 
 export const addArchiveHabit = createAsyncThunk<void, Habit, { dispatch: AppDispatch }>(
   'archiveHabitAction',

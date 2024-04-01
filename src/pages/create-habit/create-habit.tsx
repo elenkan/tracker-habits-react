@@ -1,5 +1,5 @@
-import PageLayout from 'shared/ui/page-layout/page-layout'
-import CreateHabitForm from 'features/create-habit-form/create-habit-form'
+import { PageLayout } from 'shared/ui'
+import CreateHabitForm from 'features/create-habit-form'
 
 const CreateHabitPage = () => {
   return (

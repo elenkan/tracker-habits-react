@@ -6,7 +6,7 @@ interface PropsType {
   action: () => void
 }
 
-const FormButton = ({ buttonWidth, buttonTitle, action }: PropsType) => {
+export const FormButton = ({ buttonWidth, buttonTitle, action }: PropsType) => {
   return (
     <Button
       sx={{
@@ -31,5 +31,3 @@ const FormButton = ({ buttonWidth, buttonTitle, action }: PropsType) => {
     </Button>
   )
 }
-
-export default FormButton

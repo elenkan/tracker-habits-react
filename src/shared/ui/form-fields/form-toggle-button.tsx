@@ -14,7 +14,7 @@ interface PropsType {
   styleData?: object
 }
 
-const FormToggleButton = ({
+export const FormToggleButton = ({
   groupData,
   action,
   defaultValue,
@@ -50,5 +50,3 @@ const FormToggleButton = ({
     </ToggleButtonGroup>
   )
 }
-
-export default FormToggleButton

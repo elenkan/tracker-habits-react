@@ -36,7 +36,7 @@
         "checksVoidReturn": false
       }
     ],
-    "@typescript-eslint/no-floating-promises": "warn",
+    "@typescript-eslint/no-floating-promises": "off",
     "@typescript-eslint/no-invalid-void-type": "warn",
     "@typescript-eslint/prefer-nullish-coalescing": "off",
     "space-in-brackets": "off",

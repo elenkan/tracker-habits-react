@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { auth } from 'shared/config/firebase'
 import { deleteUser } from 'firebase/auth'
-import Notification from 'shared/ui/notification/notification'
+import { Notification } from 'shared/ui'
 
 export const deleteAccount = createAsyncThunk<void>('deleteAccount', async () => {
   try {

@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box'
 import { Tabs, Tab, Switch, Typography } from '@mui/material'
-import BaseButton from 'shared/ui/base-button'
+import { BaseButton } from 'shared/ui'
 import type { SyntheticEvent } from 'react'
 import { useState } from 'react'
 import { useAppDispatch, useAppSelector } from 'shared/hooks/stateHooks'

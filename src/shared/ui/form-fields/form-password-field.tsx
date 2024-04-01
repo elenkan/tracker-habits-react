@@ -10,7 +10,7 @@ interface PropsType {
   control: Control<FormData>
   keyDownAction: () => void
 }
-const FormPasswordField = ({ control, keyDownAction }: PropsType) => {
+export const FormPasswordField = ({ control, keyDownAction }: PropsType) => {
   const {
     field: { onChange, value },
     fieldState: { error },
@@ -90,5 +90,3 @@ const FormPasswordField = ({ control, keyDownAction }: PropsType) => {
     />
   )
 }
-
-export default FormPasswordField

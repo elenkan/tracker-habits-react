@@ -1,4 +1,4 @@
-import PageLayout from 'shared/ui/page-layout/page-layout'
+import { PageLayout } from 'shared/ui'
 import SettingBoard from 'features/settings-board'
 
 const SettingPage = () => {
