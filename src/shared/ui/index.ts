@@ -1,5 +1,5 @@
 export { BaseButton } from './base-button/base-button'
-export { PageLayout } from './page-layout/page-layout'
+export { PageLayout } from '../templates/page-layout/page-layout'
 export { Notification } from './notification/notification'
 export { FormToggleButton } from './form-fields/form-toggle-button'
 export { FormPasswordField } from './form-fields/form-password-field'

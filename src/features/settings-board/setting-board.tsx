@@ -8,7 +8,7 @@ import { currentThemeSelector } from 'shared/store/selectors'
 import { setAuthStatus, setCurrentTheme } from 'shared/store/actions'
 import { deleteAccount } from './store/thunks'
 import { saveColorMode } from 'shared/store/thunks/color-mode'
-import { AppRouteList } from 'app/router/enums'
+import { AppRouteList } from 'app/providers/router-provider/enums'
 import { useNavigate } from 'react-router-dom'
 import './settings-board.scss'
 

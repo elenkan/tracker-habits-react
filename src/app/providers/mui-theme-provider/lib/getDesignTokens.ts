@@ -1,6 +1,6 @@
 import type { PaletteMode } from '@mui/material'
 import { ThemeModes } from 'app/enums'
-import { paletteDark, paletteLight } from 'app/model/paletteData'
+import { paletteDark, paletteLight } from '../model/paletteData'
 
 export const getDesignTokens = (mode: PaletteMode) => ({
   palette: {
