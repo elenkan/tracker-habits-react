@@ -15,7 +15,7 @@ import type { FormData } from 'shared/types'
 import { guestHabitsList } from 'features/authorization-form/model/guestData'
 import classNames from 'classnames'
 import { auth } from 'shared/config/firebase'
-import 'features/authorization-form/authorization-form.scss'
+import './authorization-form.scss'
 
 const AuthorizationForm = () => {
   const currentTheme = useAppSelector(currentThemeSelector)
@@ -44,30 +44,26 @@ const AuthorizationForm = () => {
     setOpen(false)
   }
 
-  const setAuthValues = () => {
-    localStorage.setItem('checkAuth', 'true')
-    dispatch(setAuthStatus(true))
-  }
-
   useEffect(() => {
     reset({ userName: '', email: '', password: '' })
   }, [open])
 
   const saveMode = () => {
-    if (userColorTheme === 'light' && currentTheme === 'dark') {
+    const colorTheme = userColorTheme || 'light'
+    if (colorTheme !== currentTheme) {
       dispatch(setCurrentTheme(currentTheme))
       dispatch(saveColorMode(currentTheme))
       localStorage.setItem('theme', currentTheme)
     } else {
-      dispatch(setCurrentTheme(userColorTheme))
-      localStorage.setItem('theme', userColorTheme)
+      dispatch(setCurrentTheme(colorTheme))
+      localStorage.setItem('theme', colorTheme)
     }
   }
 
   const onClickGuestBtn = () => {
     handleClose()
     dispatch(signInAsGuest()).then(_ => {
-      setAuthValues()
+      dispatch(setAuthStatus(true))
       dispatch(setIsGuestAuth(true))
       dispatch(addGuestHabits(guestHabitsList))
       navigate(AppRouteList.ProgressPage)
@@ -80,14 +76,14 @@ const AuthorizationForm = () => {
     if (type === 'signup') {
       await dispatch(createLogin({ name, email, password }))
       if (auth.currentUser) {
-        setAuthValues()
+        dispatch(setAuthStatus(true))
         navigate(AppRouteList.HabitsPage)
       }
     } else {
       await dispatch(login({ email, password }))
       if (auth.currentUser) {
-        setAuthValues()
-        await dispatch(getColorMode())
+        dispatch(setAuthStatus(true))
+        dispatch(getColorMode())
         saveMode()
         dispatch(fetchHabitList())
         dispatch(fetchArchiveHabitList())

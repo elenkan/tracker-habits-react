@@ -17,7 +17,8 @@ import { logout } from './store/thunks'
 import { setAuthStatus, setIsGuestAuth } from 'shared/store/actions'
 import { AppRouteList } from 'app/providers/router-provider/enums'
 import ColorModeSwitcher from 'features/color-mode-switcher'
-import { isAuthSelector, isGuestAuthSelector } from './store/selectors'
+import { isGuestAuthSelector } from './store/selectors'
+import { isAuthSelector } from 'shared/store/selectors'
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)

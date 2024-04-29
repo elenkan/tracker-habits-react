@@ -10,6 +10,7 @@ import {
   setUserColorTheme,
   setIsLoading,
   setShowCongratulation,
+  setIsListLoading,
 } from 'shared/store/actions'
 
 import type { Habit } from 'shared/types'
@@ -22,9 +23,10 @@ interface StateType {
   isAuth: boolean
   isGuestAuth: boolean
   currentTheme: 'light' | 'dark'
-  userColorTheme: 'light' | 'dark'
+  userColorTheme: 'light' | 'dark' | null
   isLoading: boolean
   showCongratulation: boolean
+  isListLoading: boolean
 }
 
 const initialState: StateType = {
@@ -35,9 +37,10 @@ const initialState: StateType = {
   isAuth: false,
   isGuestAuth: false,
   currentTheme: 'light',
-  userColorTheme: 'light',
+  userColorTheme: null,
   isLoading: false,
   showCongratulation: false,
+  isListLoading: false,
 }
 
 const reducer = createReducer(initialState, builder => {
@@ -79,6 +82,10 @@ const reducer = createReducer(initialState, builder => {
 
   builder.addCase(setShowCongratulation, (state, action) => {
     state.showCongratulation = action.payload
+  })
+
+  builder.addCase(setIsListLoading, (state, action) => {
+    state.isListLoading = action.payload
   })
 })
 

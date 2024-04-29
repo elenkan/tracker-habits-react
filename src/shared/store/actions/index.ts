@@ -18,3 +18,4 @@ export const setIsLoading = createAction('setIsLoading', value => ({ payload: va
 export const setShowCongratulation = createAction('setShowCongratulation', value => ({
   payload: value,
 }))
+export const setIsListLoading = createAction('setIsListLoading', value => ({ payload: value }))

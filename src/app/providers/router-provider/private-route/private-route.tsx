@@ -2,11 +2,11 @@ import { AppRouteList } from '../enums'
 import { Navigate } from 'react-router-dom'
 
 interface PropsType {
-  isAuth: string | null
+  isAuth: boolean | null
   children: JSX.Element
 }
 
 const PrivateRoute = ({ isAuth, children }: PropsType) =>
-  isAuth === 'true' ? children : <Navigate to={AppRouteList.Home} />
+  isAuth ? children : <Navigate to={AppRouteList.Home} />
 
 export default PrivateRoute

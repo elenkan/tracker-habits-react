@@ -9,9 +9,11 @@ import ProgressPage from 'pages/progress-page'
 import SettingPage from 'pages/settings-page/setting-page'
 import NotFoundPage from 'pages/not-found-page'
 import Header from 'widgets/header'
+import { useAppSelector } from 'shared/hooks/stateHooks'
+import { isAuthSelector } from 'shared/store/selectors'
 
 const AppRouter = () => {
-  const isAuth = localStorage.getItem('checkAuth')
+  const isAuth = useAppSelector(isAuthSelector)
 
   return (
     <BrowserRouter>
