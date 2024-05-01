@@ -9,7 +9,7 @@ const ColorModeSwitcher = () => {
   const currentTheme = useAppSelector(currentThemeSelector)
   const dispatch = useAppDispatch()
 
-  const handleChangeSwitch = () => {
+  const onClick = () => {
     dispatch(setCurrentTheme(currentTheme === 'light' ? 'dark' : 'light'))
   }
 
@@ -22,7 +22,7 @@ const ColorModeSwitcher = () => {
           padding: 0,
         },
       }}
-      onClick={handleChangeSwitch}
+      onClick={onClick}
       data-testid="wrapper">
       {currentTheme === 'dark' ? (
         <Brightness7Icon

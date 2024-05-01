@@ -3,7 +3,18 @@ import { store } from 'shared/store'
 import { render } from '@testing-library/react'
 import type { RenderResult } from '@testing-library/react'
 import type { ReactNode } from 'react'
+import { configureStore } from '@reduxjs/toolkit'
+import { reducer } from 'shared/store/reducers'
 
-export const wrapperTestingComponent = (component: ReactNode): RenderResult => {
-  return render(<Provider store={store}>{component}</Provider>)
+export const wrapperTestingComponent = (
+  component: ReactNode,
+  initialState: object | null = null
+): RenderResult => {
+  const testingStore = initialState
+    ? configureStore({
+        reducer,
+        preloadedState: initialState,
+      })
+    : store
+  return render(<Provider store={testingStore}>{component}</Provider>)
 }

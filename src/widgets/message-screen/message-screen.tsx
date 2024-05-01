@@ -7,13 +7,13 @@ import { currentThemeSelector } from 'shared/store/selectors'
 import classNames from 'classnames'
 import './message-screen.scss'
 
-interface PropsType {
+interface Props {
   title?: string
   buttonTitle?: string
   buttonLink?: string
 }
 
-const MessageScreen = ({ title, buttonTitle, buttonLink }: PropsType) => {
+const MessageScreen = ({ title, buttonTitle, buttonLink }: Props) => {
   const currentTheme = useAppSelector(currentThemeSelector)
   const contentClass = classNames('message-screen__content', {
     'message-screen__content_dark': currentTheme === 'dark',

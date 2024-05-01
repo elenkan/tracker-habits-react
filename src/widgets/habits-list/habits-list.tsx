@@ -2,11 +2,11 @@ import type { Habit } from 'shared/types'
 import HabitItem from './ui/habit-item'
 import './habits-list.scss'
 
-interface PropsType {
+interface Props {
   list: Habit[]
 }
 
-const HabitsList = ({ list }: PropsType) => {
+const HabitsList = ({ list }: Props) => {
   const listItems = list.map(item => {
     return <HabitItem habit={item} key={item.id} />
   })

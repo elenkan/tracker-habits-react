@@ -11,7 +11,7 @@ export const addHabit = createAsyncThunk<void, Habit, { dispatch: AppDispatch }>
   async (habit, { dispatch }) => {
     try {
       const user = auth?.currentUser?.uid
-      await push(ref(database, `users/${user}/challengeHabitsList`), habit).then(res => {
+      await push(ref(database, `users/${user}/challengeHabitsList`), habit).then(_ => {
         dispatch(fetchHabitList())
       })
     } catch (e) {

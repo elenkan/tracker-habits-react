@@ -1,12 +1,12 @@
 import Button from '@mui/material/Button'
 
-interface PropsType {
+interface Props {
   buttonWidth: string
   buttonTitle: string
   action: () => void
 }
 
-export const FormButton = ({ buttonWidth, buttonTitle, action }: PropsType) => {
+export const FormButton = ({ buttonWidth, buttonTitle, action }: Props) => {
   return (
     <Button
       sx={{

@@ -1,25 +1,24 @@
-// import { useAppDispatch, useAppSelector } from 'hooks/stateHooks'
 import { wrapperTestingComponent } from 'shared/helpers/tests/wrapperTestingComponent'
-import { fireEvent, screen } from '@testing-library/react'
+import { screen } from '@testing-library/react'
 import ColorModeSwitcher from 'features/color-mode-switcher/color-mode-switcher'
 
-// jest.mock('../../hooks/stateHooks')
+describe('тест компонента ColorMode', () => {
+  test('отображение light icon', () => {
+    wrapperTestingComponent(<ColorModeSwitcher />)
 
-test('тест компонента ColorMode', () => {
-  // const hook = { useAppDispatch, useAppSelector }
-  // const dispatch = jest.spyOn(hook, 'useAppDispatch').mockReturnValue(jest.fn())
-  // const selector = jest.spyOn(hook, 'useAppSelector').mockReturnValue('dark')
-  wrapperTestingComponent(<ColorModeSwitcher />)
+    const iconWrapper = screen.getByTestId(/wrapper/i)
+    const lightIcon = screen.getByTestId(/icon-light/i)
+    const darkIcon = screen.queryByTestId(/icon-dark/i)
 
-  const iconWrapper = screen.getByTestId(/wrapper/i)
-  const lightIcon = screen.getByTestId(/icon-light/i)
-  const darkIcon = screen.queryByTestId(/icon-dark/i)
+    expect(iconWrapper).toBeInTheDocument()
+    expect(lightIcon).toBeInTheDocument()
+    expect(darkIcon).toBeNull()
+  })
 
-  expect(iconWrapper).toBeInTheDocument()
-  expect(lightIcon).toBeInTheDocument()
-  expect(darkIcon).toBeNull()
+  test('отображение dark icon', () => {
+    wrapperTestingComponent(<ColorModeSwitcher />, { currentTheme: 'dark' })
 
-  // fireEvent.click(iconWrapper)
-  // expect(darkIcon).toBeInTheDocument()
-  // expect(lightIcon).toBeNull()
+    expect(screen.queryByTestId(/icon-dark/i)).toBeInTheDocument()
+    expect(screen.queryByTestId(/icon-light/i)).toBeNull()
+  })
 })

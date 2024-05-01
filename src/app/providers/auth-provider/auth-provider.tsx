@@ -8,11 +8,11 @@ import { useAppDispatch, useAppSelector } from 'shared/hooks/stateHooks'
 import { habitListSelector, isListLoadingSelector } from 'shared/store/selectors'
 import LoadingScreen from 'widgets/loading-screen'
 
-interface PropsType {
+interface Props {
   children: ReactNode
 }
 
-const AuthProvider = ({ children }: PropsType) => {
+const AuthProvider = ({ children }: Props) => {
   const habitList = useAppSelector(habitListSelector)
   const isListLoading = useAppSelector(isListLoadingSelector)
   const [isLoading, setIsLoading] = useState<boolean>(true)
@@ -27,7 +27,6 @@ const AuthProvider = ({ children }: PropsType) => {
         dispatch(fetchHabitList())
         dispatch(fetchArchiveHabitList())
         dispatch(setAuthStatus(true))
-        dispatch(setCurrentTheme(theme))
 
         if (user.isAnonymous) {
           dispatch(setIsGuestAuth(true))
@@ -36,6 +35,7 @@ const AuthProvider = ({ children }: PropsType) => {
         dispatch(setAuthStatus(false))
         setIsLoading(false)
       }
+      dispatch(setCurrentTheme(theme))
     })
   }, [])
 

@@ -4,11 +4,11 @@ import GoalBar from './ui/goal-bar'
 import DifficultyChart from './ui/difficulty-chart'
 import './progress-list.scss'
 
-interface PropsType {
+interface Props {
   progressData: Habit[]
 }
 
-const ProgressList = ({ progressData }: PropsType) => {
+const ProgressList = ({ progressData }: Props) => {
   return (
     <div className="progress-list">
       {progressData.map(item => {

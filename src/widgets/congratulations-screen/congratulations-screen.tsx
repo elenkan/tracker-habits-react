@@ -6,14 +6,14 @@ import './congratulations-screen.scss'
 
 const CongratulationsScreen = () => {
   const dispatch = useAppDispatch()
-  const handleClickOpen = () => {
+  const handleClick = () => {
     dispatch(setShowCongratulation(false))
   }
 
   return (
     <div
       className="congratulations-screen"
-      onClick={handleClickOpen}
+      onClick={handleClick}
       data-testid="congratulations-screen">
       <Box component="div" className="congratulations-screen__content">
         {['Поздравляем!', 'Челлендж завершен :)'].map(text => (

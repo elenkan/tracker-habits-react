@@ -57,7 +57,7 @@ const CreateHabitForm = () => {
     }
   }
 
-  const handleCancel = () => {
+  const cancelChanges = () => {
     dispatch(addChangeableHabit(null))
     navigate(AppRouteList.HabitsPage)
   }
@@ -114,7 +114,7 @@ const CreateHabitForm = () => {
           <BaseButton
             buttonWidth="200px"
             buttonTitle="Отменить"
-            action={handleCancel}
+            action={cancelChanges}
             style={{ marginTop: '15px' }}
           />
         )}

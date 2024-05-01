@@ -6,12 +6,12 @@ import { useAppSelector } from 'shared/hooks/stateHooks'
 import { isLoadingSelector, showCongratulationSelector } from './store/selectors'
 import './page-layout.scss'
 
-interface PropsType {
+interface Props {
   children: ReactNode
   topMobileIndent?: boolean
 }
 
-export const PageLayout = ({ children, topMobileIndent }: PropsType) => {
+export const PageLayout = ({ children, topMobileIndent }: Props) => {
   const isLoading = useAppSelector(isLoadingSelector)
   const showCongratulation = useAppSelector(showCongratulationSelector)
 

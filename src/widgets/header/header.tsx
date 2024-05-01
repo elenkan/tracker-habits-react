@@ -42,12 +42,11 @@ const Header = () => {
 
   const logOut = (label: string) => {
     if (label === 'Выйти') {
-      dispatch(logout()).then(res => {
+      dispatch(logout()).then(_ => {
         dispatch(setAuthStatus(false))
         if (isGuestAuth) {
           dispatch(setIsGuestAuth(false))
         }
-        localStorage.clear()
         navigate(AppRouteList.Home)
       })
     }

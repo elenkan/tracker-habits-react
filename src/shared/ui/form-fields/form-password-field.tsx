@@ -6,11 +6,11 @@ import { Visibility, VisibilityOff } from '@mui/icons-material'
 import { useState } from 'react'
 import type { FormData } from 'shared/types'
 
-interface PropsType {
+interface Props {
   control: Control<FormData>
   keyDownAction: () => void
 }
-export const FormPasswordField = ({ control, keyDownAction }: PropsType) => {
+export const FormPasswordField = ({ control, keyDownAction }: Props) => {
   const {
     field: { onChange, value },
     fieldState: { error },

@@ -5,11 +5,11 @@ import type { Field, FormData } from 'shared/types'
 import fieldsData from './fields.json'
 import { Fragment } from 'react'
 
-interface PropsType {
+interface Props {
   fieldName: 'userName' | 'email' | 'habitName' | 'habitDescription'
   control: Control<FormData>
 }
-export const FormTextField = ({ fieldName, control }: PropsType) => {
+export const FormTextField = ({ fieldName, control }: Props) => {
   const data: Field = fieldsData
   const fieldRules = data[fieldName].rules
 

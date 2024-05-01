@@ -6,11 +6,11 @@ import { currentThemeSelector } from 'shared/store/selectors'
 import { useMemo } from 'react'
 import { getDesignTokens } from './lib/getDesignTokens'
 
-interface PropsType {
+interface Props {
   children: ReactNode
 }
 
-const MuiThemeProvider = ({ children }: PropsType) => {
+const MuiThemeProvider = ({ children }: Props) => {
   const currentTheme = useAppSelector(currentThemeSelector)
   const theme = useMemo(() => createTheme(getDesignTokens(currentTheme)), [currentTheme])
 

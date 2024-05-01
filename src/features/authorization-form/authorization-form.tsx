@@ -4,9 +4,8 @@ import { login, createLogin, signInAsGuest, addGuestHabits } from './store/thunk
 import { fetchHabitList, fetchArchiveHabitList } from 'shared/store/thunks/habit-list'
 import { saveColorMode, getColorMode } from 'shared/store/thunks/color-mode'
 import { useAppDispatch, useAppSelector } from 'shared/hooks/stateHooks'
-import { userColorThemeSelector } from './store/selectors'
 import { currentThemeSelector } from 'shared/store/selectors'
-import { setAuthStatus, setCurrentTheme, setIsGuestAuth } from 'shared/store/actions'
+import { setAuthStatus, setIsGuestAuth } from 'shared/store/actions'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { AppRouteList } from 'app/providers/router-provider/enums'
@@ -19,7 +18,6 @@ import './authorization-form.scss'
 
 const AuthorizationForm = () => {
   const currentTheme = useAppSelector(currentThemeSelector)
-  const userColorTheme = useAppSelector(userColorThemeSelector)
   const [open, setOpen] = useState<boolean>(false)
   const [type, setType] = useState<string>('')
   const dispatch = useAppDispatch()
@@ -35,12 +33,12 @@ const AuthorizationForm = () => {
   })
   const methods = useForm<FormData>({ defaultValues })
   const { handleSubmit, control, reset } = methods
-  const handleClickOpen = (type: string) => () => {
+  const onClickOpen = (type: string) => () => {
     setOpen(true)
     setType(type)
   }
 
-  const handleClose = () => {
+  const onClose = () => {
     setOpen(false)
   }
 
@@ -48,49 +46,37 @@ const AuthorizationForm = () => {
     reset({ userName: '', email: '', password: '' })
   }, [open])
 
-  const saveMode = () => {
-    const colorTheme = userColorTheme || 'light'
-    if (colorTheme !== currentTheme) {
-      dispatch(setCurrentTheme(currentTheme))
-      dispatch(saveColorMode(currentTheme))
-      localStorage.setItem('theme', currentTheme)
-    } else {
-      dispatch(setCurrentTheme(colorTheme))
-      localStorage.setItem('theme', colorTheme)
-    }
-  }
-
   const onClickGuestBtn = () => {
-    handleClose()
+    onClose()
     dispatch(signInAsGuest()).then(_ => {
       dispatch(setAuthStatus(true))
       dispatch(setIsGuestAuth(true))
       dispatch(addGuestHabits(guestHabitsList))
+      dispatch(saveColorMode(currentTheme))
       navigate(AppRouteList.ProgressPage)
     })
   }
 
   const onSubmit = async (data: FormData) => {
-    handleClose()
+    onClose()
     const { userName: name, email, password } = data
     if (type === 'signup') {
       await dispatch(createLogin({ name, email, password }))
       if (auth.currentUser) {
         dispatch(setAuthStatus(true))
+        dispatch(saveColorMode(currentTheme))
         navigate(AppRouteList.HabitsPage)
       }
     } else {
       await dispatch(login({ email, password }))
       if (auth.currentUser) {
+        dispatch(getColorMode(currentTheme))
         dispatch(setAuthStatus(true))
-        dispatch(getColorMode())
-        saveMode()
         dispatch(fetchHabitList())
         dispatch(fetchArchiveHabitList())
         navigate(AppRouteList.HabitsPage)
       }
     }
-    setOpen(false)
   }
 
   return (
@@ -103,7 +89,7 @@ const AuthorizationForm = () => {
             fontSize: '13px',
           },
         }}
-        onClick={handleClickOpen('signup')}>
+        onClick={onClickOpen('signup')}>
         Регистрация
       </Button>
       <Button
@@ -114,7 +100,7 @@ const AuthorizationForm = () => {
             fontSize: '13px',
           },
         }}
-        onClick={handleClickOpen('signin')}>
+        onClick={onClickOpen('signin')}>
         Войти
       </Button>
       <Dialog
@@ -122,7 +108,7 @@ const AuthorizationForm = () => {
         sx={{
           borderRadius: '10px',
         }}
-        onClose={handleClose}>
+        onClose={onClose}>
         <DialogContent
           sx={{
             '@media (max-width: 600px)': {

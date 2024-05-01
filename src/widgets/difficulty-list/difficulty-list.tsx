@@ -31,7 +31,7 @@ const DifficultyList = () => {
       }
     })
   }, [])
-  const setColorDifficulty = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const target = event.target
     dispatch(addColorDifficulty(target.value))
     difficultyList.forEach(item => {
@@ -56,7 +56,7 @@ const DifficultyList = () => {
           type="radio"
           value={item.color}
           checked={item.checked}
-          onChange={setColorDifficulty}
+          onChange={handleChange}
         />
         <span className="difficulty-list__color" style={colorStyle(item.color)} />
         <Typography

@@ -11,8 +11,8 @@ export const addArchiveHabit = createAsyncThunk<void, Habit, { dispatch: AppDisp
   async (habit, { dispatch }) => {
     try {
       const user = auth?.currentUser?.uid
-      await push(ref(database, `users/${user}/archiveHabitsList`), habit).then(async _ => {
-        await dispatch(fetchArchiveHabitList())
+      await push(ref(database, `users/${user}/archiveHabitsList`), habit).then(_ => {
+        dispatch(fetchArchiveHabitList())
       })
     } catch (e) {
       Notification.showErrorNotification(e)

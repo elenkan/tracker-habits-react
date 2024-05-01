@@ -3,7 +3,7 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
 import { useState } from 'react'
 import type { MouseEvent } from 'react'
 
-interface PropsType {
+interface Props {
   groupData: Array<{
     label: string
     toggleValue: number | string
@@ -20,10 +20,10 @@ export const FormToggleButton = ({
   defaultValue,
   color,
   styleData = {},
-}: PropsType) => {
+}: Props) => {
   const [value, setValue] = useState<number>(defaultValue ?? 21)
 
-  const handleValue = (event: MouseEvent, value: any) => {
+  const onChangeValue = (event: MouseEvent, value: any) => {
     if (value === null) return
     setValue(value)
     action(Number(value))
@@ -34,7 +34,7 @@ export const FormToggleButton = ({
       color={color ?? 'primary'}
       exclusive
       value={value}
-      onChange={handleValue}
+      onChange={onChangeValue}
       sx={styleData}>
       {groupData.map(item => (
         <ToggleButton

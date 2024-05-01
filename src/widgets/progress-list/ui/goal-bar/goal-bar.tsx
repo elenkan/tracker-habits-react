@@ -3,11 +3,11 @@ import CircularProgress from '@mui/material/CircularProgress'
 import { Typography, Box } from '@mui/material'
 import './goal-bar.scss'
 
-interface PropsType {
+interface Props {
   progressValue: Habit
 }
 
-const GoalBar = ({ progressValue }: PropsType) => {
+const GoalBar = ({ progressValue }: Props) => {
   const CircularProgressWithLabel = (value: number) => {
     return (
       <Box sx={{ position: 'relative', display: 'inline-flex' }}>

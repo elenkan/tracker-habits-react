@@ -18,11 +18,11 @@ const SettingBoard = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const handleChange = (event: SyntheticEvent, newValue: number) => {
+  const onChangeTabs = (event: SyntheticEvent, newValue: number) => {
     setActiveTab(newValue)
   }
 
-  const handleChangeSwitch = async () => {
+  const onChangeSwitch = async () => {
     const theme = currentTheme === 'light' ? 'dark' : 'light'
     dispatch(setCurrentTheme(theme))
     await dispatch(saveColorMode(theme))
@@ -54,7 +54,7 @@ const SettingBoard = () => {
           maxWidth: '400px',
         },
       }}>
-      <Tabs value={activeTab} variant="fullWidth" className="setting__tabs" onChange={handleChange}>
+      <Tabs value={activeTab} variant="fullWidth" className="setting__tabs" onChange={onChangeTabs}>
         <Tab label="Аккаунт" />
         <Tab label="Темы" />
       </Tabs>
@@ -72,7 +72,7 @@ const SettingBoard = () => {
         {activeTab === 0 ? (
           <BaseButton buttonTitle="Удалить" buttonWidth="150px" action={deleteUserAccount} />
         ) : (
-          <Switch checked={currentTheme === 'dark'} onChange={handleChangeSwitch} />
+          <Switch checked={currentTheme === 'dark'} onChange={onChangeSwitch} />
         )}
       </div>
     </Box>

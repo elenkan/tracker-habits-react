@@ -1,14 +1,14 @@
 import type { CSSProperties } from 'react'
 import { Button } from '@mui/material'
 
-interface PropsType {
+interface Props {
   buttonWidth: string
   buttonTitle: string
   action: () => void
   style?: CSSProperties
 }
 
-export const BaseButton = ({ buttonWidth, buttonTitle, action, style }: PropsType) => {
+export const BaseButton = ({ buttonWidth, buttonTitle, action, style }: Props) => {
   return (
     <Button
       variant="outlined"

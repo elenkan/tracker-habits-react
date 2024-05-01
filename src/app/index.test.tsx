@@ -17,7 +17,9 @@ jest.mock('react-chartjs-2', () => 'Chart')
 
 jest.mock('firebase/auth', () => {
   return {
-    getAuth: jest.fn(),
+    getAuth: jest.fn().mockReturnValue({
+      onAuthStateChanged: jest.fn(),
+    }),
   }
 })
 jest.mock('firebase/database', () => {
@@ -26,7 +28,7 @@ jest.mock('firebase/database', () => {
   }
 })
 test('рендер', () => {
-  wrapperTestingComponent(<App />)
+  wrapperTestingComponent(<App />, { isListLoading: true })
   const content = screen.getByTestId(/content/i)
   expect(content).toBeInTheDocument()
 })

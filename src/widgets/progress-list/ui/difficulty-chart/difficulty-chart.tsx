@@ -15,11 +15,11 @@ import './difficulty-chart.scss'
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip)
 
-interface PropsType {
+interface Props {
   colorsValue: number[]
 }
 
-const DifficultyChart = ({ colorsValue }: PropsType) => {
+const DifficultyChart = ({ colorsValue }: Props) => {
   const chartRef = useRef<ChartJS<'line', number[], string>>(null)
   const [chartData, setChartData] = useState<ChartData<'line'>>({
     datasets: [],

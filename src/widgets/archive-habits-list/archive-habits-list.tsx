@@ -6,11 +6,11 @@ import CheckCircleSharpIcon from '@mui/icons-material/CheckCircleSharp'
 import classNames from 'classnames'
 import 'widgets/archive-habits-list/archive-habits-list.scss'
 
-interface PropsType {
+interface Props {
   list: Habit[]
 }
 
-const ArchiveHabitsList = ({ list }: PropsType) => {
+const ArchiveHabitsList = ({ list }: Props) => {
   const currentTheme = useAppSelector(currentThemeSelector)
   const contentClass = classNames('archive-habits__item', {
     'archive-habits__item_dark': currentTheme === 'dark',

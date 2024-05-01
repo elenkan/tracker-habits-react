@@ -1,5 +1,5 @@
-import MuiThemeProvider from './providers/mui-theme-provider/mui-theme-provider'
-import AuthProvider from 'app/providers/auth-provider/auth-provider'
+import MuiThemeProvider from './providers/mui-theme-provider'
+import AuthProvider from './providers/auth-provider'
 import AppRouter from './providers/router-provider'
 
 const App = () => {

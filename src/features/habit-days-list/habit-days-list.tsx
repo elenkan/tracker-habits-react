@@ -13,11 +13,11 @@ import { addArchiveHabit } from './store/thunks'
 import { setShowCongratulation } from 'shared/store/actions'
 import './habit-days-list.scss'
 
-interface PropsType {
+interface Props {
   data: Habit
 }
 
-const HabitDaysList = ({ data }: PropsType) => {
+const HabitDaysList = ({ data }: Props) => {
   const habit = cloneDeep(data)
   const color = useAppSelector(colorDifficultySelector)
   const dispatch = useAppDispatch()
@@ -46,7 +46,7 @@ const HabitDaysList = ({ data }: PropsType) => {
     }
   }
 
-  const setData = (item: ColorItem): void => {
+  const handleClick = (item: ColorItem): void => {
     const data = [...list]
     changeColor(item, data, color)
     setList(data)
@@ -60,7 +60,7 @@ const HabitDaysList = ({ data }: PropsType) => {
           <span
             className="days-list__item"
             onClick={() => {
-              setData(day)
+              handleClick(day)
             }}
             style={{
               backgroundColor: day.color ? day.color : 'transparent',

@@ -3,7 +3,7 @@ import { useAppDispatch } from 'shared/hooks/stateHooks'
 import { fireEvent, screen } from '@testing-library/react'
 import CongratulationsScreen from 'widgets/congratulations-screen/index'
 
-jest.mock('../../hooks/stateHooks')
+jest.mock('shared/hooks/stateHooks')
 
 test('тест компонента CongratulationsScreen', () => {
   const hook = { useAppDispatch }

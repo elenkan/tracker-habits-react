@@ -12,24 +12,9 @@ import {
   setShowCongratulation,
   setIsListLoading,
 } from 'shared/store/actions'
+import type { StoreData } from 'shared/types/state'
 
-import type { Habit } from 'shared/types'
-
-interface StateType {
-  challengeHabitsList: Habit[]
-  archiveHabitsList: Habit[]
-  colorDifficulty: string
-  changeableHabit: Habit | null
-  isAuth: boolean
-  isGuestAuth: boolean
-  currentTheme: 'light' | 'dark'
-  userColorTheme: 'light' | 'dark' | null
-  isLoading: boolean
-  showCongratulation: boolean
-  isListLoading: boolean
-}
-
-const initialState: StateType = {
+const initialState: StoreData = {
   challengeHabitsList: [],
   archiveHabitsList: [],
   colorDifficulty: '',

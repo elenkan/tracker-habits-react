@@ -9,11 +9,11 @@ import { deleteHabit } from 'shared/store/thunks/habit'
 import HabitDaysList from 'features/habit-days-list'
 import 'widgets/habits-list/ui/habit-item/habit-item.scss'
 
-interface PropsType {
+interface Props {
   habit: Habit
 }
 
-const HabitItem = ({ habit }: PropsType) => {
+const HabitItem = ({ habit }: Props) => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
