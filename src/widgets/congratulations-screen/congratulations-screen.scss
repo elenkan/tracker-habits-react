@@ -5,10 +5,7 @@
   justify-content: center;
   background-color: rgba(137,204,197, 0.5);
   z-index: 999;
-  width: 100vw;
-  height: 100vh;
-  top: 0;
-  left: 0;
+  inset: 0;
   animation: animateBackground 10s linear infinite;
 
   &__content {

@@ -2,7 +2,7 @@ import { useController } from 'react-hook-form'
 import type { Control, RegisterOptions } from 'react-hook-form'
 import TextField from '@mui/material/TextField'
 import type { Field, FormData } from 'shared/types'
-import fieldsData from './fields.json'
+import fieldsData from 'shared/ui/form-controls/form-text-field/fields.json'
 import { Fragment } from 'react'
 
 interface Props {

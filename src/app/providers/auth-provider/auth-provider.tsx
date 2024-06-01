@@ -24,13 +24,12 @@ const AuthProvider = ({ children }: Props) => {
 
     auth.onAuthStateChanged(async user => {
       if (user && !habitList?.length) {
-        dispatch(fetchHabitList())
-        dispatch(fetchArchiveHabitList())
-        dispatch(setAuthStatus(true))
-
         if (user.isAnonymous) {
           dispatch(setIsGuestAuth(true))
         }
+        dispatch(fetchHabitList())
+        dispatch(fetchArchiveHabitList())
+        dispatch(setAuthStatus(true))
       } else {
         dispatch(setAuthStatus(false))
         setIsLoading(false)

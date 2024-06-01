@@ -46,15 +46,16 @@ const AuthorizationForm = () => {
     reset({ userName: '', email: '', password: '' })
   }, [open])
 
-  const onClickGuestBtn = () => {
+  const onClickGuestBtn = async () => {
     onClose()
-    dispatch(signInAsGuest()).then(_ => {
+    await dispatch(signInAsGuest())
+    if (auth.currentUser) {
+      dispatch(saveColorMode(currentTheme))
       dispatch(setAuthStatus(true))
       dispatch(setIsGuestAuth(true))
-      dispatch(addGuestHabits(guestHabitsList))
-      dispatch(saveColorMode(currentTheme))
+      await dispatch(addGuestHabits(guestHabitsList))
       navigate(AppRouteList.ProgressPage)
-    })
+    }
   }
 
   const onSubmit = async (data: FormData) => {

@@ -9,13 +9,15 @@ import './page-layout.scss'
 interface Props {
   children: ReactNode
   topMobileIndent?: boolean
+  customClass?: string
 }
 
-export const PageLayout = ({ children, topMobileIndent }: Props) => {
+export const PageLayout = ({ children, topMobileIndent, customClass }: Props) => {
   const isLoading = useAppSelector(isLoadingSelector)
   const showCongratulation = useAppSelector(showCongratulationSelector)
 
-  const containerClass = classNames('container', { container_mobile: topMobileIndent })
+  const containerClass =
+    customClass || classNames('container', { container_mobile: topMobileIndent })
 
   return (
     <div className={containerClass}>

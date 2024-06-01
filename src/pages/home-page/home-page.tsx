@@ -1,3 +1,4 @@
+import { PageLayout } from 'shared/ui'
 import { Box } from '@mui/material'
 import { useAppSelector } from 'shared/hooks/stateHooks'
 import { currentThemeSelector } from 'shared/store/selectors'
@@ -12,11 +13,11 @@ const HomePage = () => {
   })
 
   return (
-    <div className={contentClass}>
+    <PageLayout customClass={contentClass}>
       <Box component="span" className={nameAppClass} sx={{ color: '#fff' }}>
         Трекер привычек
       </Box>
-    </div>
+    </PageLayout>
   )
 }
 

@@ -41,9 +41,7 @@ export const signInAsGuest = createAsyncThunk<void, undefined, { dispatch: AppDi
   'signInAsGuest',
   async (_args, { dispatch }) => {
     try {
-      dispatch(setIsLoading(true))
       await signInAnonymously(auth)
-      dispatch(setIsLoading(false))
     } catch (e) {
       Notification.showErrorNotification(e)
     }
@@ -54,9 +52,11 @@ export const addGuestHabits = createAsyncThunk<void, Habit[], { dispatch: AppDis
   'habitsAction',
   async (habits, { dispatch }) => {
     try {
+      dispatch(setIsLoading(true))
       for (const habit of habits) {
         await dispatch(addHabit(habit))
       }
+      dispatch(setIsLoading(false))
     } catch (e) {
       Notification.showErrorNotification(e)
     }
